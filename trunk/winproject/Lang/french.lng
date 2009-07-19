@@ -1,0 +1,226 @@
+[Français]
+
+Translation Author = Olivieryuyu
+Version = 3.4
+Creation Date = 21 Mai 2004
+
+
+; ########### MENU #############
+;  File 
+File=&Fichier
+Load Rom...=Charger Rom...
+Close Rom=Fer&mer Rom
+Refresh Rom List=&Rafraîchir la liste des ROMs
+Recent Roms=R&oms récemment utilisées
+Freeze=&Geler la liste
+Language=&Langue
+Language Information...=Information l&angue...
+Exit=&Quitter
+
+; Run 
+Run=&Emuler
+Reset=&Redémarrer
+Pause=&Pause
+Continue=&Continuer
+Generate Bitmap=&Génerer Bitmap
+Save State=&Sauver rapidement
+Save as...=Sauver sous...
+Load State=&Charger rapidement
+Load As...=Charger fichier...
+Current Save State=Slot courant
+
+; Options 
+Options=&Options
+Full Screen=&Plein écran
+Video Settings...=&Paramétrages vidéo...
+Input Settings...=&Paramétrages contrôleur...
+Audio Settings...=&Paramétrages audio...
+RSP Settings...=&Paramétrages RSP...
+Show Toolbar=Montrer la &barre des tâches
+Show Statusbar=Montrer la &barre des statuts
+Settings...=&Paramétrages...
+
+; Utilities menu
+Utilities=&Utilitaires
+ROM Properties...=Propriétés Rom...
+Audit ROMs...=Vérifier ROMs...
+Benchmark...=Benchmark...
+Generate ROM Info...=&Générer un fichier d'infos sur la ROM...
+Show Log Window=&Afficher la fenétre de log
+Kaillera...=Kaillera...
+Record=Enregistrer
+Start Recording...=Commencer enregistrement...
+Stop Recording=Arrêter enregistrement
+Start Playback...=Commencer Playback...
+Stop Playback=Arrêter Playback
+Start Capture (REC2AVI)...=Commencer Capture (REC2AVI)...
+Stop Capture=Arrêter Capture
+
+
+; Help  
+Help=&Aide
+Contents...=&Contenu...   
+Whats new...=&Changements...
+About...=A &Propos de Mupen64...
+
+
+; ########### CONTEXT MENU ############# 
+Play Game=Démarrer Rom
+
+
+; ######### CONFIG DIALOG ##########
+Settings=Settings
+
+; ## Plugins##
+Video Plugin=Plugin graphique
+Input Plugin=Plugin contrôleur
+Sound Plugin=Plugin son
+RSP Plugin=Plugin RSP
+Ok=Ok
+Config=Configurer
+Test=Tester
+Plugin About=A Propos
+Config Plugins=Configuer les Plugins
+
+
+; ## Directories ##
+Directories=Dossiers
+Use directory recursion=Parcourir récursivement les dossiers
+Add=Ajouter
+Remove=Enlever
+Remove All=Enlever tout
+ROMs Directories=Dossiers contenant les ROMS 
+;Select Current ROM Browser Directory=Selectionner le dossier courant pour l'explorateur de ROM
+Plugins Directory=Dossier contenant les Plugins
+Saves Directory=Dossier contenant les sauvegardes
+Screenshots Directory=Dossier contenant les captures d'écran
+Choose=Choisir...
+
+
+; ## General ##
+General=Général
+Alerts=Alertes
+Alert Bad Rom=Alerter en cas de mauvaises Roms
+Alert Hacked Rom=Alerter en cas de Rom hackée
+Alert Saves errors=Alerter en cas d'erreur de sauvegarde
+Fps / VIs=Fps / VIs
+Limit fps (auto)=Limiter fps (auto)
+Use Speed Modifier=Utiliser le modificateur de vitesse
+Show FPS=Afficher les FPS
+Show VIs=Afficher les VIs
+CPU Core=Noyau CPU
+Interpreter=Interpreteur
+Dynamic Recompiler=Recompilateur Dynamique
+Pure Interpreter=Pur Interpreteur
+Ini File=Fichier Ini
+Use compressed file=Utiliser un fichier compressé
+
+; ## Advanced Settings ##
+Advanced Settings=Configuration avancée
+Common Options=Common Options
+Start Game in full screen=Démarrer en plein écran
+Pause when not active=Mettre en pause l'emulation quand la fenêtre n'est pas active
+Use global plugins settings=Utiliser les paramétres globaux du plugin
+Use toolbar=Utiliser la barre d'outils  ALT+T
+Use statusbar=Utiliser la barre de status  ALT+S
+Compatibility Options=Compatibility Options
+No audio delay=No audio delay (it can fix some compatibility issues but audio won't be synchronised with video)
+No compiled jump=No compiled jump (improves compatibility at the cost of some speed)
+Rombrowser Columns=Colonnes de l'explorateur de ROMs
+GoodName=Nom GoodN64
+Internal Name=Nom interne
+Country=Pays
+Rom size=Taille
+Comments=Commentaires
+File Name=Nom du fichier
+MD5=MD5
+
+
+; ######### AUDIT ROMS DIALOG ##########
+Audit Total ROMs=Total ROMs:
+Audit Current ROM=ROM en cours:
+Audit File Location=Chemin du fichier:
+Audit ROMs=Vérifier les ROMs
+Start=Démarrer
+Stop=Stopper
+Close=Fermer
+
+
+; ######## ROM PROPERTIES DIALOG ########
+ROM Properties=Propriétés Rom
+
+RP ROM Information=Information ROM:
+RP File Location=Emplacement du Fichier:
+RP Good Name=Nom GoodN64:
+RP Internal Name=Nom interne:
+RP Size=Taille:
+RP Country=Pays:
+RP Ini Code=Code Ini:
+RP MD5 Checksum=Somme de contrôle MD5:
+RP Calculate= Calculer
+RP Comments=Commentaires:
+
+RP Plugins=Plugins:
+RP Video Plugin=Plugin vidéo:
+RP Sound Plugin=Plugin audio:
+RP Input Plugin=Plugin contrôleur:
+RP RSP Plugin=Plugin RSP:
+RP Save Plugins=Sauver Plugins
+
+RP Comments=Commentaires:
+
+
+; ####### LANGUAGE INFO DIALOG ########
+Translation Author TEXT=Traducteur:
+Version TEXT=Version:
+Creation Date TEXT=Date de création:
+Language Information Dialog=Information langue
+
+
+; ######### ROM BROWSER STRINGS #######
+Good Name=Nom
+File Name=Nom du fichier
+Size=Taille
+Comments=Commentaires
+Country=Pays
+Demo=Demo
+Beta=Beta
+USA/Japan=USA/Japon
+German=Allemagne
+USA=USA	
+France=France
+Italy=Italie
+Japan=Japon
+Europe=Europe
+Spain=Espagne
+Australia=Australie
+Unknown=Inconnu
+
+
+; ######### STATUS BAR STRINGS ###########
+Emulation started=Emulation en cours
+Rom Closed=Rom fermée
+Emulation paused=Emulation en pause
+Loading rom...=Chargement Rom
+Total Roms=Total Roms:
+Recording replay...=enregistrement du replay...
+Recording stopped=enregistrement arrêt
+Playback started...=Playback commencé...
+Playback stopped=Playback arrêté
+Converting replay to avi...=Convertir replay en avi...
+Converting aborted=Conversion annulée
+Speed Limit=Limite de vitesse
+
+
+; ######### TOOLTIPS ############
+Start/Resume Emulation=Démarrer/Reprendre Rom
+Pause Emulation=Pauser l'emulation
+Stop Emulation=Arrêter Emulation
+; déjà implanté:
+; Load ROM...=Charger Rom...
+; Full Screen=Plein Ecran
+; Video Settings...=Paramétrages vidéo...
+; Sound Settings...=Paramétrages audio...
+; Input Settings....=Paramétrages contrôleur...
+; RSP Config...=Configuration RSP...
+; Settings...=Paramétrages...

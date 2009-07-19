@@ -1,0 +1,148 @@
+; Dutch translation by I. Clarysse
+[Dutch]
+
+Ok=OK
+Cancel=Annuleren
+
+Yes=Ja
+No=Nee
+Abort=Annuleren
+Retry=Opnieuw
+Ignore=Ignore
+Continue=Verder gaan
+
+Error=Fout
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Main Window
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; File menu
+_File=_Bestand
+_Open Rom...=_Open Rom...
+_Close Rom=_Sluit Rom
+_Language=_Taal
+_Exit=_Afsluiten
+
+; Emulation Menu
+_Emulation=_Emulatie
+_Start=_Start
+Pause/_Continue=_Pause/Verder
+Sto_p=Sto_p
+Save State=Bewaar status
+Save State As=Bewaar status als...
+Restore State=Herstel status
+Load State=Laad status
+Current save state=Huidige status
+
+; Options Menu
+_Options=_Opties
+_Configure...=_Configuratie...
+_Video Settings...=_Video Instellingen...
+_Audio Settings...=_Audio Instellingen...
+_Input Settings...=_Input Instellingen...
+_Full Screen=_Volledig Scherm
+
+; Debugger
+_Debugger=_Debugger
+_Enable=_Actief
+
+; Help Menu
+_Help=_Hulp
+_About...=Over...
+
+; Toolbar
+Open Rom=Open Rom
+Start Emulation=Start emulatie
+Pause/Continue Emulation=Pause/Vervolg Emulatie
+Stop Emulation=Emulatie Stoppen
+Configure=Configuratie
+Full Screen=Volledig Scherm
+
+; Rom Browser
+Good Name=Naam
+Country=Land
+Size=Grootte
+Comments=Commentaar
+File Name=Bestandsnaam
+Play Rom=Speel Rom
+Rom Properties=Rom Eigenschappen
+Refresh=Hernieuw
+Total Roms: %d=Aantal Roms: %d
+Scanning directory '%s'...=Doorzoeken directory '%s'...
+%d Rom Directories scanned, %d Roms found=%d Rom directories doorzocht, %d Roms gevonden
+
+; Countries
+Demo=Demo
+Beta=Beta
+USA/Japan=USA/Japan
+Germany=Duitsland
+USA=USA
+France=Frankrijk
+Italy=Italie
+Japan=Japan
+Spain=Spanje
+Australia (0x%2.2X)=Australie (0x%2.2X)
+Europe (0x%02X)=Europa (0x%02X)
+Unknown (0x%02X)=Onbekend (0x%02X)
+
+; Rom Properties
+Rom Info=Rom Info
+Calculate=Bereken
+
+; Status Bar
+Rom \"%s\" loaded.=Rom \"%s\" geladen.
+Loading Rom: %d%%=Laden Rom: %d%%
+Rom closed.=Rom gesloten.
+Emulation started (PID: %d)=Emulatie gestart (PID: %d)
+Emulation paused.=Emulatie gepauseerd.
+Emulation continued.=Emulatie herstart.
+Stopping emulation.=Emulatie wordt gestopt.
+Emulation stopped.=Emulatie gestopt.
+
+; Message Boxes
+Bad dump?=Slechte dump?
+The rom you are trying to load is probably a bad dump!\nBe warned that this will probably give unexpected results.\nDo you still want to run it?=De Rom die u wilt laden is waarschijnlijk een slechte dump!\nWees gewaarschuwd dat dit waarschijnlijk onverwachte resultaten zal opleveren.\nWilt u deze Rom nog steeds opstarten ?\n
+Hack?=Hack?
+The rom you are trying to load is probably a hack!\nBe warned that this will probably give unexpected results.\nDo you still want to run it?=De Rom die u wilt laden is waarschijnlijk een hack!\nWees gewaarschuwd dat dit waarschijnlijk onverwachte resultaten zal opleveren.\nWilt u deze Rom nog steeds opstarten ?\n
+Emulation is running. Do you want to\nstop it and load the selected rom?=De emulatie draait nog. Wilt u\nl'arréter et charger la rom sélectionnée?
+Emulation is running. Do you want to\nstop it and load a rom?=De emulatie draait nog. Wilt u\ndeze stoppen en een rom inladen?
+Stop Emulation?=De emulatie stoppen ?
+Emulation is running. Do you want to\nstop it and close the rom?=De emulatie draait nog. Wilt u\ndeze stoppen en de rom sluiten?
+No Rom Loaded=Geen Rom geladen
+There is no Rom loaded.\nDo you want to load one?=Geen Rom geladen.\nWilt u er een inladen?
+No graphics plugin selected! Do you\nwant to select one?=Geen grafische plugin geselecteerd! Wilt u er nu een kiezen?
+No audio plugin selected! Do you\nwant to select one?=Geen audio plugin geselecteerd! Wilt u er nu een kiezen?
+No input plugin selected! Do you\nwant to select one?=Geen input plugin geselecteerd! Wilt u er nu een kiezen?
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Config Dialog
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; mupen tab
+CPU Core=CPU kern
+Interpreter=Interpreter
+Dynamic Recompiler=Dynamische Recompiler
+Pure Interpreter=Pure Interpreter
+
+; plugins tab
+Plugins=Plugins
+Gfx Plugin=Grafische Plugin
+Audio Plugin=Audio Plugin
+Input Plugin=Input Plugin
+Config=Configuratie
+Test=Test
+
+; rombrowser tab
+Rom Directories=Rom Directories
+Add=Toevoegen
+Remove=Wis
+Remove All=Alles Wissen
+Recursively scan rom directories=Recursief rom directories doorzoeken
+Select Rom Directory=Rom Directory selecteren
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; About Dialog
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+About Mupen64=Over Mupen64
+

@@ -1,0 +1,174 @@
+[Svenska]
+
+Translation Author = Harteex (harteex@ktg.se)
+Version = 1.0
+Creation Date = 4:e augusti 2003
+
+
+;######### MENU ###################
+;  File 
+File=&Arkiv
+Load Rom=Ladda Rom...
+Close Rom=&Stäng Rom
+Refresh Rom List=&Uppdatera ROM-listan
+Language=S&pråk
+;Language Information=Sp&råkinformation
+Exit=&Avsluta
+
+;  Run 
+Run=&Emulation
+Reset=&Nollställ
+Pause=&Paus
+Continue=&Fortsätt
+Generate Bitmap=S&kapa Bitmap
+Save State=&Spara
+Save as=Spa&ra som
+Restore State=&Ladda
+Load=L&adda som
+Current Save State=Nuvarande sparfil
+
+;  Options 
+Options=&Inställningar
+Configure=&Konfigurera...
+Video Settings=&Videoinställningar...
+Input Settings=K&ontrollinställningar...
+Audio Settings=&Ljudinställningar...
+RSP Settings=&RSP-inställningar...
+Full Screen=&Helskärm
+
+; Utilities menu
+Utilities=&Verktyg
+ROM Properties=ROM-Egenskaper...
+Audit ROMs=Granska ROMs...
+Generate ROM Info=&Generera ROM-Info
+
+;  Help  
+Help=&Hjälp
+Contents=&Innehåll...    
+Whats new=&Whats new...
+About=&Om Mupen64...
+
+
+;######### CONFIG DIALOG ###########
+;## Plugins##
+
+GFX Plugin=Grafik-Plugin
+Input Plugin=kontroll-Plugin
+Sound Plugin=Ljud-Plugin
+RSP Plugin=RSP-Plugin
+OK=OK
+Cancel=Avbryt
+Config=Konfigurera
+Test=Testa
+Plugin About=Om
+Config Plugins=Pluginkonfiguration
+
+;Emulation Options=Emulationsval
+;Settings=Inställningar
+;country=Land
+
+;## Directories ##
+Use directory recursion=Use directory recursion
+Add=Lägg till
+Remove=Ta bort
+Remove All=Ta bort alla
+Directories=Mappar
+Roms Directories=Rom-mappar 
+Select Current Rom Browser Directory=Välj Rom-mapp
+
+Plugins Directory=Pluginmapp
+Default Plugins Check=Default:
+Choose Plugins Directory=Välj...
+Saves Directory=Sparfilsmapp
+Default Saves Check=Default:
+Choose Saves Directory=Välj...
+Screenshots Directory=Skärmdumpsmapp
+Default Screenshots Check=Default:
+Choose Screenshots Directory=Välj...
+
+;## General ##
+General=Generellt
+
+Alerts=Varningar
+Alert Bad rom=Varna om skadad rom 
+Alert Hacked rom=Varna om hackad rom
+Alert Saves errors=Varna om fel i sparfiler
+
+Fps / VIs=Fps / VIs
+Limit fps (auto)=Begränsa FPS
+Show FPS=Visa FPS
+Show VIs=Visa VIs
+
+CPU Core=CPU-Kärna
+Interpreter=Interpreter
+Dynamic Recompiler=Dynamisk Recompiler
+Pure Interpreter=Ren Interpreter
+
+Ini file=Ini-fil
+Use compressed file=Använd komprimerad fil
+
+
+;######### AUDIT ROMS DIALOG ##########
+Audit Total ROMs=Totalt antal ROMs:
+Audit Current ROM=Nuvarande ROM:
+Audit File Location=Plats:
+Audit ROMs=Granska ROMs
+
+
+;######## ROM PROPERTIES DIALOG ########
+RP ROM Information=ROM-Information:
+RP File Location=Plats:
+RP Good Name=Good Namn:
+RP Internal Name=Internt Namn:
+RP Size=Storlek:
+RP Country=Land:
+RP Ini Code=Ini-kod:
+RP MD5 Checksum=MD5 Checksum:
+RP Calculate= Räkna ut
+RP Comments=Kommentar:
+
+;####### LANGUAGE INFO DIALOG ########
+Translation Author TEXT=Översättare:
+Version TEXT=Version:
+Creation Date TEXT=Datum:
+OK=OK
+
+;######### STATUS BAR STRINGS #########
+Emulation started=Emuleringen startad
+Rom Closed=Rommen Stängd
+Emulation paused=Emuleringen pausad
+Loading rom=Laddar rom
+Total Roms=Totalt antal Roms:
+
+
+;######### ROM BROWSER STRINGS #######
+Good Name=Rom-namn
+File Name=Filnamn
+Size=Storlek
+Comments=Kommentarer
+Country=Land
+Demo=Demo
+Beta=Beta
+USA/Japan=USA/Japan
+German=Tyskland
+USA=USA	
+France=Frankrike
+Italy=Italien
+Japan=Japan
+Europe=Europa
+Spain=Spanien
+Australia=Australien
+Unknown=Okänd
+
+
+;######### TOOLTIPS ##################
+Stop Emulation=Stoppa Emulationen
+Run/Resume Rom=Starta/Fortsätt Rom
+
+;######### HELP FILES ################
+Index=index.pdf
+WhatsNew=whatsnew.txt
+
+
+Refresh=Uppdatera
+Play Game=Spela detta spelet

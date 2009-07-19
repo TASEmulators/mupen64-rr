@@ -1,0 +1,148 @@
+; spanish translation by FBCrack
+[Spanish]
+
+Ok=Aceptar
+Cancel=Cancelar
+
+Yes=Si
+No=No
+Abort=Cancelar 
+Retry=Reintentar
+Ignore=Ignorar
+Continue=Continuar
+
+Error=Error
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Main Window
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; File menu
+_File=_Archivo
+_Open Rom...=_Abrir ROM...
+_Close Rom=_Cerrar ROM
+_Language=_Lenguaje
+_Exit=_Salir
+
+; Emulation Menu
+_Emulation=_Emulacion
+_Start=_Comenzar
+Pause/_Continue=Detener/_Continuar
+Sto_p=_Parar
+Save State=Guardar Estado
+Save State As=Guardar Estado Como
+Restore State=Restaurar Estado
+Load State=Cargar Estado
+Current save state=Guardar estado actual
+
+; Options Menu
+_Options=_Opciones
+_Configure...=_Configurar...
+_Video Settings...=Configurar _Video...
+_Audio Settings...=Configurar _Audio...
+_Input Settings...=Configurar _Controladores...
+_Full Screen=_Pantalla Completa
+
+; Debugger
+_Debugger=_Debugger
+_Enable=_Activar
+
+; Help Menu
+_Help=_Ayuda
+_About...=_Acerca de...
+
+; Toolbar
+Open Rom=Abrir ROM
+Start Emulation=Comenzar Emulación
+Pause/Continue Emulation=Detener/Continuar Emulación
+Stop Emulation=Parar Emulación
+Configure=Configurar
+Full Screen=Pantalla Completa
+
+; Rom Browser
+Good Name=Nombre
+Country=País
+Size=Tamaño
+Comments=Commentarios
+File Name=Nombre del fichero
+Play Rom=Ejecutar ROM
+Rom Properties=Propiedades de la ROM
+Refresh=Refrescar
+Total Roms: %d=Total ROMs: %d
+Scanning directory '%s'...=Buscando en directorio '%s'...
+%d Rom Directories scanned, %d Roms found=%d Directorios de ROMs revisados, %d ROMs encontradas
+
+; Countries
+Demo=Demo
+Beta=Beta
+USA/Japan=USA/Japón
+Germany=Alemania
+USA=USA
+France=Francia
+Italy=Italia
+Japan=Japón
+Spain=Espña
+Australia (0x%2.2X)=Australia (0x%2.2X)
+Europe (0x%02X)=Europa (0x%02X)
+Unknown (0x%02X)=Desconocido (0x%02X)
+
+; Rom Properties
+Rom Info=Información de la ROM
+Calculate=Calcular
+
+; Status Bar
+Rom \"%s\" loaded.=ROM \"%s\" cargada.
+Loading Rom: %d%%=Cargando ROM: %d%%
+Rom closed.=ROM cerrada.
+Emulation started (PID: %d)=Emulación comenzada (PID: %d)
+Emulation paused.=Emulación detenida.
+Emulation continued.=Emulación continuada.
+Stopping emulation.=Deteniendo emulación.
+Emulation stopped.=Emulación parada.
+
+; Message Boxes
+Bad dump?=¿Volcado incorrecto?
+The rom you are trying to load is probably a bad dump!\nBe warned that this will probably give unexpected results.\nDo you still want to run it?=¿La ROM que está intentando cargar es probablemente un volcado incorrecto\nTenga en cuenta que esto puede llevar a resultados inesperados.\n¿Desea continuar con la ejecución?
+Hack?=¿Hack?
+The rom you are trying to load is probably a hack!\nBe warned that this will probably give unexpected results.\nDo you still want to run it?=¿La ROM que está intentando cargar es probablemente un hack!\nTenga en cuenta que esto puede llevar a resultados inesperados.\n¿Desea continuar con la ejecución?
+Emulation is running. Do you want to\nstop it and load the selected rom?=Emulación en proceso. ¿Desea pararla y cargar la ROM seleccionada?
+Emulation is running. Do you want to\nstop it and load a rom?=Emulación en proceso. ¿Desea pararla y cargar una ROM?
+Stop Emulation?=¿Detener Emulación?
+Emulation is running. Do you want to\nstop it and close the rom?=Emulación en proceso. ¿Desea detenerla y cerrar la ROM?
+No Rom Loaded=No hay ninguna ROM cargada
+There is no Rom loaded.\nDo you want to load one?=No hay ninguna ROM cargada.\n¿Desea cargar una?
+No graphics plugin selected! Do you\nwant to select one?=¡No hay ningún plugin gráfico seleccionado! ¿Desea seleccionar uno?
+No audio plugin selected! Do you\nwant to select one?=¡No hay ningún plugin de sonido seleccionado! ¿Desea seleccionar uno?
+No input plugin selected! Do you\nwant to select one?=¡No hay ningún plugin de entrada seleccionado! ¿Desea seleccionar uno?
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Config Dialog
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; mupen tab
+CPU Core=Nucleo de CPU
+Interpreter=Interprete
+Dynamic Recompiler=Recompilador Dinámico
+Pure Interpreter=Interprete Puro
+
+; plugins tab
+Plugins=Plugins
+Gfx Plugin=Plugin Grafico
+Audio Plugin=Plugin de Audo
+Input Plugin=Plugin Controlador
+Config=Configurar
+Test=Probar
+About=Acerca de
+
+; rombrowser tab
+Rom Directories=Directorios de ROMs
+Add=Añadir
+Remove=Eliminar
+Remove All=Eliminar Todos
+Recursively scan rom directories=Revisar directorios de ROMs recursivamente
+Select Rom Directory=Seleccionar Directorio de ROMs
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; About Dialog
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+About Mupen64=Acerca de Mupen64

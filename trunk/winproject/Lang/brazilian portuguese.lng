@@ -1,0 +1,179 @@
+[Portuguese]
+
+Translation Author = Felipe (felipefpl@ig.com.br)
+Version = 3.0
+Creation Date = 9th September 2003
+
+
+;######### MENU ###################
+;  File 
+File=&Arquivo
+Load Rom=Carregar Rom...
+Close Rom=&Fechar Rom
+Refresh Rom List=&Atualizar Lista de Roms
+Recent Roms=R&oms recentes
+Freeze=&Congelar
+Language=&Idioma
+Language Information=I&nformação do Idioma
+Exit=S&aída
+
+;  Run 
+Run=&Emulação
+Reset=&Resetar
+Pause=&Pausar
+Continue=&Continuar
+Generate Bitmap=&Gerar Bitmap
+Save State=&Save state
+Save as=Salvar &como
+Restore State=&Load State
+Load=C&arregar
+Current Save State=Save State Corrente
+
+;  Options 
+Options=&Opções
+Configure=&Configurações...
+Video Settings=&Configurações de Vídeo...
+Input Settings=&Configurações do Controle...
+Audio Settings=&Configurações de Áudio...
+RSP Settings=&Configurações do RSP...
+Full Screen=&Tela Cheia
+
+; Utilities menu
+Utilities=&Utilidades
+ROM Properties=Propriedades da ROM...
+Audit ROMs=Auditar ROMs...
+Generate ROM Info=&Gerar Info da ROM
+Show Log Window=&Mostrar janela do Log
+
+;  Help  
+Help=&Ajuda
+Contents=&Conteúdos...    
+Whats new=&O Que é Novo...
+About=&Sobre Mupen64...
+
+
+;######### CONFIG DIALOG ###########
+
+Settings = Configurações
+;## Plugins##
+
+GFX Plugin=Plugin Gráfico
+Input Plugin=Plugin do Controle
+Sound Plugin=Plugin de Som
+RSP Plugin=Plugin RSP
+OK=OK
+Config=Configurar
+Test=Testar
+Plugin About=Sobre
+Config Plugins=Plugins
+
+
+;## Directories ##
+
+Use directory recursion=Usar recurso de diretório
+Add=Adicionar
+Remove=Remover
+Remove All=Remover Todos
+Directories=Diretórios
+Roms Directories=Diretórios das Roms 
+Select Current Rom Browser Directory=Selecionar Diretório Corrente da Rom
+Plugins Directory=Diretório dos Plugins
+Choose=Escolher...
+Saves Directory=Diretório dos Saves
+Screenshots Directory=Diretório das Screenshots 
+
+
+;## General ##
+
+General=Geral
+Alerts=Alertas
+Alert Bad Rom=Alertar Rom Ruim
+Alert Hacked Rom=Alertar Rom Hackeada
+Alert Saves errors=Alertar erros dos Saves
+Fps / VIs=Fps / VIs
+Limit fps (auto)=Limitar fps (auto)
+Use Speed Modifier=Usar Modificador de Velocidade
+Show FPS=Mostrar FPS
+Show VIs=Mostrar VIs
+CPU Core=Núcleo da CPU 
+Interpreter=Interpretador
+Dynamic Recompiler=Recompilador Dinâmico
+Pure Interpreter=Interpretador Puro
+Ini File=Arquivo Ini
+Use compressed file=Usar arquivo comprimido
+
+
+;## Advanced Settings ##
+
+Advanced Settings=Configurações Avançadas
+Start Game in full screen=Iniciar jogo em tela cheia
+Pause when not active=Pausar emulação quando janela não está ativa
+Use global plugins settings=Usar configurações de plugin globais
+Use toolbar=Usar ALT+T na barra de ferramentas
+Use statusbar=Usar ALT+S na barra de status
+Rombrowser Columns=Navegar pelas Colunas
+GoodName=Good Name
+Internal Name=Nome interno
+Rom size=Tamanho da Rom
+Comments=Comentários
+File Name=Nome do Arquivo
+MD5=MD5
+
+
+;######### AUDIT ROMS DIALOG ##########
+
+Audit Total ROMs=Total de ROMs:
+Audit Current ROM=ROM Corrente:
+Audit File Location=Localização do Arquivo:
+Audit ROMs=Auditar ROMs
+
+
+;######## ROM PROPERTIES DIALOG ########
+RP ROM Information=Informação da ROM:
+RP File Location=Localização do Arquivo:
+RP Good Name=Good Name:
+RP Internal Name=Nome Interno:
+RP Size=Tamanho:
+RP Country=País:
+RP Ini Code=Código Ini:
+RP MD5 Checksum=Checksum do MD5:
+RP Calculate= Calcular
+RP Comments=Comentários:
+
+;####### LANGUAGE INFO DIALOG ########
+Translation Author TEXT=Autor da Tradução:
+Version TEXT=Versão:
+Creation Date TEXT=Data de Criação:
+OK=OK
+
+;######### STATUS BAR STRINGS #########
+Emulation started=Emulação iniciada
+Rom Closed=Rom Fechada
+Emulation paused=Emulação pausada
+Loading rom=Carregando rom
+Total Roms=Total de Roms:
+
+
+;######### ROM BROWSER STRINGS #######
+Good Name=Nome do Cabeçalho
+File Name=Nome do Arquivo
+Size=Tamanho
+Comments=Comentários
+Country=País
+Demo=Demo
+Beta=Beta
+USA/Japan=EUA/Japão
+German=Alemanha
+USA=EUA	
+France=França
+Italy=Itália
+Japan=Japão
+Europe=Europa
+Spain=Espanha
+Australia=Austrália
+Unknown=Desconhecido
+
+
+;######### TOOLTIPS ##################
+Stop Emulation=Parar Emulação
+Run/Resume Rom=Executar/Resumir Rom

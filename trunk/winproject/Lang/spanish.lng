@@ -1,0 +1,227 @@
+[Español]
+
+Translation Author = CoDeX
+Version = 0.4
+Creation Date = 23 de Mayo, 2004
+
+
+; ########### MENU #############
+; File 
+File=&Archivo
+Load ROM...=Cargar &ROM...
+Close ROM=&Cerrar ROM
+Refresh ROM List=&Refrescar lista de ROMS
+Recent ROMs=ROMs Recientes
+Freeze=&Bloquear
+Language=&Idioma
+Language Information...=Información del Idioma...
+Exit=S&alir
+
+; Run 
+Run=&Emulacion
+Reset=&Reiniciar
+Pause=&Pausa
+Continue=&Continar
+Generate Bitmap=&Generar Screenshot
+Save State=&Guardar Partida
+Save As...=Guardar &Como...
+Load State=&Cargar Partida
+Load As...=C&argar Como...
+Current Save State=Guardar partida actual
+
+; Options 
+Options=&Opciones
+Full Screen=&Pantalla Completa
+Video Settings...=Configurar &Video...
+Input Settings...=Configurar &Mando...
+Audio Settings...=Configurar &Sonido...
+RSP Settings...=&Configuracion RSP...
+Show Toolbar=Mostrar &Barra de utilidades
+Show Statusbar=Mostar Barra de estado
+Settings...=Con&figuraciones...
+
+; Utilities menu
+Utilities=&Utilidades
+ROM Properties...=Propiedades del ROM...
+Audit ROMs...=Chequear ROMs...
+Benchmark...=Benchmark...
+Generate ROM Info...=&Generar info del ROM...
+Show Log Window=&Mostrar la ventana de Log
+Kaillera...=Kaillera...
+Record=Grabar
+Start Recording...=Iniciar Grabacion...
+Stop Recording=Parar Grabacion
+Start Playback...=Ver video Grabado...
+Stop Playback=Parar Video Grabado
+Start Capture (REC2AVI)...=Iniciar Captura (REC2AVI)...
+Stop Capture=Parar Captura
+
+
+; Help  
+Help=&Ayuda
+Contents...=&Contenido...    
+Whats new...=&¿Que tiene nuevo?...
+About...=&Acerca de Mupen64...
+
+
+; ########### CONTEXT MENU #############
+Play Game=Iniciar Emulacion
+
+
+; ######### CONFIG DIALOG ##########
+Settings=Configuraciones
+Ok=Aceptar
+Cancel=Cancelar
+
+; ## Plugins##
+Video Plugin=Plugins de Video
+Input Plugin=Plugins del Mando
+Sound Plugin=Plugins de Sonido
+RSP Plugin=Plugin RSP
+Config=Configurar
+Test=Probar
+Plugin About=Acerca de
+Config Plugins=Plugins
+
+
+; ## Directories ##
+Directories=Directorios
+Use directory recursion=Use directory recursion
+Add=Añadir
+Remove=Borrar
+Remove All=Borrar Todo
+ROMs Directories=Directorios de los ROMS
+;Select Current ROM Browser Directory=Seleccionar actual directorio de ROms
+Plugins Directory=Directorio de los Plugins
+Saves Directory=Directorio de Partidas Guardadas
+Screenshots Directory=Directorio de los Screenshots
+Choose=Seleccionar...
+
+
+; ## General ##
+General=General
+Alerts=Alertas
+Alert Bad ROM=Mostrar ROM Malo
+Alert Hacked ROM=Mostrar ROM Hackeado
+Alert Saves errors=Mostrar errores si la partida esta dañada
+Fps / VIs=Fps / VIs
+Limit fps (auto)=Limitar fps (auto)
+Use Speed Modifier=Use Speed Modifier
+Show FPS=Mostrar FPS
+Show VIs=Mostrar VIs
+CPU Core=CPU Core
+Interpreter=Interpretador
+Dynamic Recompiler=Recompilador Dinamico
+Pure Interpreter=Puro Interpretador
+Ini File=Archivo Ini
+Use compressed file=Usar Archivo Comprimido
+
+
+; ## Advanced Settings ##
+Advanced Settings=Configuraciones Avanzadas
+Common Options=Common Options
+Start Game in full screen=Iniciar en modo Pantalla Completa
+Pause when not active=Pausar emulacion cuando la ventana no este activa
+Use global plugins settings=Usar configuracion predeterminada de plugins
+Show toolbar=Mostrar Barra de Utilidades
+Show statusbar=Mostrar Barra de estado
+Compatibility Options=Compatibility Options
+No audio delay=No audio delay (it can fix some compatibility issues but audio won't be synchronised with video)
+No compiled jump=No compiled jump (improves compatibility at the cost of some speed)
+Rombrowser Columns=Columnas del Buscador
+GoodName=Nombre
+Internal Name=Nombre interno
+Country=Pais
+ROM size=Tamaño
+Comments=Comentarios
+File Name=Nombre del Archivo
+MD5=MD5
+
+
+;######### AUDIT ROMS DIALOG ##########
+Audit Total ROMs=ROMs Totales:
+Audit Current ROM=Actual ROM:
+Audit File Location=Directorio del Archivo:
+Audit ROMs=Chequear ROMs
+Start=Iniciar
+Stop=Parar
+Close=Cerrar
+
+
+; ######## ROM PROPERTIES DIALOG ########
+ROM Properties=Propiedades del ROM
+
+RP ROM Information=Informacion del ROM:
+RP File Location=Directorio del Archivo:
+RP Good Name=Nombre:
+RP Internal Name=Nombre Interno:
+RP Size=Tamaño:
+RP Country=Pais:
+RP Ini Code=Codigo Ini:
+RP MD5 Checksum=MD5 Checksum:
+RP Calculate= Calcular
+
+RP Plugins=Plugins:
+RP Video Plugin=Plugin de Video:
+RP Sound Plugin=Plugin de Sonido:
+RP Input Plugin=Plugin de Mando:
+RP RSP Plugin=Plugin RSP:
+RP Save Plugins=Guardar Plugins
+
+RP Comments=Comentarios:
+
+
+; ####### LANGUAGE INFO DIALOG ########
+Translation Author TEXT=Author:
+Version TEXT=Version:
+Creation Date TEXT=Fecha:
+Language Information Dialog=Información del Idioma
+
+
+; ######### ROM BROWSER STRINGS #######
+Good Name=Titulo
+File Name=Nombre del Archivo
+Size=Tamaño
+Comments=Comentarios
+Country=Pais
+Demo=Demo
+Beta=Beta
+USA/Japan=USA/Japon
+German=Aleman
+USA=USA	
+France=Francia
+Italy=Italia
+Japan=Japon
+Europe=Europa
+Spain=España
+Australia=Australia
+Unknown=Desconocido
+
+
+; ######### STATUS BAR STRINGS ###########
+Emulation started=Emulacion Iniciada
+Rom Closed=Cerrar Rom
+Emulation paused=Emulacion en Pausa
+Loading ROM...=Cargando ROM...
+Total ROMs=ROMs Totales
+Recording replay...=Repitiendo Grabacion...
+Recording stopped=Grabacion parada
+Playback started...=Playback iniciado...
+Playback stopped=Playback parado
+Converting replay to avi...=Convirtiendo repeticion en avi...
+Converting aborted=Conversion Abortada
+Speed Limit=Limite de velocidad
+
+
+; ######### TOOLTIPS ############
+Start/Resume Emulation=Iniciar/Continuar Emulacion
+Pause Emulation=Pausar Emulacion
+Stop Emulation=Parar Emulacion
+; Actualmente implementado:
+; Load ROM...=Cargar Rom...
+; Full Screen=Pantalla Completa
+; Video Settings...=Configuración de Video...
+; Sound Settings...=Configuración del Sonido...
+; Input Settings....=Configuración del Mando...
+; RSP Config...=Configuración del RSP...
+; Settings...=Configuraciones...

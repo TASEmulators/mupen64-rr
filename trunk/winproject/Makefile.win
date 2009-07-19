@@ -1,0 +1,204 @@
+# Project: Mupen 64 Windows
+# Makefile created by Dev-C++ 4.9.9.2
+
+CPP  = g++.exe
+CC   = gcc.exe
+WINDRES = windres.exe
+RES  = mupen64_private.res
+OBJ  = ../main/rom.o ../memory/memory.o ../r4300/x86/debug.o ../main/win/configdialog.o ../r4300/r4300.o ../main/unzip.o ../r4300/interupt.o ../memory/tlb.o ../memory/dma.o ../memory/pif.o ../r4300/exception.o ../r4300/recomp.o ../r4300/pure_interp.o ../r4300/x86/rjump.o ../main/ioapi.o ../r4300/x86/assemble.o ../r4300/x86/gr4300.o ../r4300/special.o ../r4300/x86/gspecial.o ../r4300/regimm.o ../r4300/x86/gregimm.o ../r4300/tlb.o ../r4300/x86/gtlb.o ../r4300/cop0.o ../r4300/x86/gcop0.o ../r4300/bc.o ../r4300/x86/gbc.o ../r4300/cop1_s.o ../r4300/x86/gcop1_s.o ../r4300/cop1_d.o ../r4300/x86/gcop1_d.o ../r4300/cop1_w.o ../r4300/x86/gcop1_w.o ../r4300/cop1_l.o ../r4300/x86/gcop1_l.o ../r4300/cop1.o ../r4300/x86/gcop1.o ../memory/flashram.o ../main/md5.o ../main/mupenIniApi.o ../main/win/dumplist.o ../main/win/rombrowser.o ../main/win/timers.o ../main/win/translation.o ../main/win/main_win.o ../main/win/inifunctions.o ../main/savestates.o ../main/win/Config.o ../main/win/guifuncs.o ../main/win/RomSettings.o ../main/win/GUI_LogWindow.o ../main/win/kaillera.o ../main/win/commandline.o ../main/vcr.o ../r4300/x86/regcache.o ../main/win/vcr_compress.o ../main/vcr_resample.o ../main/adler32.o $(RES)
+LINKOBJ  = ../main/rom.o ../memory/memory.o ../r4300/x86/debug.o ../main/win/configdialog.o ../r4300/r4300.o ../main/unzip.o ../r4300/interupt.o ../memory/tlb.o ../memory/dma.o ../memory/pif.o ../r4300/exception.o ../r4300/recomp.o ../r4300/pure_interp.o ../r4300/x86/rjump.o ../main/ioapi.o ../r4300/x86/assemble.o ../r4300/x86/gr4300.o ../r4300/special.o ../r4300/x86/gspecial.o ../r4300/regimm.o ../r4300/x86/gregimm.o ../r4300/tlb.o ../r4300/x86/gtlb.o ../r4300/cop0.o ../r4300/x86/gcop0.o ../r4300/bc.o ../r4300/x86/gbc.o ../r4300/cop1_s.o ../r4300/x86/gcop1_s.o ../r4300/cop1_d.o ../r4300/x86/gcop1_d.o ../r4300/cop1_w.o ../r4300/x86/gcop1_w.o ../r4300/cop1_l.o ../r4300/x86/gcop1_l.o ../r4300/cop1.o ../r4300/x86/gcop1.o ../memory/flashram.o ../main/md5.o ../main/mupenIniApi.o ../main/win/dumplist.o ../main/win/rombrowser.o ../main/win/timers.o ../main/win/translation.o ../main/win/main_win.o ../main/win/inifunctions.o ../main/savestates.o ../main/win/Config.o ../main/win/guifuncs.o ../main/win/RomSettings.o ../main/win/GUI_LogWindow.o ../main/win/kaillera.o ../main/win/commandline.o ../main/vcr.o ../r4300/x86/regcache.o ../main/win/vcr_compress.o ../main/vcr_resample.o ../main/adler32.o $(RES)
+LIBS =  -L"lib" -L"zlib" -mwindows -L. -lz -lcomctl32 -lwinmm -lvfw_avi32 -lvfw_ms32  -s -march=pentium2 -mmmx 
+INCS =  -I"include"  -I"zlib" 
+CXXINCS =  -I"lib/gcc/mingw32/3.4.2/include"  -I"include/c++/3.4.2/backward"  -I"include/c++/3.4.2/mingw32"  -I"include/c++/3.4.2"  -I"include"  -I"zlib" 
+BIN  = mupen64.exe
+CXXFLAGS = $(CXXINCS)   -fexpensive-optimizations -O3 -march=pentium2 -mmmx
+CFLAGS = $(INCS) -D__WIN32__ -DX86 -DVCR_SUPPORT -Wall -fno-strict-aliasing -fomit-frame-pointer   -fexpensive-optimizations -O3 -march=pentium2 -mmmx
+RM = rm -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before mupen64.exe all-after
+
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CC) $(LINKOBJ) -o "mupen64.exe" $(LIBS)
+
+../main/rom.o: ../main/rom.c
+	$(CC) -c ../main/rom.c -o ../main/rom.o $(CFLAGS)
+
+../memory/memory.o: ../memory/memory.c
+	$(CC) -c ../memory/memory.c -o ../memory/memory.o $(CFLAGS)
+
+../r4300/x86/debug.o: ../r4300/x86/debug.c
+	$(CC) -c ../r4300/x86/debug.c -o ../r4300/x86/debug.o $(CFLAGS)
+
+../main/win/configdialog.o: ../main/win/configdialog.c
+	$(CC) -c ../main/win/configdialog.c -o ../main/win/configdialog.o $(CFLAGS)
+
+../r4300/r4300.o: ../r4300/r4300.c
+	$(CC) -c ../r4300/r4300.c -o ../r4300/r4300.o $(CFLAGS)
+
+../main/unzip.o: ../main/unzip.c
+	$(CC) -c ../main/unzip.c -o ../main/unzip.o $(CFLAGS)
+
+../r4300/interupt.o: ../r4300/interupt.c
+	$(CC) -c ../r4300/interupt.c -o ../r4300/interupt.o $(CFLAGS)
+
+../memory/tlb.o: ../memory/tlb.c
+	$(CC) -c ../memory/tlb.c -o ../memory/tlb.o $(CFLAGS)
+
+../memory/dma.o: ../memory/dma.c
+	$(CC) -c ../memory/dma.c -o ../memory/dma.o $(CFLAGS)
+
+../memory/pif.o: ../memory/pif.c
+	$(CC) -c ../memory/pif.c -o ../memory/pif.o $(CFLAGS)
+
+../r4300/exception.o: ../r4300/exception.c
+	$(CC) -c ../r4300/exception.c -o ../r4300/exception.o $(CFLAGS)
+
+../r4300/recomp.o: ../r4300/recomp.c
+	$(CC) -c ../r4300/recomp.c -o ../r4300/recomp.o $(CFLAGS)
+
+../r4300/pure_interp.o: ../r4300/pure_interp.c
+	$(CC) -c ../r4300/pure_interp.c -o ../r4300/pure_interp.o $(CFLAGS)
+
+../r4300/x86/rjump.o: ../r4300/x86/rjump.c
+	$(CC) -c ../r4300/x86/rjump.c -o ../r4300/x86/rjump.o $(CFLAGS)
+
+../main/ioapi.o: ../main/ioapi.c
+	$(CC) -c ../main/ioapi.c -o ../main/ioapi.o $(CFLAGS)
+
+../r4300/x86/assemble.o: ../r4300/x86/assemble.c
+	$(CC) -c ../r4300/x86/assemble.c -o ../r4300/x86/assemble.o $(CFLAGS)
+
+../r4300/x86/gr4300.o: ../r4300/x86/gr4300.c
+	$(CC) -c ../r4300/x86/gr4300.c -o ../r4300/x86/gr4300.o $(CFLAGS)
+
+../r4300/special.o: ../r4300/special.c
+	$(CC) -c ../r4300/special.c -o ../r4300/special.o $(CFLAGS)
+
+../r4300/x86/gspecial.o: ../r4300/x86/gspecial.c
+	$(CC) -c ../r4300/x86/gspecial.c -o ../r4300/x86/gspecial.o $(CFLAGS)
+
+../r4300/regimm.o: ../r4300/regimm.c
+	$(CC) -c ../r4300/regimm.c -o ../r4300/regimm.o $(CFLAGS)
+
+../r4300/x86/gregimm.o: ../r4300/x86/gregimm.c
+	$(CC) -c ../r4300/x86/gregimm.c -o ../r4300/x86/gregimm.o $(CFLAGS)
+
+../r4300/tlb.o: ../r4300/tlb.c
+	$(CC) -c ../r4300/tlb.c -o ../r4300/tlb.o $(CFLAGS)
+
+../r4300/x86/gtlb.o: ../r4300/x86/gtlb.c
+	$(CC) -c ../r4300/x86/gtlb.c -o ../r4300/x86/gtlb.o $(CFLAGS)
+
+../r4300/cop0.o: ../r4300/cop0.c
+	$(CC) -c ../r4300/cop0.c -o ../r4300/cop0.o $(CFLAGS)
+
+../r4300/x86/gcop0.o: ../r4300/x86/gcop0.c
+	$(CC) -c ../r4300/x86/gcop0.c -o ../r4300/x86/gcop0.o $(CFLAGS)
+
+../r4300/bc.o: ../r4300/bc.c
+	$(CC) -c ../r4300/bc.c -o ../r4300/bc.o $(CFLAGS)
+
+../r4300/x86/gbc.o: ../r4300/x86/gbc.c
+	$(CC) -c ../r4300/x86/gbc.c -o ../r4300/x86/gbc.o $(CFLAGS)
+
+../r4300/cop1_s.o: ../r4300/cop1_s.c
+	$(CC) -c ../r4300/cop1_s.c -o ../r4300/cop1_s.o $(CFLAGS)
+
+../r4300/x86/gcop1_s.o: ../r4300/x86/gcop1_s.c
+	$(CC) -c ../r4300/x86/gcop1_s.c -o ../r4300/x86/gcop1_s.o $(CFLAGS)
+
+../r4300/cop1_d.o: ../r4300/cop1_d.c
+	$(CC) -c ../r4300/cop1_d.c -o ../r4300/cop1_d.o $(CFLAGS)
+
+../r4300/x86/gcop1_d.o: ../r4300/x86/gcop1_d.c
+	$(CC) -c ../r4300/x86/gcop1_d.c -o ../r4300/x86/gcop1_d.o $(CFLAGS)
+
+../r4300/cop1_w.o: ../r4300/cop1_w.c
+	$(CC) -c ../r4300/cop1_w.c -o ../r4300/cop1_w.o $(CFLAGS)
+
+../r4300/x86/gcop1_w.o: ../r4300/x86/gcop1_w.c
+	$(CC) -c ../r4300/x86/gcop1_w.c -o ../r4300/x86/gcop1_w.o $(CFLAGS)
+
+../r4300/cop1_l.o: ../r4300/cop1_l.c
+	$(CC) -c ../r4300/cop1_l.c -o ../r4300/cop1_l.o $(CFLAGS)
+
+../r4300/x86/gcop1_l.o: ../r4300/x86/gcop1_l.c
+	$(CC) -c ../r4300/x86/gcop1_l.c -o ../r4300/x86/gcop1_l.o $(CFLAGS)
+
+../r4300/cop1.o: ../r4300/cop1.c
+	$(CC) -c ../r4300/cop1.c -o ../r4300/cop1.o $(CFLAGS)
+
+../r4300/x86/gcop1.o: ../r4300/x86/gcop1.c
+	$(CC) -c ../r4300/x86/gcop1.c -o ../r4300/x86/gcop1.o $(CFLAGS)
+
+../memory/flashram.o: ../memory/flashram.c
+	$(CC) -c ../memory/flashram.c -o ../memory/flashram.o $(CFLAGS)
+
+../main/md5.o: ../main/md5.c
+	$(CC) -c ../main/md5.c -o ../main/md5.o $(CFLAGS)
+
+../main/mupenIniApi.o: ../main/mupenIniApi.c
+	$(CC) -c ../main/mupenIniApi.c -o ../main/mupenIniApi.o $(CFLAGS)
+
+../main/win/dumplist.o: ../main/win/dumplist.c
+	$(CC) -c ../main/win/dumplist.c -o ../main/win/dumplist.o $(CFLAGS)
+
+../main/win/rombrowser.o: ../main/win/rombrowser.c
+	$(CC) -c ../main/win/rombrowser.c -o ../main/win/rombrowser.o $(CFLAGS)
+
+../main/win/timers.o: ../main/win/timers.c
+	$(CC) -c ../main/win/timers.c -o ../main/win/timers.o $(CFLAGS)
+
+../main/win/translation.o: ../main/win/translation.c
+	$(CC) -c ../main/win/translation.c -o ../main/win/translation.o $(CFLAGS)
+
+../main/win/main_win.o: ../main/win/main_win.c
+	$(CC) -c ../main/win/main_win.c -o ../main/win/main_win.o $(CFLAGS)
+
+../main/win/inifunctions.o: ../main/win/inifunctions.c
+	$(CC) -c ../main/win/inifunctions.c -o ../main/win/inifunctions.o $(CFLAGS)
+
+../main/savestates.o: ../main/savestates.c
+	$(CC) -c ../main/savestates.c -o ../main/savestates.o $(CFLAGS)
+
+../main/win/Config.o: ../main/win/Config.c
+	$(CC) -c ../main/win/Config.c -o ../main/win/Config.o $(CFLAGS)
+
+../main/win/guifuncs.o: ../main/win/guifuncs.c
+	$(CC) -c ../main/win/guifuncs.c -o ../main/win/guifuncs.o $(CFLAGS)
+
+../main/win/RomSettings.o: ../main/win/RomSettings.c
+	$(CC) -c ../main/win/RomSettings.c -o ../main/win/RomSettings.o $(CFLAGS)
+
+../main/win/GUI_LogWindow.o: ../main/win/GUI_LogWindow.c
+	$(CC) -c ../main/win/GUI_LogWindow.c -o ../main/win/GUI_LogWindow.o $(CFLAGS)
+
+../main/win/kaillera.o: ../main/win/kaillera.c
+	$(CC) -c ../main/win/kaillera.c -o ../main/win/kaillera.o $(CFLAGS)
+
+../main/win/commandline.o: ../main/win/commandline.c
+	$(CC) -c ../main/win/commandline.c -o ../main/win/commandline.o $(CFLAGS)
+
+../main/vcr.o: ../main/vcr.c
+	$(CC) -c ../main/vcr.c -o ../main/vcr.o $(CFLAGS)
+
+../r4300/x86/regcache.o: ../r4300/x86/regcache.c
+	$(CC) -c ../r4300/x86/regcache.c -o ../r4300/x86/regcache.o $(CFLAGS)
+
+../main/win/vcr_compress.o: ../main/win/vcr_compress.c
+	$(CC) -c ../main/win/vcr_compress.c -o ../main/win/vcr_compress.o $(CFLAGS)
+
+../main/vcr_resample.o: ../main/vcr_resample.c
+	$(CC) -c ../main/vcr_resample.c -o ../main/vcr_resample.o $(CFLAGS)
+
+../main/adler32.o: ../main/adler32.c
+	$(CC) -c ../main/adler32.c -o ../main/adler32.o $(CFLAGS)
+
+mupen64_private.res: mupen64_private.rc rsrc.rc 
+	$(WINDRES) -i mupen64_private.rc --input-format=rc -o mupen64_private.res -O coff 
