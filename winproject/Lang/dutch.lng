@@ -1,0 +1,227 @@
+[Nederlands]
+; encoding trigger:
+; é ë (this file is in ISO-8859-1 encoding, with CRLF line terminators)
+
+Translation Author = Soggie
+Version = 3.5
+Creation Date = May 23rd, 2004
+
+
+; ########### MENU #############
+; File 
+File=&Bestand
+Load ROM...=Laad ROM...
+Close ROM=&Sluit ROM
+Refresh ROM List=&Ververs ROM Lijst
+Recent ROMs=R&ecente ROMs
+Freeze=Be&vries
+Language=&Taal
+Language Information...=Taal &informatie...
+Exit=&Afsluiten
+
+; Run 
+Run=&Emulatie
+Reset=&Reset
+Pause=&Pauze
+Continue=&Vervolg
+Generate Bitmap=&Genereer Bitmap
+Save State=Toestand &bewaren
+Save As...=&Bewaar Als...
+Load State=Toestand &laden
+Load As...=L&aad Als...
+Current Save State=Huidige bewaar toestand
+
+; Options 
+Options=&Opties
+Full Screen=V&olledige Scherm
+Video Settings...=&Video Instellingen...
+Input Settings...=&Invoer Instellingen...
+Audio Settings...=&Audio Instellingen...
+RSP Settings...=&RSP Instellingen...
+Show Toolbar=Toon &Werkbalk
+Show Statusbar=Toon Status&balk
+Settings...=&Instellingen...
+
+; Utilities menu
+Utilities=&Hulpmiddelen
+ROM Properties...=ROM Eigenschappen...
+Audit ROMs...=ROMs doorlichten...
+Benchmark...=Benchmark...
+Generate ROM Info...=&Genereer ROM Info...
+Show Log Window=&Toon Log Venster
+Kaillera...=Kaillera...
+Record=Opname
+Start Recording...=Start Opname...
+Stop Recording=Stop Opname
+Start Playback...=Start Afspelen...
+Stop Playback=Stop Afspelen
+Start Capture (REC2AVI)...=Start Captatie (REC2AVI)...
+Stop Capture=Stop Captatie
+
+
+; Help  
+Help=&Hulp
+Contents...=&Inhoud...    
+Whats new...=&Nieuwigheden...
+About...=&Over Mupen64...
+
+
+; ########### CONTEXT MENU #############
+Play Game=Start Emulatie
+
+
+; ######### CONFIG DIALOG ##########
+Settings=Instellingen
+Ok=Ok
+Cancel=Annuleren
+
+; ## Plugins##
+Video Plugin=Video Plugin
+Input Plugin=Invoer Plugin
+Sound Plugin=Geluid Plugin
+RSP Plugin=RSP Plugin
+Config=Configureer
+Test=Test
+Plugin About=Over
+Config Plugins=Plugins
+
+
+; ## Directories ##
+Directories=Mappen
+Use directory recursion=Gebruik map recursie
+Add=Voeg toe
+Remove=Wis
+Remove All=Wis Alles
+ROMs Directories=ROM Mappen 
+;Select Current ROM Browser Directory=Kies Huidige ROM Blader Map
+Plugins Directory=Plugins Map
+Saves Directory=Toestandsopslag Map
+Screenshots Directory=Screenshots Map
+Choose=Kies...
+
+
+; ## General ##
+General=Algemeen
+Alerts=Waarschuwingen
+Alert Bad ROM=Waarschuwing bij slechte ROM
+Alert Hacked ROM=Waarschuwing bij gehackte ROM
+Alert Saves errors=Waarschuwing bij fout in toestandsopslag
+Fps / VIs=Fps / VIs
+Limit fps (auto)=Beperk fps (auto)
+Use Speed Modifier=Gebruik Snelheidsaanpasser
+Show FPS=Toon FPS
+Show VIs=Toon VIs
+CPU Core=CPU Kern
+Interpreter=Interpreter
+Dynamic Recompiler=Dynamische Recompiler
+Pure Interpreter=Pure Interpreter
+Ini File=Ini Bestand
+Use compressed file=Gebruik gecomprimeerd bestand
+
+
+; ## Advanced Settings ##
+Advanced Settings=Gevordere Instellingen
+Common Options=Common Options
+Start Game in full screen=Start spel in volledige scherm modus
+Pause when not active=Pauzeer emulatie als het venster niet actief is
+Use global plugins settings=Gebruik globale plugin instellingen
+Show toolbar=Toon werkbalk
+Show statusbar=Toon statusbalk
+Compatibility Options=Compatibility Options
+No audio delay=No audio delay (it can fix some compatibility issues but audio won't be synchronised with video)
+No compiled jump=No compiled jump (improves compatibility at the cost of some speed)
+Rombrowser Columns=Rombladeraar Kolommen
+GoodName=Goede Naam
+Internal Name=Interne Naam
+Country=Land
+ROM size=ROM grootte
+Comments=Commentaar
+File Name=Bestandsnaam
+MD5=MD5
+
+
+; ######### AUDIT ROMS DIALOG ##########
+Audit Total ROMs=Aantal ROMs:
+Audit Current ROM=Huidige ROM:
+Audit File Location=Bestandslocatie:
+Audit ROMs=Doorgelichte ROMs
+Start=Start
+Stop=Stop
+Close=Sluit
+
+
+; ######## ROM PROPERTIES DIALOG ########
+ROM Properties=ROM Eigenschappen
+
+RP ROM Information=ROM Informatie:
+RP File Location=Bestandslocatie:
+RP Good Name=Goede Naam:
+RP Internal Name=Interne Naam:
+RP Size=Grootte:
+RP Country=Land:
+RP Ini Code=Ini Code:
+RP MD5 Checksum=MD5 Controlesom:
+RP Calculate= Bereken
+
+RP Plugins=Plugins:
+RP Video Plugin=Video Plugin:
+RP Sound Plugin=Geluid Plugin:
+RP Input Plugin=Invoer Plugin:
+RP RSP Plugin=RSP Plugin:
+RP Save Plugins=Bewaar Plugins
+
+RP Comments=Commentaar:
+
+
+; ####### LANGUAGE INFO DIALOG ########
+Translation Author TEXT=Auteur Vertaling:
+Version TEXT=Versie:
+Creation Date TEXT=Datum Aanmaak:
+Language Information Dialog=Taalinformatie
+
+
+; ######### ROM BROWSER STRINGS #######
+Good Name=Header Naam
+File Name=Bestandsnaam
+Size=Grootte
+Comments=Commentaar
+Country=Land
+Demo=Demo
+Beta=Beta
+USA/Japan=USA/Japan
+German=Duitsland
+USA=USA	
+France=Frankrijk
+Italy=Italië
+Japan=Japan
+Europe=Europa
+Spain=Spanje
+Australia=Australië
+Unknown=Onbekend
+
+; ######### STATUS BAR STRINGS ###########
+Emulation started=Emulatie gestart
+Rom Closed=Rom Afgesloten
+Emulation paused=Emulatie gepauzeerd
+Loading ROM...=Laden ROM...
+Total ROMs=Aantal ROMs
+Recording replay...=Opname replay...
+Recording stopped=Opname gestopt
+Playback started...=Afspelen gestart...
+Playback stopped=Afspelen gestopt
+Converting replay to avi...=Conversie replay naar avi...
+Converting aborted=Conversie afgebroken
+Speed Limit=Snelheidsbeperking
+
+
+; ######### TOOLTIPS ############
+Start/Resume Emulation=Start/Hervat Emulatie
+Pause Emulation=Pauzeer Emulatie
+Stop Emulation=Stop Emulatie
+; Load ROM...=Laad ROM...
+; Full Screen=Volledig Scherm    (Already Implented)
+; Video Settings...=Video Instellingen...
+; Sound Settings...=Geluid Instellingen...
+; Input Settings....=Invoer Instellingen...
+; RSP Config...=RSP Configuratie...
+; Settings...=Instellingen...

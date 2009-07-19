@@ -1,0 +1,34 @@
+VCR - Video recording for mupen64
+---------------------------------
+
+1) The VCR menu
+  Start record...     Creates a savestate (.st) and starts recording data from
+                      the input plugin into a .rec file.
+  Stop record         Finishes the .rec file and closes it.
+
+  Start playback...   Loads the selected .rec file and the matching savestate,
+                      then starts sending input data from the .rec file to the
+                      N64.
+  Stop playback       Stops playback.
+
+  Start capture...    Starts playback for selected file & captures Audio/Video.
+  Stop capture        Stops capture - finishes .avi file and stops playback.
+
+  Configure Codecs... Pops up a Audio/Video codec configuration dialog.
+
+2) How to create a movie
+  1) Open the rom, run it. Go to the place where you want the movie to start and
+     select "Start record..." from the VCR menu.
+  2) Play the part which you want to be recorded in the movie later.
+  3) Choose "Stop record" from the VCR menu.
+  4) Then choose "Start capture...", select the .rec file, enter a filename for
+     the .avi file and wait until rendering has finished. You can also choose
+     "Stop capture" to stop capturing at any time.
+
+3) Notes
+  - On my PC when running xawtv in overlay mode I only get black screen in the
+    movie.
+  - Only works with glN64-0.4.1 at the moment.
+  - The window needs to be fully visible on your desktop, if it's covered by
+    other windows parts of them will show up in the movie.
+  - MP3 bitrate is hardcoded @ 192 kbps.

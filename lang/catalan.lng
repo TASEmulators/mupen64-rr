@@ -1,0 +1,160 @@
+; catalan translation by tux <tux@lleida.org>
+[Catalan]
+
+Ok=Accepta
+Cancel=Cancel·la
+
+Yes=Si
+No=No
+Abort=Cancel·la 
+Retry=Reintenta
+Ignore=Ignora
+Continue=Continua
+
+Error=Error
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Main Window
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; File menu
+_File=_Arxiu
+_Open Rom...=_Obrir ROM...
+_Close Rom=_Tancar ROM
+_Language=_Idioma
+_Exit=_Sortir
+
+; Emulation Menu
+_Emulation=_Emulació
+_Start=_Començar
+Pause/_Continue=Parar/_Continuar
+Sto_p=_Parar
+Save State=Guardar Estat
+Save State As=Guardar Estat Com
+Restore State=Restaurar Estat
+Load State=Carregar Estat
+Current save state=Guardar estat actual
+
+; Options Menu
+_Options=_Opcions
+_Configure...=_Configurar...
+_Video Settings...=Configurar _Vídeo...
+_Audio Settings...=Configurar _Àudio...
+_Input Settings...=Configurar _Controladors...
+_Full Screen=_Pantalla Completa
+
+; Debugger
+_Debugger=_Debugger
+_Enable=_Activar
+
+; Help Menu
+_Help=_Ajuda
+_About...=_Sobre...
+
+; Toolbar
+Open Rom=Obrir ROM
+Start Emulation=Començar Emulació
+Pause/Continue Emulation=Parar/Continuar Emulació
+Stop Emulation=Parar Emulació
+Configure=Configurar
+Full Screen=Pantalla Completa
+
+; Rom Browser
+Good Name=Nom
+Country=País
+Size=Tamany
+Comments=Comentaris
+File Name=Nom del fitxer
+Play Rom=Executar ROM
+Rom Properties=Propietats de la ROM
+Refresh=Refrescar
+Total Roms: %d=Total ROMs: %d
+Scanning directory '%s'...=Buscant al directori '%s'...
+%d Rom Directories scanned, %d Roms found=%d Directoris de ROMs
+rastrejats, %d ROMs trovades
+
+; Countries
+Demo=Demo
+Beta=Beta
+USA/Japan=USA/Japó
+Germany=Alemanya
+USA=USA
+France=França
+Italy=Italia
+Japan=Japó
+Spain=Espanya
+Australia (0x%2.2X)=Australia (0x%2.2X)
+Europe (0x%02X)=Europa (0x%02X)
+Unknown (0x%02X)=Desconegut (0x%02X)
+
+; Rom Properties
+Rom Info=Informació de la ROM
+Calculate=Calcular
+
+; Status Bar
+Rom \"%s\" loaded.=ROM \"%s\" carregada.
+Loading Rom: %d%%=Carregant ROM: %d%%
+Rom closed.=ROM tancada.
+Emulation started (PID: %d)=Emulació començada (PID: %d)
+Emulation paused.=Emulació parada.
+Emulation continued.=Emulació continuada.
+Stopping emulation.=Parant emulació.
+Emulation stopped.=Emulació parada.
+
+; Message Boxes
+Bad dump?=Volcat incorrecte?
+The rom you are trying to load is probably a bad dump!\nBe warned that this will probably give unexpected results.\nDo you still want to run it?=La ROM que está
+intentant carregar es probablement un volcat incorrecte\nTingui en
+compte que ens pot portar a resultats inesperats.\nDesitja continuar amb l'execució?
+Hack?=Hack?
+The rom you are trying to load is probably a hack!\nBe warned that this will probably give unexpected results.\nDo you still want to run it?=La ROM que
+està intentant carregar es probablement un hack!\nTingui en compte
+que ens pot portar a resultats inesperats.\nDesitja continuar amb
+l'execució?
+Emulation is running. Do you want to\nstop it and load the selected
+rom?=Emulació en procés. Desitja parar i carregar la ROM escollida?
+Emulation is running. Do you want to\nstop it and load a rom?=Emulació
+en procés. Desitja parar i carregar una ROM?
+Stop Emulation?=Parar l'emulació?
+Emulation is running. Do you want to\nstop it and close the
+rom?=Emulació en procés. Desitja parar-la i tancar la ROM?
+No Rom Loaded=No hi ha cap ROM carregada
+There is no Rom loaded.\nDo you want to load one?=No hi ha cap ROM.\nDesitja carregar-ne  una?
+No graphics plugin selected! Do you\nwant to select one?=No hi ha cap
+plugin gràfic sel·leccionat! Desitja sel·leccionar-ne un?
+No audio plugin selected! Do you\nwant to select one?=No hi ha cap
+plugin de so sel·leccionat! Desitja sel·leccionar-ne un?
+No input plugin selected! Do you\nwant to select one?=No hi ha cap
+plugin d'entrada sel·leccionat! Desea sel·leccionar-ne un?
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Config Dialog
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+; mupen tab
+CPU Core=Nucli de la CPU
+Interpreter=Intèrpret
+Dynamic Recompiler=Recompilador Dinàmic
+Pure Interpreter=Intèrpret Pur
+
+; plugins tab
+Plugins=Plugins
+Gfx Plugin=Plugin Gràfic
+Audio Plugin=Plugin d'Àudio
+Input Plugin=Plugin Controlador
+Config=Configurar
+Test=Provar
+About=Sobre
+
+; rombrowser tab
+Rom Directories=Directoris de ROMs
+Add=Afegir
+Remove=Eliminar
+Remove All=Eliminar Tots
+Recursively scan rom directories=Revisar directoris de ROMs recursivament
+Select Rom Directory=Sel·leccionar Directori de ROMs
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; About Dialog
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+About Mupen64=Sobre Mupen64

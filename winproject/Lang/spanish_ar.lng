@@ -1,0 +1,225 @@
+[Español (Argentina)]
+
+Translation Author = _pm_
+Version = 0.4
+Creation Date = 8 de Abril, 2005
+
+
+; ########### MENU #############
+; File 
+File=&Archivo
+Load ROM...=Ca&rgar ROM...
+Close ROM=&Cerrar ROM
+Refresh ROM List=&Actualizar lista de ROMs
+Recent ROMs=ROMs r&ecientes
+Freeze=Conser&var lista
+Language=&Idioma
+Language Information...=Información de i&dioma...
+Exit=Sa&lir
+
+; Run 
+Run=&Emulación
+Reset=&Reiniciar
+Pause=&Pausar
+Continue=&Continuar
+Generate Bitmap=&Generar mapa de bits
+Save State=&Guardar estado
+Save As...=G&uardar como...
+Load State=C&argar estado
+Load As...=Cargar &como...
+Current Save State=Estado actual
+
+; Options 
+Options=&Opciones
+Full Screen=&Pantalla completa
+Video Settings...=Configuración de &Video...
+Input Settings...=Configuración de &Controles...
+Audio Settings...=Configuración de &Sonido...
+RSP Settings...=Configuración de &RSP...
+Show Toolbar=Mostrar barra de &herramientas
+Show Statusbar=Mostrar barra de &estado
+Settings...=&Configuración...
+
+; Utilities menu
+Utilities=&Utilidades
+ROM Properties...=&Propiedades de ROM...
+Audit ROMs...=&Comprobar ROMs...
+Benchmark...=Pruebas de &rendimiento...
+Generate ROM Info...=&Generar información de ROM...
+Show Log Window=&Mostrar ventana de informe
+Kaillera...=Kaillera...
+Record=Grabar
+Start Recording...=Comenzar a grabar...
+Stop Recording=Interrumpir grabación
+Start Playback...=Comenzar a reproducir...
+Stop Playback=Detener reproducción
+Start Capture (REC2AVI)...=Comenzar captura de video (REC2AVI)...
+Stop Capture=Detener captura
+
+
+; Help  
+Help=A&yuda
+Contents...=&Contenido...    
+Whats new...=&Novedades...
+About...=&Acerca de Mupen64...
+
+
+; ########### CONTEXT MENU #############
+Play Game=Jugar
+
+
+; ######### CONFIG DIALOG ##########
+Settings=Configuración
+Ok=Aceptar
+Cancel=Cancelar
+
+; ## Plugins##
+Video Plugin=Plugin de Video
+Input Plugin=Plugin de Controles
+Sound Plugin=Plugin de Sonido
+RSP Plugin=Plugin de RSP
+Config=Configurar
+Test=Probar
+Plugin About=Acerca de
+Config Plugins=Plugins
+
+
+; ## Directories ##
+Directories=Directorios
+Use directory recursion=Usar recursividad en directorios
+Add=Agregar
+Remove=Quitar
+Remove All=Quitar todos
+ROMs Directories=Directorios de ROMs
+;Select Current ROM Browser Directory=Select Current ROM Browser Directory
+Plugins Directory=Directorio de Plugins
+Saves Directory=Directorio de juegos grabados
+Screenshots Directory=Directorio de capturas de pantalla (Screenshots)
+Choose=Elegir...
+
+
+; ## General ##
+General=General
+Alerts=Alertas
+Alert Bad ROM=Informar sobre ROM en mal estado
+Alert Hacked ROM=Informar sobre ROM alterada
+Alert Saves errors=Informar sobre errores de grabación
+Fps / VIs=Cps / VIs
+Limit fps (auto)=Limitar cuadros por segundo (fps, auto)
+Use Speed Modifier=Utilizar modificador de velocidad
+Show FPS=Mostrar FPS
+Show VIs=Mostrar VIs
+CPU Core=Núcleo de CPU
+Interpreter=Intérprete
+Dynamic Recompiler=Compilador dinámico
+Pure Interpreter=Intérprete puro
+Ini File=Archivo ini
+Use compressed file=Utilizar archivo comprimido
+
+
+; ## Advanced Settings ##
+Advanced Settings=Configuración avanzada
+Common Options=Opciones de uso frecuente
+Start Game in full screen=Comenzar juego en modo de pantalla completa
+Pause when not active=Pausar emulación cuando la ventana no está activa
+Use global plugins settings=Usar configuración global del plugin
+Show toolbar=Mostrar barra de herramientas
+Show statusbar=Mostrar barra de estado
+Compatibility Options=Opciones de compatibilidad
+No audio delay=No demorar audio (puede solucionar incompatibilidades, a costa de perder sincronización entre la imagen y el sonido)
+No compiled jump=No utilizar saltos compilados (mejora la compatibilidad, sacrificando un poco de velocidad)
+Rombrowser Columns=Columnas del explorador de ROMs
+GoodName=Nombre 'Good'
+Internal Name=Nombre interno
+Country=País
+ROM size=Tamaño de la ROM
+Comments=Comentarios
+File Name=Nombre de archivo
+MD5=MD5
+
+
+; ######### AUDIT ROMS DIALOG ##########
+Audit Total ROMs=Total ROMs:
+Audit Current ROM=Current ROM:
+Audit File Location=File Location:
+Audit ROMs=Audit ROMs
+Start=Start
+Stop=Stop
+Close=Close
+
+
+; ######## ROM PROPERTIES DIALOG ########
+ROM Properties=Propiedades de la ROM
+
+RP ROM Information=Información de la ROM:
+RP File Location=Ubicación:
+RP Good Name=Nombre 'Good':
+RP Internal Name=Nombre interno:
+RP Size=Tamaño:
+RP Country=País:
+RP Ini Code=Código Ini:
+RP MD5 Checksum=Checksum MD5:
+RP Calculate= Calcular
+
+RP Plugins=Plugins:
+RP Video Plugin=Plugin de Video:
+RP Sound Plugin=Plugin de Sonido:
+RP Input Plugin=Plugin Controles:
+RP RSP Plugin=Plugin de RSP:
+RP Save Plugins=Guardar
+
+RP Comments=Comentarios:
+
+
+; ####### LANGUAGE INFO DIALOG ########
+Translation Author TEXT=Autor:
+Version TEXT=Versión:
+Creation Date TEXT=Fecha de creación:
+Language Information Dialog=Diálogo de información del idioma actual
+
+; ######### ROM BROWSER STRINGS #######
+Good Name=Nombre de cabecera
+File Name=Nombre de archivo
+Size=Tamaño
+Comments=Comentario
+Country=País
+Demo=Demo
+Beta=Beta
+USA/Japan=EEUU/Japón
+German=Alemán
+USA=EEUU
+France=Francia
+Italy=Italia
+Japan=Japón
+Europe=Europa
+Spain=España
+Australia=Australia
+Unknown=Desconocido
+
+; ######### STATUS BAR STRINGS ###########
+Emulation started=Emulación iniciada
+Rom Closed=Rom cerrada
+Emulation paused=Emulación interrumpida
+Loading ROM...=Cargando ROM...
+Total ROMs=Cantidad de ROMs
+Recording replay...=Grabación iniciada...
+Recording stopped=Grabación detenida
+Playback started...=Reproducción inicada...
+Playback stopped=Reproducción detenida
+Converting replay to avi...=Convirtiendo grabación a avi...
+Converting aborted=Conversión cancelada
+Speed Limit=Límite de velocidad
+
+
+; ######### TOOLTIPS ############
+Start/Resume Emulation=Comenzar/Continuar emulación
+Pause Emulation=Pausar emulación
+Stop Emulation=Interrumpir emulación
+; These are already implented:
+; Load ROM...=Load ROM...
+; Full Screen=Full Screen
+; Video Settings...=Video Settings...
+; Sound Settings...=Sound Settings...
+; Input Settings....=Input Settings...
+; RSP Config...=RSP Config...
+; Settings...=Settings...

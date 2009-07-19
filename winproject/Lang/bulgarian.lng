@@ -1,0 +1,216 @@
+[Български]
+
+Translation Author = linker
+Version = 1.0
+Creation Date = 23-ти май 2004г.
+
+
+; ########### MENU #############
+; File 
+File=&Файл
+Load ROM...=З&ареди ROM...
+Close ROM=&Затвори ROM
+Refresh ROM List=&Опресни ROM листата
+Recent ROMs=&Скоро отворени ROM-ове
+Freeze=&Заключи
+Language=&Език
+Language Information...=&Информация за превода...
+Exit=Из&ход
+
+; Run 
+Run=&Емулация
+Reset=&Нулиране
+Pause=&Пауза
+Continue=&Продължи
+Generate Bitmap=&Създай изображение
+Save State=&Запиши
+Save As...=Запиши &като...
+Load State=За&реди
+Load As...=З&ареди като...
+Current Save State=Сегашен слот за запис
+
+; Options 
+Options=&Опции
+Full Screen=&Цял екран
+Video Settings...=Настройки на &видеото...
+Input Settings...=Настройки на &управлението...
+Audio Settings...=Настройки на &звука...
+RSP Settings...=Настройки &на RSP...
+Show Toolbar=&Покажи toolbar-а
+Show Statusbar=П&окажи statusbar-а
+Settings...=&Общи настройки...
+
+; Utilities menu
+Utilities=&Инструменти
+ROM Properties...=ROM &Настройки...
+Audit ROMs...=&Провери ROM-овете...
+Benchmark...=&Тест...
+Generate ROM Info...=&Създай ROM информация...
+Show Log Window=&Покажи/скрий лог прозореца
+Kaillera...=Kaillera...
+Record=&Запис
+Start Recording...=&Стартирай запис...
+Stop Recording=Сп&ри запис
+Start Playback...=&Плебек на запис...
+Stop Playback=Спри п&лейбек
+Start Capture (REC2AVI)...=Преобразувай &запис във avi...
+Stop Capture=Спри п&реобразуването
+
+
+; Help  
+Help=&Помощ
+Contents...=&Съдържание...    
+Whats new...=&Какво ново...
+About...=&За Mupen64...
+
+
+; ########### CONTEXT MENU #############
+Play Game=Отвори ROM-а
+
+
+; ######### CONFIG DIALOG ##########
+Settings=Настройки
+Ok=Добре
+Cancel=Отказ
+
+; ## Plugins##
+Video Plugin=Plugin за видеото
+Input Plugin=Plugin за управлението
+Sound Plugin=Plugin за звука
+RSP Plugin=Plugin за RSP
+Config=Конфиг
+Test=Тест
+Plugin About=Относно
+Config Plugins=Plugin-и
+
+
+; ## Directories ##
+Directories=Директории
+Use directory recursion=Вмъкни поддиректориите
+Add=Добави...
+Remove=Премахни
+Remove All=Дел. всички
+ROMs Directories=ROM директории
+Plugins Directory=Директория на Plugin-ите
+Saves Directory=Директория на записите
+Screenshots Directory=Директория на снимките
+Choose=Избери...
+
+
+; ## General ##
+General=Общи настройки
+Alerts=Съобщения за грешки
+Alert Bad ROM=Алармирай за повреден ROM
+Alert Hacked ROM=Алармирай за хакнат ROM
+Alert Saves errors=Алармирай за грешки при запис
+Fps / VIs=Fps / VIs
+Limit fps (auto)=Лимит на кадрите в секунда
+Use Speed Modifier=Възможност за промяна на скоростта
+Show FPS=Покажи кадрите в секунда
+Show VIs=Покажи VIs
+CPU Core=Процесор
+Interpreter=Интерпретатор
+Dynamic Recompiler=Динамичен рекомпилатор
+Pure Interpreter=Чист интерпретатор
+Ini File=Ini файл
+Use compressed file=Използвай компресиран файл
+
+
+; ## Advanced Settings ##
+Advanced Settings=Други
+Common Options=Общи настройки
+Start Game in full screen=Стартирай играта на цял екран
+Pause when not active=Паузирай емулатора при неактивен прозорец
+Use global plugins settings=Иползвай глобални настройки за plugin-ите
+Show toolbar=Покажи toolbar-а
+Show statusbar=Покажи statusbar-а
+Compatibility Options=Опции за съвместимост
+No audio delay=Без изчакване на звука (подобрява съвместимостта, но звука не е синхронизиран с видеото)
+No compiled jump=Без прескачания на кода (подобрява съвместимостта за сметка на скоростта)
+Rombrowser Columns=Колони на Rombrowser-а
+GoodName=Good име
+Internal Name=Вътрешно име
+Country=Страна
+ROM size=Размер на ROM-а
+Comments=Коментар
+File Name=Име на файла
+MD5=MD5
+
+
+; ######### AUDIT ROMS DIALOG ##########
+Audit Total ROMs=Общ брой:
+Audit Current ROM=Текущ ROM:
+Audit File Location=Разположение на файла:
+Audit ROMs=Проверка на ROM-ове
+Start=Стартирай
+Stop=Спри
+Close=Затвори
+
+
+; ######## ROM PROPERTIES DIALOG ########
+ROM Properties=ROM Настройки
+
+RP ROM Information=ROM Информация:
+RP File Location=Разположение на файла:
+RP Good Name=Good Име:
+RP Internal Name=Вътрешно име:
+RP Size=Размер:
+RP Country=Страна:
+RP Ini Code=Ini код:
+RP MD5 Checksum=MD5 проверка:
+RP Calculate=Пресметни
+
+RP Plugins=Plugin-и:
+RP Video Plugin=Графичен Plugin:
+RP Sound Plugin=Аудио Plugin:
+RP Input Plugin=Управление:
+RP RSP Plugin=RSP Plugin:
+RP Save Plugins=Запиши
+
+RP Comments=Коментар:
+
+
+; ####### LANGUAGE INFO DIALOG ########
+Translation Author TEXT=Автор на превода:
+Version TEXT=Версия:
+Creation Date TEXT=Дата на създаване:
+Language Information Dialog=Информация за превода
+
+; ######### ROM BROWSER STRINGS #######
+Good Name=Име на играта
+File Name=Име на файла
+Size=Размер
+Comments=Коментар
+Country=Страна
+Demo=Демо
+Beta=Бета
+USA/Japan=САЩ/Япония
+German=Германия
+USA=Америка	
+France=Франция
+Italy=Италия
+Japan=Япония
+Europe=Европа
+Spain=Испания
+Australia=Австралия
+Unknown=Непознат
+
+; ######### STATUS BAR STRINGS ###########
+Emulation started=Емулацията стартирана
+Rom Closed=Емулацията прекратена
+Emulation paused=Емулацията паузирана
+Loading ROM...=Зареждане...
+Total ROMs=Общ брой ROM-ове
+Recording replay...=Записване...
+Recording stopped=Записването спряно
+Playback started...=Плейбек стартиран...
+Playback stopped=Плейбек спрян
+Converting replay to avi...=Преобразуване на плейбек в avi...
+Converting aborted=Преобразуването прекратено
+Speed Limit=Лимит на скоростта
+
+
+; ######### TOOLTIPS ############
+Start/Resume Emulation=Пусни/продължи емулация
+Pause Emulation=Паузирай емулацията
+Stop Emulation=Спри емулацията

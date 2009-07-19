@@ -1,0 +1,20 @@
+#include <windows.h>
+#include "resource.h"
+
+IDD_RSPCONFIG DIALOGEX 0, 0, 200, 200
+STYLE DS_SETFONT | DS_MODALFRAME | DS_CENTER | WS_POPUP | WS_CAPTION | 
+    WS_SYSMENU
+CAPTION "Rsp Configuration"    
+FONT 8, "Tahoma", 0, 0, 0x0
+BEGIN
+GROUPBOX        "Configuration",IDC_METHOD,5,5,190,155
+CONTROL         "Process Alists inside RSP",IDC_ALISTS_INSIDE_RSP,"Button",BS_AUTORADIOBUTTON,16,
+                    20,160,12
+CONTROL         "Process Alists by emu defined plugin",IDC_ALISTS_EMU_DEFINED_PLUGIN,"Button",
+                    BS_AUTORADIOBUTTON,16,35,160,13
+CONTROL         "Process Alists by RSP defined plugin",IDC_ALISTS_RSP_DEFINED_PLUGIN,"Button",
+                    BS_AUTORADIOBUTTON,16,50,160,12
+COMBOBOX        IDC_COMBO_AUDIO,16,86,164,100,CBS_DROPDOWNLIST | 
+                    WS_VSCROLL | WS_TABSTOP | WS_DISABLED
+DEFPUSHBUTTON   "&OK",IDOK,126,173,60,14                    
+END

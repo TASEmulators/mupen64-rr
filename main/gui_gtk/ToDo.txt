@@ -1,0 +1,7 @@
+ - fix rombrowser column width saving (the width of the title
+   widget seems to be the set width + 1)
+ - add menu shortcuts (tip: Gtk+ FAQ)
+ - add help
+ - debugger support (untested cuz debugger doesn't support gui)
+ - catch signals from the core thread
+ - log window

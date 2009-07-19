@@ -1,0 +1,186 @@
+[Русский]
+
+Translation Author = A.sh.T.ray
+Version = 1.0
+Creation Date = 1 Декабря 2003
+
+
+;######### MENU ###################
+;  File 
+File=&Файл
+Load Rom=&Открыть ROM...
+Close Rom=&Закрыть ROM
+Refresh Rom List=Обновить &список ROMов
+Recent Roms=&Последние ROMы
+Freeze=Зам&орозить
+Language=&Язык
+Language Information=И&нформация о переводе
+Exit=Выход&
+
+;  Run 
+Run=&Эмуляция
+Reset=&Сброс
+Pause=&Пауза
+Continue=Пр&одолжить
+Generate Bitmap=Сделать скриншо&т
+Save State=Со&хранить
+Save as=Сохранить &как
+Restore State=&Возобновить
+Load=Возобновить &из
+Current Save State=Текущий &блок памяти
+
+;  Options 
+Options=&Опции
+Configure=Настройк&и...
+Video Settings=Настройка &графики...
+Input Settings=Настройка &управления...
+Audio Settings=Настройка &звука...
+RSP Settings=Настройка &RSP...
+Full Screen=&Во весь экран
+
+; Utilities menu
+Utilities=&Утилиты
+ROM Properties=Свойства ROMа...
+Audit ROMs=Проверить ROMы...
+Generate ROM Info=&Создать список ROMов
+Show Log Window=&Показать лог программы 
+
+;  Help  
+Help=&Помощь
+Contents=&Содержание...    
+Whats new=&Что новенького...
+About=&О Mupen64...
+
+
+;######### CONFIG DIALOG ###########
+
+Settings = Настройки
+;## Plugins##
+
+GFX Plugin=Графический плагин
+Input Plugin=Плагин управления
+Sound Plugin=Звуковой плагин
+RSP Plugin=RSP плагин
+OK=OK
+Config=Настроить
+Test=Тест
+Plugin About=О плагине
+Config Plugins=Плагины
+
+
+;## Directories ##
+
+Use directory recursion=Рекурсия
+Add=Добавить
+Remove=Удалить
+Remove All=Удалить все
+Directories=Папки
+Roms Directories=Папки с ROMами 
+Select Current Rom Browser Directory=Выберете папку с ROMами
+Plugins Directory=Папка с плагинами
+Choose=Обзор...
+Saves Directory=Папка с сохранениями
+Screenshots Directory=Папка со скриншотами
+
+
+;## General ##
+
+General=Основные
+Alerts=Уведомления
+Alert Bad Rom=Плохой ROM
+Alert Hacked Rom=Хакнутый ROM
+Alert Saves errors=Ошибки сохранения
+Fps / VIs=Fps / VIs
+Limit fps (auto)=Ограничить fps (auto)
+Use Speed Modifier=Регулятор скорости
+Show FPS=Показывать FPS
+Show VIs=Показывать VIs
+CPU Core=Ядро
+Interpreter=Интерпритатор
+Dynamic Recompiler=Динамический рекомпилятор
+Pure Interpreter=Простой интерпритатор
+Ini File=Файл настройки
+Use compressed file=Использывать сжатый файл
+
+
+;## Advanced Settings ##
+
+Advanced Settings=Дополнительно
+Start Game in full screen=Запускать игру во весь экран
+Pause when not active=Приостанавливать эмуляцию когда не активен
+Use global plugins settings=Использывать настройки плагинов
+Use toolbar=Кнопки                (ALT+T)
+Use statusbar=Строка статуса  (ALT+S)
+Rombrowser Columns=Поля браузера ROMов
+GoodName=Название согласно GoodN64
+Internal Name=Внутреннее имя
+Rom size=Размер ROMа
+Comments=Примечания
+Country=Страна
+File Name=Имя файла
+MD5=MD5
+
+
+;######### AUDIT ROMS DIALOG ##########
+
+Audit Total ROMs=Всего ROMов:
+Audit Current ROM=Текущий ROM:
+Audit File Location=Расположение файла:
+Audit ROMs=Проверка ROMов
+
+
+;######## ROM PROPERTIES DIALOG ########
+RP ROM Information=Информация о ROMе:
+RP File Location=Расположение файла:
+RP Good Name=Имя GoodN64:
+RP Internal Name=Внутр. имя:
+RP Size=Размер:
+RP Country=Страна:
+RP Ini Code=Ini Code:
+RP MD5 Checksum=Контр.сумма MD5:
+RP Calculate=Сосчитать
+RP Comments=Примечание:
+
+;####### LANGUAGE INFO DIALOG ########
+Translation Author TEXT=Автор перевода:
+Version TEXT=Версия:
+Creation Date TEXT=Дата создания:
+OK=OK
+
+;######### STATUS BAR STRINGS #########
+Emulation started=Начата эмуляция
+Rom Closed=ROM закрыт
+Emulation paused=Приостановленно
+Loading rom=Загрузка
+Total Roms=Всего ROMов:
+
+
+;######### ROM BROWSER STRINGS #######
+
+Good Name=Заголовок
+File Name=Файл
+Size=Размер
+Comments=Примечание
+Country=Страна
+Demo=Демо
+Beta=Бета
+USA/Japan=США/Япония
+German=Германия
+USA=США	
+France=Франция
+Italy=Италия
+Japan=Япония
+Europe=Европа
+Spain=Испания
+Australia=Австралия
+Unknown=Неизвестно
+
+
+;######### TOOLTIPS ##################
+Stop Emulation=Остановить
+Run/Resume Rom=Запуск/Приостановка ROMа
+
+
+Refresh=Обновить
+Play Game=Запустить
+Speed Limit=Скорость:

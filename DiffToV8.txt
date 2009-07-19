@@ -1,0 +1,291 @@
+diff -rdu c:\mupen64\mupen64_src-rerecording-v8/mupen64_src-rerecording-v8/main/vcr.c c:\mupen64\upthmupen64_src-rerecording-v8/mupen64_src-rerecording-v8/main/vcr.c
+--- c:\mupen64\mupen64_src-rerecording-v8/mupen64_src-rerecording-v8/main/vcr.c	2005-11-12 13:49:14.000000000 -0800
++++ c:\mupen64\upthmupen64_src-rerecording-v8/mupen64_src-rerecording-v8/main/vcr.c	2007-09-16 15:53:08.140625000 -0700
+@@ -1,4 +1,4 @@
+-#include "../config.h"
++//#include "../config.h"
+ #ifdef VCR_SUPPORT
+ 
+ #include "vcr.h"
+@@ -83,6 +83,7 @@
+ */
+ 
+ static char   m_filename[PATH_MAX];
++static char   AVIFileName[PATH_MAX];
+ static FILE*  m_file = 0;
+ static int    m_task = Idle;
+ 
+@@ -107,6 +108,7 @@
+ static int soundBufPos = 0;
+ long lastSound = 0;
+ volatile BOOL captureFrameValid = FALSE;
++static int AVIBreakMovie = 0;
+ 
+ 
+ static void printWarning (char* str)
+@@ -1481,6 +1483,37 @@
+ 		return;
+ 	}
+ 
++	if(VCRComp_GetSize() > 0x7B9ACA00)
++	{
++		if(AVIBreakMovie)
++		{
++			VCRComp_finishFile(1);
++			AVIBreakMovie=2;
++		}
++		else
++		{
++			VCRComp_finishFile(1);
++			AVIBreakMovie=1;
++		}
++		int	fnlen=strlen(AVIFileName);
++		if(AVIBreakMovie==2)
++		{
++			AVIFileName[fnlen-5]++;
++			if(AVIFileName[fnlen-5]==90)
++				AVIBreakMovie=1;
++		}
++		else
++		{
++			AVIFileName[fnlen+1]=AVIFileName[fnlen];
++			AVIFileName[fnlen]=AVIFileName[fnlen-1];
++			AVIFileName[fnlen-1]=AVIFileName[fnlen-2];
++			AVIFileName[fnlen-2]=AVIFileName[fnlen-3];
++			AVIFileName[fnlen-3]=AVIFileName[fnlen-4];
++			AVIFileName[fnlen-4]=65;
++		}
++		VCRComp_startFile( AVIFileName, width, height, visByCountrycode(), 0);
++	}
++
+ //char str[256];
+ //sprintf(str, "[VCR]: width = %d, height = %d, image = 0x%x", (int)width, (int)height, image);
+ //ShowInfo(str);
+@@ -1699,8 +1732,9 @@
+ 	readScreen( &dest, &width, &height );
+ 	if (dest)
+ 		free( dest );
+-	VCRComp_startFile( aviFilename, width, height, visByCountrycode() );
++	VCRComp_startFile( aviFilename, width, height, visByCountrycode(), 1);
+ 	m_capture = 1;
++	strncpy( AVIFileName, aviFilename, PATH_MAX );
+ /*	if (VCR_startPlayback( recFilename ) < 0)
+ 	{
+ 		printError("Cannot start capture; could not play movie file!\n" );
+@@ -1757,7 +1791,8 @@
+ 	usleep( 100000 ); // HACK - is this really necessary?
+ #endif
+ //	VCR_stopPlayback();
+-	VCRComp_finishFile();
++	VCRComp_finishFile(0);
++	AVIBreakMovie = 0;
+ 	printf( "[VCR]: Capture finished.\n" );
+ //	ShowInfo("VCR_stopCapture() done");
+ 	return 0;
+diff -rdu c:\mupen64\mupen64_src-rerecording-v8/mupen64_src-rerecording-v8/main/vcr.h c:\mupen64\upthmupen64_src-rerecording-v8/mupen64_src-rerecording-v8/main/vcr.h
+--- c:\mupen64\mupen64_src-rerecording-v8/mupen64_src-rerecording-v8/main/vcr.h	2005-11-12 13:48:12.000000000 -0800
++++ c:\mupen64\upthmupen64_src-rerecording-v8/mupen64_src-rerecording-v8/main/vcr.h	2007-09-16 15:53:08.203125000 -0700
+@@ -1,7 +1,7 @@
+ #ifndef __VCR_H__
+ #define __VCR_H__
+ 
+-#include "../config.h"
++//#include "../config.h"
+ 
+ #ifdef VCR_SUPPORT
+ 
+diff -rdu c:\mupen64\mupen64_src-rerecording-v8/mupen64_src-rerecording-v8/main/vcr_compress.h c:\mupen64\upthmupen64_src-rerecording-v8/mupen64_src-rerecording-v8/main/vcr_compress.h
+--- c:\mupen64\mupen64_src-rerecording-v8/mupen64_src-rerecording-v8/main/vcr_compress.h	2005-10-30 01:36:08.000000000 -0700
++++ c:\mupen64\upthmupen64_src-rerecording-v8/mupen64_src-rerecording-v8/main/vcr_compress.h	2007-09-16 15:53:08.234375000 -0700
+@@ -1,4 +1,4 @@
+-#include "../config.h"
++//#include "../config.h"
+ 
+ #ifdef VCR_SUPPORT
+ 
+@@ -16,8 +16,8 @@
+ 
+ void VCRComp_init();
+ 
+-void VCRComp_startFile( const char *filename, long width, long height, int fps );
+-void VCRComp_finishFile();
++void VCRComp_startFile( const char *filename, long width, long height, int fps, int New);
++void VCRComp_finishFile(int split);
+ BOOL VCRComp_addVideoFrame( const unsigned char *data );
+ BOOL VCRComp_addAudioData( const unsigned char *data, int len );
+ 
+@@ -42,6 +42,7 @@
+ int         VCRComp_numAudioCodecAttribOptions( int cindex, int aindex );
+ const char *VCRComp_audioCodecAttribOption( int cindex, int aindex, int oindex );
+ void        VCRComp_selectAudioCodec( int index );
++unsigned int VCRComp_GetSize ( );
+ 
+ #if defined(__cplusplus)
+ } // extern "C"
+diff -rdu c:\mupen64\mupen64_src-rerecording-v8/mupen64_src-rerecording-v8/main/vcr_resample.c c:\mupen64\upthmupen64_src-rerecording-v8/mupen64_src-rerecording-v8/main/vcr_resample.c
+--- c:\mupen64\mupen64_src-rerecording-v8/mupen64_src-rerecording-v8/main/vcr_resample.c	2005-10-30 01:03:26.000000000 -0800
++++ c:\mupen64\upthmupen64_src-rerecording-v8/mupen64_src-rerecording-v8/main/vcr_resample.c	2007-09-16 15:53:08.296875000 -0700
+@@ -1,4 +1,4 @@
+-#include "../config.h"
++//#include "../config.h"
+ #ifdef VCR_SUPPORT
+ 
+ #include "vcr_resample.h"
+diff -rdu c:\mupen64\mupen64_src-rerecording-v8/mupen64_src-rerecording-v8/main/vcr_resample.h c:\mupen64\upthmupen64_src-rerecording-v8/mupen64_src-rerecording-v8/main/vcr_resample.h
+--- c:\mupen64\mupen64_src-rerecording-v8/mupen64_src-rerecording-v8/main/vcr_resample.h	2005-10-26 20:16:34.000000000 -0700
++++ c:\mupen64\upthmupen64_src-rerecording-v8/mupen64_src-rerecording-v8/main/vcr_resample.h	2007-09-16 15:53:08.359375000 -0700
+@@ -1,4 +1,4 @@
+-#include "../config.h"
++//#include "../config.h"
+ 
+ #ifdef VCR_SUPPORT
+ 
+diff -rdu c:\mupen64\mupen64_src-rerecording-v8/mupen64_src-rerecording-v8/main/win/vcr_compress.c c:\mupen64\upthmupen64_src-rerecording-v8/mupen64_src-rerecording-v8/main/win/vcr_compress.c
+--- c:\mupen64\mupen64_src-rerecording-v8/mupen64_src-rerecording-v8/main/win/vcr_compress.c	2005-11-12 12:33:44.000000000 -0800
++++ c:\mupen64\upthmupen64_src-rerecording-v8/mupen64_src-rerecording-v8/main/win/vcr_compress.c	2007-09-16 22:36:21.593750000 -0700
+@@ -50,6 +50,7 @@
+ static AVICOMPRESSOPTIONS *pvideo_options[1];
+ 
+ static int sample;
++static unsigned int AVIFileSize;
+ static WAVEFORMATEX sound_format;
+ static AVISTREAMINFO sound_stream_header;
+ static PAVISTREAM sound_stream;
+@@ -141,19 +142,25 @@
+ 
+ BOOL VCRComp_addVideoFrame( unsigned char *data )
+ {
+-	return (0 == AVIStreamWrite(compressed_video_stream, frame++, 1, data, infoHeader.biSizeImage, AVIIF_KEYFRAME, NULL, NULL));
++    long int TempLen;
++    BOOL ret = AVIStreamWrite(compressed_video_stream, frame++, 1, data, infoHeader.biSizeImage, AVIIF_KEYFRAME, NULL, &TempLen);
++    AVIFileSize += TempLen; 
++	return (0 == ret);
+ }
+ 
+ BOOL VCRComp_addAudioData( unsigned char *data, int len )
+ {
+ 	BOOL ok = (0 == AVIStreamWrite(sound_stream, sample, len / sound_format.nBlockAlign, data, len, 0, NULL, NULL));
+ 	sample += len / sound_format.nBlockAlign;
++	AVIFileSize += len;
+ 	return ok;
+ }
+ 
+-void VCRComp_startFile( const char *filename, long width, long height, int fps )
++void VCRComp_startFile( const char *filename, long width, long height, int fps, int New )
+ {
++   recording = 1;
+    avi_opened = 1;
++   AVIFileSize = 0;
+    frame = 0;
+    infoHeader.biSize = sizeof( BITMAPINFOHEADER );
+    infoHeader.biWidth = width;
+@@ -177,12 +184,15 @@
+    video_stream_header.dwSuggestedBufferSize = 0;
+    AVIFileCreateStream(avi_file, &video_stream, &video_stream_header);
+    
+-   ZeroMemory(&video_options, sizeof(AVICOMPRESSOPTIONS));
+-   pvideo_options[0] = &video_options;
+-   AVISaveOptions(mainHWND, 0, 1, &video_stream, pvideo_options);
++   if (New)
++   {
++	   ZeroMemory(&video_options, sizeof(AVICOMPRESSOPTIONS));
++	   pvideo_options[0] = &video_options;
++	   AVISaveOptions(mainHWND, 0, 1, &video_stream, pvideo_options);
++   }
+    AVIMakeCompressedStream(&compressed_video_stream, video_stream, &video_options, NULL);
+    AVIStreamSetFormat(compressed_video_stream, 0, &infoHeader, 
+-                      infoHeader.biSize + infoHeader.biClrUsed * sizeof(RGBQUAD));
++					  infoHeader.biSize + infoHeader.biClrUsed * sizeof(RGBQUAD));
+                       
+    // sound
+    sample = 0;
+@@ -211,7 +221,7 @@
+    AVIStreamSetFormat(compressed_sound_stream, 0, &sound_format, sizeof(WAVEFORMATEX));*/
+ }
+ 
+-void VCRComp_finishFile()
++void VCRComp_finishFile(int split)
+ {
+    SetWindowPos(mainHWND, HWND_TOP, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);
+    AVIStreamClose(compressed_video_stream);
+@@ -220,13 +230,16 @@
+    AVIStreamClose(sound_stream);
+    AVIFileClose(avi_file);
+    AVIFileExit();
+-   HMENU hMenu;
+-   hMenu = GetMenu(mainHWND);
+-   EnableMenuItem(hMenu,ID_END_CAPTURE,MF_GRAYED);
+-   EnableMenuItem(hMenu,ID_START_CAPTURE,MF_ENABLED);
+-   EnableMenuItem(hMenu,FULL_SCREEN,MF_ENABLED);               //Enables fullscreen menu
+-   SendMessage( hTool, TB_ENABLEBUTTON, FULL_SCREEN, TRUE );   //Enables fullscreen button
+-   SetWindowPos(mainHWND, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);  //Remove the always on top flag
++   if (!split)
++   {
++	   HMENU hMenu;
++	   hMenu = GetMenu(mainHWND);         
++	   EnableMenuItem(hMenu,ID_END_CAPTURE,MF_GRAYED);
++	   EnableMenuItem(hMenu,ID_START_CAPTURE,MF_ENABLED);
++	   EnableMenuItem(hMenu,FULL_SCREEN,MF_ENABLED);               //Enables fullscreen menu
++	   SendMessage( hTool, TB_ENABLEBUTTON, FULL_SCREEN, TRUE );   //Enables fullscreen button
++	   SetWindowPos(mainHWND, HWND_NOTOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE);  //Remove the always on top flag
++   }
+    
+    recording = 0;
+    avi_opened = 0;
+@@ -244,3 +257,8 @@
+         readScreen = win_readScreen;
+ }
+ 
++
++unsigned int VCRComp_GetSize()
++{
++         return AVIFileSize;
++}
+diff -rdu c:\mupen64\mupen64_src-rerecording-v8/mupen64_src-rerecording-v8/memory/memory.c c:\mupen64\upthmupen64_src-rerecording-v8/mupen64_src-rerecording-v8/memory/memory.c
+--- c:\mupen64\mupen64_src-rerecording-v8/mupen64_src-rerecording-v8/memory/memory.c	2005-10-31 00:18:24.000000000 -0800
++++ c:\mupen64\upthmupen64_src-rerecording-v8/mupen64_src-rerecording-v8/memory/memory.c	2007-09-16 15:53:08.484375000 -0700
+@@ -27,7 +27,7 @@
+  *
+ **/
+ 
+-#include "../config.h"
++//#include "../config.h"
+ 
+ #include <stdio.h>
+ #include <stdlib.h>
+diff -rdu c:\mupen64\mupen64_src-rerecording-v8/mupen64_src-rerecording-v8/memory/pif.c c:\mupen64\upthmupen64_src-rerecording-v8/mupen64_src-rerecording-v8/memory/pif.c
+--- c:\mupen64\mupen64_src-rerecording-v8/mupen64_src-rerecording-v8/memory/pif.c	2005-11-08 20:20:32.000000000 -0800
++++ c:\mupen64\upthmupen64_src-rerecording-v8/mupen64_src-rerecording-v8/memory/pif.c	2007-09-16 15:53:08.546875000 -0700
+@@ -27,7 +27,7 @@
+  *
+ **/
+ 
+-#include "../config.h"
++//#include "../config.h"
+ 
+ #include <stdio.h>
+ #include <stdlib.h>
+diff -rdu c:\mupen64\mupen64_src-rerecording-v8/mupen64_src-rerecording-v8/r4300/interupt.c c:\mupen64\upthmupen64_src-rerecording-v8/mupen64_src-rerecording-v8/r4300/interupt.c
+--- c:\mupen64\mupen64_src-rerecording-v8/mupen64_src-rerecording-v8/r4300/interupt.c	2005-10-29 21:53:04.000000000 -0700
++++ c:\mupen64\upthmupen64_src-rerecording-v8/mupen64_src-rerecording-v8/r4300/interupt.c	2007-09-16 15:53:08.609375000 -0700
+@@ -27,7 +27,7 @@
+  *
+ **/
+ 
+-#include "../config.h"
++//#include "../config.h"
+ 
+ #include <stdio.h>
+ #include <stdlib.h>
+diff -rdu c:\mupen64\mupen64_src-rerecording-v8/mupen64_src-rerecording-v8/r4300/r4300.c c:\mupen64\upthmupen64_src-rerecording-v8/mupen64_src-rerecording-v8/r4300/r4300.c
+--- c:\mupen64\mupen64_src-rerecording-v8/mupen64_src-rerecording-v8/r4300/r4300.c	2005-10-22 10:45:46.000000000 -0700
++++ c:\mupen64\upthmupen64_src-rerecording-v8/mupen64_src-rerecording-v8/r4300/r4300.c	2007-09-16 15:53:08.656250000 -0700
+@@ -27,7 +27,7 @@
+  *
+ **/
+ 
+-#include "../config.h"
++//#include "../config.h"
+ #include "../main/vcr.h"
+ #include "r4300.h"
+ #include "ops.h"
