@@ -45,21 +45,21 @@ Mupen64 will trigger a power off/on reset when the value for the controller info
 
 The meaning of each 4-byte value is determined by OR-ing together values for whichever of the following are pressed:
 
-   0x000000FF     Analog Y (signed, up is positive)
-   0x0000FF00     Analog X (signed, right is positive)
-   0x00010000     C-Right
-   0x00020000     C-Left
-   0x00040000     C-Down
-   0x00080000     C-Up
-   0x00100000     R
-   0x00200000     L
-   0x00400000     (reserved)
-   0x00800000     (reserved)
-   0x01000000     Digital Pad Right
-   0x02000000     Digital Pad Left
-   0x04000000     Digital Pad Down
-   0x08000000     Digital Pad Up
-   0x10000000     Start
-   0x20000000     Z
-   0x40000000     B
-   0x80000000     A
+ *  0x000000FF     Analog Y (signed, up is positive)
+ *  0x0000FF00     Analog X (signed, right is positive)
+ *  0x00010000     C-Right
+ *  0x00020000     C-Left
+ *  0x00040000     C-Down
+ *  0x00080000     C-Up
+ *  0x00100000     R
+ *  0x00200000     L
+ *  0x00400000     (reserved)
+ *  0x00800000     (reserved)
+ *  0x01000000     Digital Pad Right
+ *  0x02000000     Digital Pad Left
+ *  0x04000000     Digital Pad Down
+ *  0x08000000     Digital Pad Up
+ *  0x10000000     Start
+ *  0x20000000     Z
+ *  0x40000000     B
+ *  0x80000000     A
