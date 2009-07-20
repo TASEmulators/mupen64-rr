@@ -16,7 +16,7 @@ Header format:
  *   01C 2-byte unsigned int: movie start type 
   * value 1: movie begins from snapshot (the snapshot will be loaded from an external   file with the movie's filename and a .st extension) 
   * value 2: movie begins from poweron
-        other values: invalid movie
+  * other values: invalid movie
  *   01E 2-byte unsigned int: reserved, should be 0
  *   020 4-byte unsigned int: controller flags
   *       bit 0: controller 1 present
