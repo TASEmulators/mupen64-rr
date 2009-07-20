@@ -14,15 +14,15 @@ Header format:
  *   016 2-byte unsigned int: reserved, should be 0
  *   018 4-byte little-endian unsigned int: number of input samples for any controllers
  *   01C 2-byte unsigned int: movie start type 
- ** value 1: movie begins from snapshot (the snapshot will be loaded from an external   file with the movie's filename and a .st extension) 
- ** value 2: movie begins from poweron
+  * value 1: movie begins from snapshot (the snapshot will be loaded from an external   file with the movie's filename and a .st extension) 
+  * value 2: movie begins from poweron
         other values: invalid movie
  *   01E 2-byte unsigned int: reserved, should be 0
  *   020 4-byte unsigned int: controller flags
- **       bit 0: controller 1 present
- **       bit 4: controller 1 has mempak
- **       bit 8: controller 1 has rumblepak
- **       +1..3 for controllers 2..4.
+  *       bit 0: controller 1 present
+  *       bit 4: controller 1 has mempak
+  *       bit 8: controller 1 has rumblepak
+  *       +1..3 for controllers 2..4.
  *   024 160 bytes: reserved, should be 0
  *   0C4 32-byte ASCII string: internal name of ROM used when recording, directly from ROM
  *   0E4 4-byte unsigned int: CRC32 of ROM used when recording, directly from ROM
@@ -30,10 +30,10 @@ Header format:
  *   0EA 56 bytes: reserved, should be 0
  *   122 64-byte ASCII string: name of video plugin used when recording, directly from plugin
  *   162 64-byte ASCII string: name of sound plugin used when recording, directly from plugin
-  *  1A2 64-byte ASCII string: name of input plugin used when recording, directly from plugin
-  *  1E2 64-byte ASCII string: name of rsp plugin used when recording, directly from plugin
-  *  222 222-byte UTF-8 string: author's name info
-  *  300 256-byte UTF-8 string: author's movie description info
+ *  1A2 64-byte ASCII string: name of input plugin used when recording, directly from plugin
+ *  1E2 64-byte ASCII string: name of rsp plugin used when recording, directly from plugin
+ *  222 222-byte UTF-8 string: author's name info
+ *  300 256-byte UTF-8 string: author's movie description info
 
 After the header, starting at byte 0x400 in the file, comes the input data. (NOTE: If the version number at 0x004 is 1 or 2, then the input data starts at byte 0x200 instead.) The input data is a stream of 4-byte bitvectors which indicate which buttons and/or analog directions are pressed at each point in time.
 
