@@ -1,3 +1,5 @@
+#summary M64 file format description
+
 m64 is the movie capture format of Mupen64.
 M64 file format description
 M64 files consist of a 1024-byte header with various blocks that depend on settings, followed by some input data.
