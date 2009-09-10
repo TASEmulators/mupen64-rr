@@ -1,4 +1,4 @@
-#TAS Input Plugin
+#summary TAS Input Plugin and how to use it.
 
 [http://img219.imageshack.us/img219/9985/tasinputpluginmockupqg0.png]
 
