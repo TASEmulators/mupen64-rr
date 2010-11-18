@@ -28,10 +28,15 @@
 **/
 
 #include <math.h>
+#include <float.h>
 
 #include "r4300.h"
 #include "ops.h"
 #include "macros.h"
+
+#ifdef _MSC_VER
+#define isnan _isnan
+#endif
 
 void ADD_D()
 {

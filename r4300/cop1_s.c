@@ -31,6 +31,11 @@
 #include "ops.h"
 #include "macros.h"
 #include <math.h>
+#include <float.h>
+
+#ifdef _MSC_VER
+#define isnan _isnan
+#endif
 
 void ADD_S()
 {

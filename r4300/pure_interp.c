@@ -30,11 +30,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <float.h>
 #include "r4300.h"
 #include "exception.h"
 #include "../memory/memory.h"
 #include "macros.h"
 #include "interupt.h"
+
+#ifdef _MSC_VER
+#define isnan _isnan
+#endif
 
 #ifdef DBG
 extern int debugger_mode;
@@ -3069,7 +3074,7 @@ void prefetch()
 	  }
 	else
 	  {
-	     printf("execution ‡ l'addresse :%x\n", (int)interp_addr);
+	     printf("execution ÅEl'addresse :%x\n", (int)interp_addr);
 	     stop=1;
 	  }
      }

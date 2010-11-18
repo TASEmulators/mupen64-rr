@@ -107,11 +107,19 @@ stop=1; \
 #define ErrorEPC reg_cop0[30]
 
 #ifdef X86
+#ifdef _MSC_VER
+#define set_rounding() __asm fldcw rounding_mode
+#define set_trunc() __asm fldcw trunc_mode
+#define set_round() __asm fldcw round_mode
+#define set_ceil() __asm fldcw ceil_mode
+#define set_floor() __asm fldcw floor_mode
+#else
 #define set_rounding() __asm__ __volatile__("fldcw %0" : : "m" (rounding_mode))
 #define set_trunc() __asm__ __volatile__("fldcw %0" : : "m" (trunc_mode))
 #define set_round() __asm__ __volatile__("fldcw %0" : : "m" (round_mode))
 #define set_ceil() __asm__ __volatile__("fldcw %0" : : "m" (ceil_mode))
 #define set_floor() __asm__ __volatile__("fldcw %0" : : "m" (floor_mode))
+#endif // _MSC_VER
 #else
 #define set_rounding() ((void) 0)
 #define set_trunc() ((void) 0)
