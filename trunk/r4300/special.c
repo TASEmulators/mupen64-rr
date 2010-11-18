@@ -96,7 +96,7 @@ void JR()
 
 void JALR()
 {
-   unsigned long long int *dest = PC->f.r.rd;
+   unsigned long long int *dest = (unsigned long long int*) PC->f.r.rd;
    local_rs32 = rrs32;
    PC++;
    delay_slot=1;

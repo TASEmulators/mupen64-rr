@@ -52,7 +52,12 @@ static int save_ebp;
 
 void dyna_start(void (*code)())
 {
-#ifndef _WIN32
+#ifdef _MSC_VER
+   save_ebp=0;
+   __asm mov save_ebp, ebp
+   code();
+   __asm mov ebp, save_ebp
+#elif !defined(_WIN32)
    save_ebp=0;
    asm("mov %%ebp, save_ebp \n" : : : "memory");
    code();
@@ -70,7 +75,10 @@ static void dyna_stop2() {}
 void dyna_stop()
 {
    *return_address = (unsigned long)dyna_stop2;
-#ifndef _WIN32
+#ifdef _MSC_VER
+   __asm mov esp, return_address
+   __asm ret
+#elif !defined(_WIN32)
    asm("mov return_address, %%esp \n"
        "ret                       \n"
        :
