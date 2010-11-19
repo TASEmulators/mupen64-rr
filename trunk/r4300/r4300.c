@@ -1334,7 +1334,7 @@ void SD()
 void NOTCOMPILED()
 {
    if ((PC->addr>>16) == 0xa400)
-     recompile_block(SP_DMEM, blocks[0xa4000000>>12], PC->addr);
+     recompile_block((long*)SP_DMEM, blocks[0xa4000000>>12], PC->addr);
    else
      {
 	unsigned long paddr = 0;
@@ -1346,11 +1346,11 @@ void NOTCOMPILED()
 	     if ((paddr & 0x1FFFFFFF) >= 0x10000000)
 	       {
 		  //printf("not compiled rom:%x\n", paddr);
-		  recompile_block((unsigned long*)rom+((((paddr-(PC->addr-blocks[PC->addr>>12]->start)) & 0x1FFFFFFF) - 0x10000000)>>2),
+		  recompile_block((long*)rom+((((paddr-(PC->addr-blocks[PC->addr>>12]->start)) & 0x1FFFFFFF) - 0x10000000)>>2),
 				  blocks[PC->addr>>12], PC->addr);
 	       }
 	     else
-	       recompile_block(rdram+(((paddr-(PC->addr-blocks[PC->addr>>12]->start)) & 0x1FFFFFFF)>>2),
+	       recompile_block((long*)(rdram+(((paddr-(PC->addr-blocks[PC->addr>>12]->start)) & 0x1FFFFFFF)>>2)),
 			       blocks[PC->addr>>12], PC->addr);
 	  }
 	else printf("not compiled exception\n");
@@ -1411,7 +1411,7 @@ inline void jump_to_func()
      {
 	if (!blocks[addr>>12])
 	  {
-	     blocks[addr>>12] = malloc(sizeof(precomp_block));
+	     blocks[addr>>12] = (precomp_block*) malloc(sizeof(precomp_block));
 	     actual = blocks[addr>>12];
 	     blocks[addr>>12]->code = NULL;
 	     blocks[addr>>12]->block = NULL;
@@ -1419,7 +1419,7 @@ inline void jump_to_func()
 	  }
 	blocks[addr>>12]->start = addr & ~0xFFF;
 	blocks[addr>>12]->end = (addr & ~0xFFF) + 0x1000;
-	init_block(rdram+(((paddr-(addr-blocks[addr>>12]->start)) & 0x1FFFFFFF)>>2),
+	init_block((long*)(rdram+(((paddr-(addr-blocks[addr>>12]->start)) & 0x1FFFFFFF)>>2)),
 		   blocks[addr>>12]);
      }
    PC=actual->block+((addr-actual->start)>>2);
@@ -1472,7 +1472,7 @@ void init_blocks()
 	invalid_code[i] = 1;
 	blocks[i] = NULL;
      }
-   blocks[0xa4000000>>12] = malloc(sizeof(precomp_block));
+   blocks[0xa4000000>>12] = (precomp_block*)malloc(sizeof(precomp_block));
    invalid_code[0xa4000000>>12] = 1;
    blocks[0xa4000000>>12]->code = NULL;
    blocks[0xa4000000>>12]->block = NULL;
@@ -1480,7 +1480,7 @@ void init_blocks()
    blocks[0xa4000000>>12]->start = 0xa4000000;
    blocks[0xa4000000>>12]->end = 0xa4001000;
    actual=blocks[0xa4000000>>12];
-   init_block(SP_DMEM, blocks[0xa4000000>>12]);
+   init_block((long*)SP_DMEM, blocks[0xa4000000>>12]);
    PC=actual->block+(0x40/4);
 #ifdef DBG
    if (debugger_mode) // debugger shows initial state (before 1st instruction).
@@ -1786,7 +1786,7 @@ void go()
 	dynacore = 1;
 	printf("dynamic recompiler\n");
 	init_blocks();
-	code = (void *)(actual->code+(actual->block[0x40/4].local_addr));
+	code = (void (*)(void))(actual->code+(actual->block[0x40/4].local_addr));
 	dyna_start(code);
 	PC++;
      }

@@ -138,7 +138,7 @@ void add_interupt_event(int type, unsigned long delay)
    
    if (q == NULL)
      {
-	q = malloc(sizeof(interupt_queue));
+	q = (interupt_queue*)malloc(sizeof(interupt_queue));
 	q->next = NULL;
 	q->count = count;
 	q->type = type;
@@ -149,7 +149,7 @@ void add_interupt_event(int type, unsigned long delay)
    
    if(before_event(count, q->count, q->type) && !special)
      {
-	q = malloc(sizeof(interupt_queue));
+	q = (interupt_queue*)malloc(sizeof(interupt_queue));
 	q->next = aux;
 	q->count = count;
 	q->type = type;
@@ -164,7 +164,7 @@ void add_interupt_event(int type, unsigned long delay)
    
    if (aux->next == NULL)
      {
-	aux->next = malloc(sizeof(interupt_queue));
+	aux->next = (interupt_queue*)malloc(sizeof(interupt_queue));
 	aux = aux->next;
 	aux->next = NULL;
 	aux->count = count;
@@ -177,7 +177,7 @@ void add_interupt_event(int type, unsigned long delay)
 	  while(aux->next != NULL && aux->next->count == count)
 	    aux = aux->next;
 	aux2 = aux->next;
-	aux->next = malloc(sizeof(interupt_queue));
+	aux->next = (interupt_queue*)malloc(sizeof(interupt_queue));
 	aux = aux->next;
 	aux->next = aux2;
 	aux->count = count;
@@ -311,14 +311,14 @@ void check_interupt()
      {
 	if(q == NULL)
 	  {
-	     q = malloc(sizeof(interupt_queue));
+	     q = (interupt_queue*)malloc(sizeof(interupt_queue));
 	     q->next = NULL;
 	     q->count = Count;
 	     q->type = CHECK_INT;
 	  }
 	else
 	  {
-	     interupt_queue* aux = malloc(sizeof(interupt_queue));
+	     interupt_queue* aux = (interupt_queue*)malloc(sizeof(interupt_queue));
 	     aux->next = q;
 	     aux->count = Count;
 	     aux->type = CHECK_INT;

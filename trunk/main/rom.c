@@ -47,7 +47,7 @@
 #include "guifuncs.h"
 
 static FILE *rom_file;
-static gzFile *z_rom_file;
+static gzFile z_rom_file;
 static unzFile zip;
 static unz_file_info pfile_info;
 static int i, tmp, z;
@@ -70,7 +70,7 @@ static void findsize()
    else if (z == 1)
      {
 	taille_rom=0;
-	rom=malloc(100000);
+	rom=(unsigned char*)malloc(100000);
 	for(;;)
 	  {
 	     i = gzread(z_rom_file, rom, 100000);
@@ -176,7 +176,7 @@ int rom_read(const char *argv)
    findsize();
    
    if (rom) free(rom);
-   rom = malloc(taille_rom);
+   rom = (unsigned char*)malloc(taille_rom);
 
    tmp=0;
    if (!z)
@@ -251,7 +251,7 @@ int rom_read(const char *argv)
      }
    printf("rom loaded succesfully\n");
   
-   if (!ROM_HEADER) ROM_HEADER = malloc(sizeof(rom_header));
+   if (!ROM_HEADER) ROM_HEADER = (rom_header*)malloc(sizeof(rom_header));
    memcpy(ROM_HEADER, rom, sizeof(rom_header));
    display_loading_progress(100);
    printf ("%x %x %x %x\n", ROM_HEADER->init_PI_BSB_DOM1_LAT_REG,
@@ -309,7 +309,7 @@ int rom_read(const char *argv)
 		ROM_HEADER->Country_code);
 	if ((entry = ini_search_by_CRC(mycrc)) == NULL)
 	  {
-	     strcpy(ROM_SETTINGS.goodname, ROM_HEADER->nom);
+	     strcpy(ROM_SETTINGS.goodname, (const char*)ROM_HEADER->nom);
 	     strcat(ROM_SETTINGS.goodname, " (unknown rom)");
 	     printf("%s\n", ROM_SETTINGS.goodname);
 	     ROM_SETTINGS.eeprom_16kb = 0;
@@ -382,7 +382,7 @@ int fill_header(const char *argv)
 /*------------------------------------------------------------------------*/   
    findsize();
    if (rom) free(rom);
-   rom = malloc(0x40);
+   rom = (unsigned char*)malloc(0x40);
    
    tmp=0;
    
@@ -428,7 +428,7 @@ int fill_header(const char *argv)
 	return 0;
      }
    
-   if (ROM_HEADER == NULL) ROM_HEADER= malloc(sizeof(rom_header));
+   if (ROM_HEADER == NULL) ROM_HEADER= (rom_header*)malloc(sizeof(rom_header));
    memcpy(ROM_HEADER, rom, 0x40);
    free(rom);
    rom = NULL;
@@ -449,7 +449,7 @@ void calculateMD5(const char *argv, unsigned char digest[16])
 /*------------------------------------------------------------------------*/   
    findsize();
    if (rom) free(rom);
-   rom = malloc(taille_rom);
+   rom = (unsigned char*)malloc(taille_rom);
    
    tmp=0;
    if (!z)

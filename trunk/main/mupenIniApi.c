@@ -69,7 +69,7 @@ static char* get_ini_path()
    static char *path = NULL;
    if (path == NULL)
      {
-	path = malloc(strlen(get_currentpath())+1+strlen("mupen64.ini"));
+	path = (char*)malloc(strlen(get_currentpath())+1+strlen("mupen64.ini"));
 	strcpy(path, get_currentpath());
 	strcat(path, "mupen64.ini");
      }

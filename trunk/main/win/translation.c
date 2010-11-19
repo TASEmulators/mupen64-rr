@@ -16,9 +16,14 @@
 
 #include <windows.h>
 #include <stdlib.h>
-#include <dirent.h>
 #include <stdio.h>
+#ifdef WIN32
+#else
+#include <dirent.h>
+#endif
+#ifndef _WIN32_IE
 #define _WIN32_IE 0x0500
+#endif
 #include <commctrl.h>
 #include "translation.h"
 #include "../../winproject/resource.h"
@@ -41,10 +46,10 @@ void insert_lang( languages *p, char *file_name, char *language_name)
         {
             p=p->next;
         }
-        p->next = malloc(sizeof(languages));
-        p->next->file_name = malloc(strlen(file_name)+1);
+        p->next = (languages*)malloc(sizeof(languages));
+        p->next->file_name = (char*)malloc(strlen(file_name)+1);
         strcpy( p->next->file_name, file_name);
-        p->next->language_name = malloc(strlen(language_name)+7);
+        p->next->language_name = (char*)malloc(strlen(language_name)+7);
         strcpy( p->next->language_name, language_name);
         p->next->next=NULL;
         return;
@@ -63,7 +68,7 @@ void search_languages()
     struct dirent *entry;
     char String[800];
     
-    lang_list = malloc( sizeof(languages));
+    lang_list = (languages*)malloc(sizeof(languages));
     lang_list->next = NULL;
     
     sprintf(cwd, "%slang",AppPath);

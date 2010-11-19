@@ -32,7 +32,10 @@
 #define VERSION "0.5"
 
 #include <stdlib.h>
+#ifdef WIN32
+#else
 #include <unistd.h>
+#endif
 
 #include "guifuncs.h"
 #include "rom.h"

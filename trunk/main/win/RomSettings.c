@@ -47,7 +47,7 @@ char *RomSettingsFilePath()
    static char *cfgpath = NULL;
    if (cfgpath == NULL)
      {
-       	cfgpath = malloc(strlen(AppPath)+1+strlen(ROM_SETIINGS_FILE));
+       	cfgpath = (char*)malloc(strlen(AppPath)+1+strlen(ROM_SETIINGS_FILE));
 	    strcpy(cfgpath, AppPath);
     	strcat(cfgpath, ROM_SETIINGS_FILE);
      }

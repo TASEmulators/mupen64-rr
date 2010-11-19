@@ -16,11 +16,16 @@
  ***************************************************************************/
 
 #include <windows.h>
+#ifndef _WIN32_IE
 #define _WIN32_IE 0x0500
+#endif
 #include <commctrl.h>
 #include <stdlib.h>
-#include <dirent.h>
 #include <math.h>
+#ifdef WIN32
+#else
+#include <dirent.h>
+#endif
 #include "../../winproject/resource.h"
 #include "../plugin.h"
 #include "../rom.h"
@@ -44,6 +49,11 @@
 #include "../../r4300/recomph.h"
 #include "kaillera.h"
 
+#ifdef WIN32
+#define snprintf	_snprintf
+#define strcasecmp	stricmp
+#define strncasecmp	strnicmp
+#endif
 
 
 static DWORD Id;
@@ -432,12 +442,12 @@ void insert_plugin(plugins *p, char *file_name,
                                (p->type == type) ? num+1 : num);
     else
     {
-        p->next = malloc(sizeof(plugins));
+        p->next = (plugins*)malloc(sizeof(plugins));
         p->next->type = type;
-        p->next->handle = handle;
-        p->next->file_name = malloc(strlen(file_name)+1);
+        p->next->handle = (HMODULE)handle;
+        p->next->file_name = (char*)malloc(strlen(file_name)+1);
         strcpy(p->next->file_name, file_name);
-        p->next->plugin_name = malloc(strlen(plugin_name)+7);
+        p->next->plugin_name = (char*)malloc(strlen(plugin_name)+7);
         sprintf(p->next->plugin_name, "%s", plugin_name);
         p->next->next=NULL;
     }
@@ -503,7 +513,7 @@ void search_plugins()
     struct dirent *entry;
     
         
-    liste_plugins = malloc(sizeof(plugins));
+    liste_plugins = (plugins*)malloc(sizeof(plugins));
     liste_plugins->type = -1;
     liste_plugins->next = NULL;
     

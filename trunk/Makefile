@@ -38,6 +38,9 @@ OBJ		=main/rom.o \
 		main/plugin.o \
 		main/unzip.o \
 		main/ioapi.o \
+		main/iowin32.o \
+		main/mztools.o \
+		main/zip.o \
 		memory/flashram.o \
 		main/md5.o \
 		main/mupenIniApi.o \

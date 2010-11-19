@@ -17,7 +17,13 @@
 #include <math.h>
 #include <stdio.h>
 #include <string.h>
+#ifdef WIN32
+#define snprintf	_snprintf
+#define strcasecmp	_stricmp
+#define strncasecmp	_strnicmp
+#else
 #include <unistd.h>
+#endif
 //#include <zlib.h>
 #include <stdio.h>
 #include <time.h>
@@ -31,6 +37,10 @@
 #include <commctrl.h> // for SendMessage, SB_SETTEXT
 #include <windows.h> // for truncate functions
 #include <../../winproject/resource.h> // for EMU_RESET
+#endif
+
+#ifndef PATH_MAX
+#define PATH_MAX _MAX_PATH
 #endif
 
 //void ShowInfo(char*, ...);
@@ -245,7 +255,7 @@ static void setROMInfo (SMovieHeader* header)
 
 	extern rom_header *ROM_HEADER;
 	if(ROM_HEADER)
-	    strncpy(header->romNom, ROM_HEADER->nom, 32);
+	    strncpy(header->romNom, (const char*)ROM_HEADER->nom, 32);
     else
 	    strncpy(header->romNom, "(Unknown)", 32);
     header->romCRC = ROM_HEADER ? ROM_HEADER->CRC1 : 0;
@@ -500,7 +510,7 @@ void VCR_clearAllSaveData ()
     {
      char *filename;
      FILE *f;
-     filename = malloc(strlen(get_savespath())+
+     filename = (char*)malloc(strlen(get_savespath())+
 		       strlen(ROM_SETTINGS.goodname)+4+1);
      strcpy(filename, get_savespath());
      strcat(filename, ROM_SETTINGS.goodname);
@@ -525,7 +535,7 @@ void VCR_clearAllSaveData ()
      char *filename;
      FILE *f;
      int i;
-     filename = malloc(strlen(get_savespath())+
+     filename = (char*)malloc(strlen(get_savespath())+
 		       strlen(ROM_SETTINGS.goodname)+4+1);
      strcpy(filename, get_savespath());
      strcat(filename, ROM_SETTINGS.goodname);
@@ -549,7 +559,7 @@ void VCR_clearAllSaveData ()
     {
 	 char *filename;
 	 FILE *f;
-	 filename = malloc(strlen(get_savespath())+
+	 filename = (char*)malloc(strlen(get_savespath())+
 			   strlen(ROM_SETTINGS.goodname)+4+1);
 	 strcpy(filename, get_savespath());
 	 strcat(filename, ROM_SETTINGS.goodname);
@@ -658,7 +668,7 @@ VCR_movieFreeze (char** buf, unsigned long* size)
 	// compute size needed for the buffer
 	unsigned long size_needed = sizeof(m_header.uid) + sizeof(m_currentSample) + sizeof(m_currentVI) + sizeof(m_header.length_samples);			// room for header.uid, currentFrame, and header.length_samples
 	size_needed += (unsigned long)(sizeof(BUTTONS) * (m_header.length_samples+1));
-	*buf=malloc(size_needed);
+	*buf=(char*)malloc(size_needed);
 	*size=size_needed;
 
 	char* ptr = *buf;
@@ -1247,7 +1257,7 @@ VCR_startPlayback( const char *filename, const char *authorUTF8, const char *des
 
 				char str [512], name [512];
 				extern rom_header *ROM_HEADER;
-                if(ROM_HEADER && stricmp(m_header.romNom, ROM_HEADER->nom) != 0)
+                if(ROM_HEADER && stricmp(m_header.romNom, (const char*)ROM_HEADER->nom) != 0)
                 {
 				    sprintf(str, "The movie was recorded with the ROM \"%s\",\nbut you are using the ROM \"%s\",\nso the movie probably won't play properly.\n", m_header.romNom, ROM_HEADER->nom);
 					strcat(warningStr, str);
@@ -1522,7 +1532,7 @@ VCR_updateScreen()
 //	{
 //		if(image)
 //		{
-			if(!VCRComp_addVideoFrame(image))
+			if(!VCRComp_addVideoFrame((const unsigned char*)image))
 			{
 //				ShowInfo("Video codec failure!\nA call to addVideoFrame() (AVIStreamWrite) failed.\nPerhaps you ran out of memory?");
 				printError("Video codec failure!\nA call to addVideoFrame() (AVIStreamWrite) failed.\nPerhaps you ran out of memory?");
@@ -1604,7 +1614,7 @@ static void writeSound(char* buf, int len, int minWriteSize, int maxWriteSize, B
 					printf("[VCR]: Warning: Possible stereo sound error detected.\n");
 					fprintf(stderr, "[VCR]: Warning: Possible stereo sound error detected.\n");
 				}
-				if(!VCRComp_addAudioData((char*)buf2, len2))
+				if(!VCRComp_addAudioData((const unsigned char*)buf2, len2))
 				{
 //					ShowInfo("Audio output failure!\nA call to addAudioData() (AVIStreamWrite) failed.\nPerhaps you ran out of memory?");
 					printError("Audio output failure!\nA call to addAudioData() (AVIStreamWrite) failed.\nPerhaps you ran out of memory?");

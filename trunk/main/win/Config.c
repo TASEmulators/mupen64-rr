@@ -46,7 +46,7 @@ char *CfgFilePath()
    static char *cfgpath = NULL;
    if (cfgpath == NULL)
      {
-       	cfgpath = malloc(strlen(AppPath)+1+strlen(CfgFileName));
+       	cfgpath = (char*)malloc(strlen(AppPath)+1+strlen(CfgFileName));
 	    strcpy(cfgpath, AppPath);
     	strcat(cfgpath, CfgFileName);
      }

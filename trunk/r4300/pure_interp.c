@@ -120,7 +120,7 @@ static void JR()
 
 static void JALR()
 {
-   unsigned long long int *dest = PC->f.r.rd;
+   unsigned long long int *dest = (unsigned long long int*)PC->f.r.rd;
    local_rs32 = rrs32;
    interp_addr+=4;
    delay_slot=1;
@@ -2494,7 +2494,7 @@ static void LDL()
      {
       case 0:
 	address = iimmediate + irs32;
-	rdword = &irt;
+	rdword = (unsigned long long int*)&irt;
 	read_dword_in_memory();
 	break;
       case 1:
@@ -2592,7 +2592,7 @@ static void LDR()
 	break;
       case 7:
 	address = (iimmediate + irs32) & 0xFFFFFFF8;
-	rdword = &irt;
+	rdword = (unsigned long long int*)&irt;
 	read_dword_in_memory();
 	break;
      }
@@ -2602,7 +2602,7 @@ static void LB()
 {
    interp_addr+=4;
    address = iimmediate + irs32;
-   rdword = &irt;
+   rdword = (unsigned long long int*)&irt;
    read_byte_in_memory();
    sign_extendedb(irt);
 }
@@ -2611,7 +2611,7 @@ static void LH()
 {
    interp_addr+=4;
    address = iimmediate + irs32;
-   rdword = &irt;
+   rdword = (unsigned long long int*)&irt;
    read_hword_in_memory();
    sign_extendedh(irt);
 }
@@ -2624,7 +2624,7 @@ static void LWL()
      {
       case 0:
 	address = iimmediate + irs32;
-	rdword = &irt;
+	rdword = (unsigned long long int*)&irt;
 	read_word_in_memory();
 	break;
       case 1:
@@ -2652,7 +2652,7 @@ static void LWL()
 static void LW()
 {
    address = iimmediate + irs32;
-   rdword = &irt;
+   rdword = (unsigned long long int*)&irt;
    interp_addr+=4;
    read_word_in_memory();
    sign_extended(irt);
@@ -2662,7 +2662,7 @@ static void LBU()
 {
    interp_addr+=4;
    address = iimmediate + irs32;
-   rdword = &irt;
+   rdword = (unsigned long long int*)&irt;
    read_byte_in_memory();
 }
 
@@ -2670,7 +2670,7 @@ static void LHU()
 {
    interp_addr+=4;
    address = iimmediate + irs32;
-   rdword = &irt;
+   rdword = (unsigned long long int*)&irt;
    read_hword_in_memory();
 }
 
@@ -2700,7 +2700,7 @@ static void LWR()
 	break;
       case 3:
 	address = (iimmediate + irs32) & 0xFFFFFFFC;
-	rdword = &irt;
+	rdword = (unsigned long long int*)&irt;
 	read_word_in_memory();
 	sign_extended(irt);
      }
@@ -2709,7 +2709,7 @@ static void LWR()
 static void LWU()
 {
    address = iimmediate + irs32;
-   rdword = &irt;
+   rdword = (unsigned long long int*)&irt;
    interp_addr+=4;
    read_word_in_memory();
 }
@@ -2940,7 +2940,7 @@ static void CACHE()
 static void LL()
 {
    address = iimmediate + irs32;
-   rdword = &irt;
+   rdword = (unsigned long long int*)&irt;
    interp_addr+=4;
    read_word_in_memory();
    sign_extended(irt);
@@ -2963,7 +2963,7 @@ static void LDC1()
    if (check_cop1_unusable()) return;
    interp_addr+=4;
    address = lfoffset+reg[lfbase];
-   rdword = (long long*)reg_cop1_double[lfft];
+   rdword = (unsigned long long int*)reg_cop1_double[lfft];
    read_dword_in_memory();
 }
 
@@ -2971,7 +2971,7 @@ static void LD()
 {
    interp_addr+=4;
    address = iimmediate + irs32;
-   rdword = &irt;
+   rdword = (unsigned long long int*)&irt;
    read_dword_in_memory();
 }
 
@@ -3100,7 +3100,7 @@ void pure_interpreter()
 {
    interp_addr = 0xa4000040;
    stop=0;
-   PC = malloc(sizeof(precomp_instr));
+   PC = (precomp_instr*)malloc(sizeof(precomp_instr));
    last_addr = interp_addr;
    while (!stop)
      {
@@ -3126,7 +3126,7 @@ void pure_interpreter()
 void interprete_section(unsigned long addr)
 {
    interp_addr = addr;
-   PC = malloc(sizeof(precomp_instr));
+   PC = (precomp_instr*)malloc(sizeof(precomp_instr));
    last_addr = interp_addr;
    while (!stop && (addr >> 12) == (interp_addr >> 12))
      {

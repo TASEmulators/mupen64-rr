@@ -36,7 +36,10 @@
 #define VERSION "0.5\0"
 
 #include <stdlib.h>
+#ifdef WIN32
+#else
 #include <unistd.h>
+#endif
 
 #include "main.h"
 #include "guifuncs.h"
