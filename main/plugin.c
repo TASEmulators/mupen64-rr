@@ -27,13 +27,16 @@
  *
 **/
 
-#include <dlfcn.h>
 #include <stdio.h>
-#include <dirent.h>
 #include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
 #include <limits.h>
+#ifdef WIN32
+#else
+#include <dlfcn.h>
+#include <dirent.h>
+#include <unistd.h>
+#endif
 
 #include "winlnxdefs.h"
 #include "plugin.h"
@@ -41,6 +44,10 @@
 #include "../memory/memory.h"
 #include "../r4300/interupt.h"
 #include "../r4300/r4300.h"
+
+#ifndef PATH_MAX
+#define PATH_MAX _MAX_PATH
+#endif
 
 CONTROL Controls[4];
 
@@ -136,12 +143,12 @@ static void insert_plugin(plugins *p, const char *file_name,
 		   (p->type == type) ? num+1 : num);
    else
      {
-	p->next = malloc(sizeof(plugins));
+	p->next = (plugins*)malloc(sizeof(plugins));
 	p->next->type = type;
 	p->next->handle = handle;
-	p->next->file_name = malloc(strlen(file_name)+1);
+	p->next->file_name = (char*)malloc(strlen(file_name)+1);
 	strcpy(p->next->file_name, file_name);
-	p->next->plugin_name = malloc(strlen(plugin_name)+7);
+	p->next->plugin_name = (char*)malloc(strlen(plugin_name)+7);
 	sprintf(p->next->plugin_name, "%d - %s",
 		num+((p->type == type) ? 2 : 1), plugin_name);
 	p->next->next=NULL;
@@ -230,7 +237,7 @@ void plugin_scan_directory(const char *directory)
    char cwd[1024];
    struct dirent *entry;
 
-   liste_plugins = malloc(sizeof(plugins));
+   liste_plugins = (plugins*)malloc(sizeof(plugins));
    liste_plugins->type = -1;
    liste_plugins->next = NULL;
 

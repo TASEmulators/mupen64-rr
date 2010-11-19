@@ -43,7 +43,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="../zlib"
-				PreprocessorDefinitions="WIN32;_WIN32;_DEBUG;_WINDOWS;__WIN32__;X86;VCR_SUPPORT"
+				PreprocessorDefinitions="WIN32;_WIN32;_DEBUG;_WINDOWS;__WIN32__;X86;VCR_SUPPORT;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="1"
@@ -51,6 +51,7 @@
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="false"
 				DebugInformationFormat="4"
+				DisableSpecificWarnings="4018;4244"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -122,12 +123,13 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				AdditionalIncludeDirectories="../zlib"
-				PreprocessorDefinitions="WIN32;_WIN32;NDEBUG;_WINDOWS;__WIN32__;X86;VCR_SUPPORT"
+				PreprocessorDefinitions="WIN32;_WIN32;NDEBUG;_WINDOWS;__WIN32__;X86;VCR_SUPPORT;_CRT_SECURE_NO_WARNINGS"
 				RuntimeLibrary="0"
 				UsePrecompiledHeader="0"
 				WarningLevel="3"
 				Detect64BitPortabilityProblems="false"
 				DebugInformationFormat="3"
+				DisableSpecificWarnings="4018;4244"
 			/>
 			<Tool
 				Name="VCManagedResourceCompilerTool"
@@ -206,7 +208,7 @@
 						>
 						<Tool
 							Name="VCCLCompilerTool"
-							CompileAs="2"
+							CompileAs="0"
 						/>
 					</FileConfiguration>
 				</File>
@@ -216,6 +218,10 @@
 				</File>
 				<File
 					RelativePath="..\..\main\Controller_#1.1.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\main\crypt.h"
 					>
 				</File>
 				<File
@@ -242,12 +248,28 @@
 						>
 						<Tool
 							Name="VCCLCompilerTool"
-							CompileAs="2"
+							CompileAs="0"
 						/>
 					</FileConfiguration>
 				</File>
 				<File
 					RelativePath="..\..\main\ioapi.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\main\iowin32.c"
+					>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							CompileAs="0"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\main\iowin32.h"
 					>
 				</File>
 				<File
@@ -343,6 +365,22 @@
 					>
 				</File>
 				<File
+					RelativePath="..\..\main\mztools.c"
+					>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							CompileAs="0"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\main\mztools.h"
+					>
+				</File>
+				<File
 					RelativePath="..\..\main\plugin.c"
 					>
 					<FileConfiguration
@@ -434,7 +472,7 @@
 						>
 						<Tool
 							Name="VCCLCompilerTool"
-							CompileAs="2"
+							CompileAs="0"
 						/>
 					</FileConfiguration>
 				</File>
@@ -516,6 +554,22 @@
 				</File>
 				<File
 					RelativePath="..\..\main\winlnxdefs.h"
+					>
+				</File>
+				<File
+					RelativePath="..\..\main\zip.c"
+					>
+					<FileConfiguration
+						Name="Release|Win32"
+						>
+						<Tool
+							Name="VCCLCompilerTool"
+							CompileAs="0"
+						/>
+					</FileConfiguration>
+				</File>
+				<File
+					RelativePath="..\..\main\zip.h"
 					>
 				</File>
 				<Filter

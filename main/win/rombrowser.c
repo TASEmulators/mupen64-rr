@@ -116,7 +116,7 @@ char *get_cachepath()
    static char *cachepath = NULL;
    if (cachepath == NULL)
      {
-       	cachepath = malloc(strlen(get_currentpath())+1+strlen("mupen64.cache"));
+       	cachepath = (char*)malloc(strlen(get_currentpath())+1+strlen("mupen64.cache"));
 	    strcpy(cachepath, get_currentpath());
     	strcat(cachepath, "mupen64.cache");
      }
@@ -128,7 +128,7 @@ char *get_dirfilepath()
     static char *cachepath = NULL;
     if (cachepath == NULL)
      {
-       	cachepath = malloc(strlen(get_currentpath())+1+strlen("mupen64.cch"));
+       	cachepath = (char*)malloc(strlen(get_currentpath())+1+strlen("mupen64.cch"));
 	    strcpy(cachepath, get_currentpath());
     	strcat(cachepath, "mupen64.cch");
      }
@@ -215,7 +215,7 @@ void removeDirectoryFromLinkedList(char Dir[MAX_PATH]) {
 ROM_DIRECTORY_PTR LoadRomBrowserDirs() {
     char RomBrowserDir[MAX_PATH];
     ROM_DIRECTORY_PTR head,tmp,prev ;
-    gzFile *cacheFile;
+    gzFile cacheFile;
     head=NULL;
         
     cacheFile = gzopen(get_dirfilepath(), "rb");
@@ -250,7 +250,7 @@ ROM_DIRECTORY_PTR LoadRomBrowserDirs() {
 
 void SaveRomBrowserCache()
 {
-   gzFile *cacheFile;
+   gzFile cacheFile;
    cacheFile = gzopen (get_cachepath(), "wb");
    if (cacheFile) {
    gzwrite(cacheFile,&ItemList.ListCount,sizeof(ItemList.ListCount));
@@ -261,7 +261,7 @@ void SaveRomBrowserCache()
 
 BOOL LoadRomBrowserCache()
 {
-   gzFile *cacheFile;
+   gzFile cacheFile;
    ROM_INFO * pRomInfo;
    int i;
    LV_ITEM  lvItem;
@@ -336,7 +336,7 @@ BOOL LoadRomBrowserCache()
 
 void SaveRomBrowserDirs() {
    ROM_DIRECTORY_PTR RomDirsHeader;
-   gzFile *cacheFile;
+   gzFile cacheFile;
    RomDirsHeader = ROM_DIRECTORY_HEADER;
    cacheFile = gzopen (get_dirfilepath(), "wb");
    if (cacheFile) {
@@ -457,7 +457,7 @@ void AddRomToList (char * RomLocation) {
 	memset(&lvItem, 0, sizeof(lvItem));
 //Filling rombrowser info
 	strncpy(pRomInfo->szFullFileName, RomLocation, MAX_PATH);
-    strncpy(pRomInfo->InternalName, ROM_HEADER->nom, sizeof(ROM_HEADER->nom));
+    strncpy(pRomInfo->InternalName, (const char*)ROM_HEADER->nom, sizeof(ROM_HEADER->nom));
     pRomInfo->Country = ROM_HEADER->Country_code;
     pRomInfo->RomSize = ROM_SIZE;
     pRomInfo->CRC1 = sl(ROM_HEADER->CRC1);

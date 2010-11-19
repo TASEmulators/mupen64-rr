@@ -28,7 +28,10 @@
 **/
 
 #include "r4300.h"
+#ifdef WIN32
+#else
 #include "sys/time.h"
+#endif
 
 #ifdef PROFILE
 

@@ -35,6 +35,12 @@
 #include "../rom.h"
 #include "inifunctions.h"
 
+#ifdef WIN32
+#define snprintf	_snprintf
+#define strcasecmp	_stricmp
+#define strncasecmp	_strnicmp
+#endif
+
 
 HWND romInfoHWND;
 static DWORD dwExitCode;
@@ -854,7 +860,6 @@ BOOL CALLBACK AdvancedSettingsProc(HWND hwnd, UINT Message, WPARAM wParam, LPARA
       case WM_COMMAND:
         switch(LOWORD(wParam))
         {
-          
         }
         break;
 

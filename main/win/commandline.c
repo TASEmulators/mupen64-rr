@@ -199,7 +199,7 @@ BOOL GuiDisabled()
    return cmdlineNoGui;
 }
 
-BOOL CmdLineParameterExist(int param)
+BOOL CmdLineParameterExist(CmdLineParameterType param)
 {
    char tempStr[MAX_PATH];
    GetCmdLineParameter(param, tempStr); 

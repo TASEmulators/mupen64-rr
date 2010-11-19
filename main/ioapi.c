@@ -1,9 +1,9 @@
-/* ioapi.c -- IO base function header for compress/uncompress .zip 
+/* ioapi.c -- IO base function header for compress/uncompress .zip
    files using zlib + zip or unzip API
 
-   Version 0.18 beta, Feb 26th, 2002
+   Version 1.01e, February 12th, 2005
 
-   Copyright (C) 1998-2002 Gilles Vollant
+   Copyright (C) 1998-2005 Gilles Vollant
 */
 
 #include <stdio.h>
@@ -56,7 +56,7 @@ long ZCALLBACK fseek_file_func OF((
    uLong offset,
    int origin));
 
-long ZCALLBACK fclose_file_func OF((
+int ZCALLBACK fclose_file_func OF((
    voidpf opaque,
    voidpf stream));
 
@@ -94,7 +94,7 @@ uLong ZCALLBACK fread_file_func (opaque, stream, buf, size)
    uLong size;
 {
     uLong ret;
-    ret = fread(buf, 1, size, (FILE *)stream);
+    ret = (uLong)fread(buf, 1, (size_t)size, (FILE *)stream);
     return ret;
 }
 
@@ -106,7 +106,7 @@ uLong ZCALLBACK fwrite_file_func (opaque, stream, buf, size)
    uLong size;
 {
     uLong ret;
-    ret = fwrite(buf, 1, size, (FILE *)stream);
+    ret = (uLong)fwrite(buf, 1, (size_t)size, (FILE *)stream);
     return ret;
 }
 
@@ -145,11 +145,11 @@ long ZCALLBACK fseek_file_func (opaque, stream, offset, origin)
     return ret;
 }
 
-long ZCALLBACK fclose_file_func (opaque, stream)
+int ZCALLBACK fclose_file_func (opaque, stream)
    voidpf opaque;
    voidpf stream;
 {
-    long ret;
+    int ret;
     ret = fclose((FILE *)stream);
     return ret;
 }
@@ -171,7 +171,7 @@ void fill_fopen_filefunc (pzlib_filefunc_def)
     pzlib_filefunc_def->zwrite_file = fwrite_file_func;
     pzlib_filefunc_def->ztell_file = ftell_file_func;
     pzlib_filefunc_def->zseek_file = fseek_file_func;
-    pzlib_filefunc_def->zclose_file = (close_file_func)fclose_file_func;
+    pzlib_filefunc_def->zclose_file = fclose_file_func;
     pzlib_filefunc_def->zerror_file = ferror_file_func;
     pzlib_filefunc_def->opaque = NULL;
 }

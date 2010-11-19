@@ -55,7 +55,7 @@ static void staticMalloc(short** buf, int size, int* prevSize)
 		return;
 	if(*buf)
 		free(*buf);
-	*buf = malloc(size);
+	*buf = (short*)malloc(size);
 	*prevSize = size;
 }
 

@@ -60,13 +60,13 @@ void savestates_select_slot(unsigned int s)
 void savestates_select_filename(unsigned char *fn)
 {
    slot += 10;
-   if (strlen(fn) >= 1024) return;
-   strcpy(fname, fn);
+   if (strlen((const char *)fn) >= 1024) return;
+   strcpy(fname, (const char *)fn);
 }
 
 unsigned const char * savestates_get_selected_filename()
 {
-	return (const char *) fname;
+	return (unsigned const char *) fname;
 }
 
 void savestates_save()
@@ -87,7 +87,7 @@ void savestates_save()
    
    if (slot <= 9)
      {
-	filename = malloc(strlen(get_savespath())+
+	filename = (char*)malloc(strlen(get_savespath())+
 			  strlen(ROM_SETTINGS.goodname)+4+1);
 	strcpy(filename, get_savespath());
 	strcat(filename, ROM_SETTINGS.goodname);
@@ -97,7 +97,7 @@ void savestates_save()
      }
    else
      {
-	filename = malloc(strlen(fname)+1);
+	filename = (char*)malloc(strlen(fname)+1);
 	strcpy(filename, fname);
 	slot -= 10;
      }
@@ -193,7 +193,7 @@ void savestates_load()
    
    if (slot <= 9)
      {
-	filename = malloc(strlen(get_savespath())+
+	filename = (char*)malloc(strlen(get_savespath())+
 			  strlen(ROM_SETTINGS.goodname)+4+1);
 	strcpy(filename, get_savespath());
 	strcat(filename, ROM_SETTINGS.goodname);
@@ -203,7 +203,7 @@ void savestates_load()
      }
    else
      {
-	filename = malloc(strlen(fname)+1);
+	filename = (char*)malloc(strlen(fname)+1);
 	strcpy(filename, fname);
 	slot -= 10;
      }
@@ -306,7 +306,7 @@ void savestates_load()
 	{
 		unsigned long movieInputDataSize = 0;
 		gzread(f, &movieInputDataSize, sizeof(movieInputDataSize));
-		char* local_movie_data = malloc(movieInputDataSize * sizeof(char));
+		char* local_movie_data = (char*)malloc(movieInputDataSize * sizeof(char));
 		int readBytes = gzread(f, local_movie_data, movieInputDataSize);
 		if(readBytes != movieInputDataSize)
 		{

@@ -18,7 +18,9 @@
 #define ROMBROWSER_H
 
 #include <windows.h>
+#ifndef _WIN32_IE
 #define _WIN32_IE 0x0500
+#endif
 #include <commctrl.h>
 
 #include "../md5.h"
