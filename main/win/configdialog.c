@@ -35,7 +35,7 @@
 #include "../rom.h"
 #include "inifunctions.h"
 
-#ifdef WIN32
+#ifdef _MSC_VER
 #define snprintf	_snprintf
 #define strcasecmp	_stricmp
 #define strncasecmp	_strnicmp

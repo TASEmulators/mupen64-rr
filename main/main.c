@@ -36,7 +36,7 @@
 #define VERSION "0.5\0"
 
 #include <stdlib.h>
-#ifdef WIN32
+#ifdef _MSC_VER
 #else
 #include <unistd.h>
 #endif

@@ -17,7 +17,7 @@
 #include <windows.h>
 #include <stdlib.h>
 #include <stdio.h>
-#ifdef WIN32
+#ifdef _MSC_VER
 #else
 #include <dirent.h>
 #endif
