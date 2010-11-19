@@ -22,7 +22,7 @@
 #include <commctrl.h>
 #include <stdlib.h>
 #include <math.h>
-#ifdef WIN32
+#ifdef _MSC_VER
 #else
 #include <dirent.h>
 #endif
@@ -49,7 +49,7 @@
 #include "../../r4300/recomph.h"
 #include "kaillera.h"
 
-#ifdef WIN32
+#ifdef _MSC_VER
 #define snprintf	_snprintf
 #define strcasecmp	stricmp
 #define strncasecmp	strnicmp

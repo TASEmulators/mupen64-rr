@@ -31,7 +31,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <limits.h>
-#ifdef WIN32
+#ifdef _MSC_VER
 #else
 #include <dlfcn.h>
 #include <dirent.h>

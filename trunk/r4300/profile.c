@@ -28,7 +28,7 @@
 **/
 
 #include "r4300.h"
-#ifdef WIN32
+#ifdef _MSC_VER
 #else
 #include "sys/time.h"
 #endif

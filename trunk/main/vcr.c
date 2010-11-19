@@ -17,7 +17,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <string.h>
-#ifdef WIN32
+#ifdef _MSC_VER
 #define snprintf	_snprintf
 #define strcasecmp	_stricmp
 #define strncasecmp	_strnicmp
