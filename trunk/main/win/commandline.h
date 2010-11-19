@@ -34,7 +34,7 @@ void SaveCmdLineParameter(char *cmdline);
 void GetCmdLineParameter(CmdLineParameterType arg, char *buf);
 BOOL StartGameByCommandLine();
 BOOL GuiDisabled();
-BOOL CmdLineParameterExist( int param);
+BOOL CmdLineParameterExist(CmdLineParameterType param);
 
 extern BOOL cmdlineMode; 
 extern BOOL cmdlineSave;
