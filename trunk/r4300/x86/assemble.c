@@ -971,8 +971,9 @@ void shl_reg32_imm8(unsigned long reg32, unsigned char imm8)
    put8(imm8);
 }
 
-void mov_reg32_m32(unsigned long reg32, unsigned long* m32)
+void mov_reg32_m32(unsigned long reg32, void* _m32)
 {
+   unsigned long* m32 = (unsigned long*) _m32;
    put8(0x8B);
    put8((reg32 << 3) | 5);
    put32((unsigned long)(m32));
