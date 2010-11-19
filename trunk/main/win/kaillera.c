@@ -64,7 +64,7 @@ int LoadKaillera()
     
     if (KailleraHandle) {
       ShowInfo("Kaillera Library found") ;
-      kailleraGetVersion = (void (__stdcall* ) ()) GetProcAddress( KailleraHandle, "_kailleraGetVersion@4");
+      kailleraGetVersion = (void (__stdcall* ) (char*)) GetProcAddress( KailleraHandle, "_kailleraGetVersion@4");
       if (kailleraGetVersion==NULL) {
          ShowError("kailleraGetVersion not found") ;
          return 0 ;
