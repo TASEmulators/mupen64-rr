@@ -32,6 +32,10 @@
 #include <string.h>
 #include <limits.h>
 #ifdef _MSC_VER
+inline char* realpath(const char *pathname, char *resolvedname)
+{
+	_fullpath(resolvedname, pathname, _MAX_PATH);
+}
 #else
 #include <dlfcn.h>
 #include <dirent.h>

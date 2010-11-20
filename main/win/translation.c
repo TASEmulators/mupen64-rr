@@ -62,10 +62,10 @@ void rewind_lang()
 
 void search_languages()
 {
-    DIR *dir;
+	HANDLE hFind;
+	WIN32_FIND_DATA FindFileData;
     char cwd[MAX_PATH];
     char name[MAX_PATH];
-    struct dirent *entry;
     char String[800];
     
     lang_list = (languages*)malloc(sizeof(languages));
@@ -73,26 +73,28 @@ void search_languages()
     
     sprintf(cwd, "%slang",AppPath);
     
-    dir = opendir(cwd);
-    if (dir==NULL)  { 
+    sprintf(String, "%s\\*.lng", cwd);    
+    hFind = FindFirstFile(String, &FindFileData);
+	if (hFind == INVALID_HANDLE_VALUE) {
         return;
     }
-    while((entry = readdir(dir)) != NULL)
+    do
     {
-              
-        strcpy(name, cwd);
-        strcat(name, "\\");
-        strcat(name, entry->d_name);
-        if (getExtension(entry->d_name) != NULL && strcmp(getExtension(entry->d_name),"lng")==0) 
+        if (strcmp(FindFileData.cFileName, ".") != 0 &&
+            strcmp(FindFileData.cFileName, "..") != 0 &&
+			!(FindFileData.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
         {
+             char *filePart;
+             GetFullPathName(FindFileData.cFileName, _MAX_PATH, name, &filePart);
              memset(String,0,sizeof(String));
-             GetPrivateProfileSectionNames( String, sizeof(String), name);
-             if ( String) 
+             GetPrivateProfileSectionNames(String, sizeof(String), name);
+             if (String) 
              {
                 insert_lang( lang_list, name, String );
-             }                     
+             }
         }
-    }
+    } while(FindNextFile(hFind, &FindFileData));
+    FindClose(hFind);
 }
 
 void SetCurrentLangByName(char *language_name)
