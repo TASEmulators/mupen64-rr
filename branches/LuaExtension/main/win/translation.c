@@ -302,7 +302,6 @@ void TranslateMenu(HMENU hMenu,HWND mainHWND)
     SetMenuTranslatedString(submenu,7,"Language","");
     SetMenuTranslatedString(submenu,8,"Language Information...","");
     SetMenuTranslatedString(submenu,10,"Exit","Alt F4");
-
     
     //Run menu
     submenu = GetSubMenu(hMenu,1);

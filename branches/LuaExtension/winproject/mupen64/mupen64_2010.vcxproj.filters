@@ -1,0 +1,444 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\main">
+      <UniqueIdentifier>{bee2682b-6b74-44b2-a144-56003c12b400}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\main\win">
+      <UniqueIdentifier>{f566d9f1-0b8d-440f-b48f-4e0a92fa9af8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\main\gui_gtk">
+      <UniqueIdentifier>{c651ad6f-11d0-4190-afb4-ef5ac369b02b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\r4300">
+      <UniqueIdentifier>{b605fa0b-114f-402d-8860-a09013a886c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\r4300\x86">
+      <UniqueIdentifier>{90b867e7-67ee-42e8-8cee-0a94585968b6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\lua">
+      <UniqueIdentifier>{94d2dde9-756f-4c20-9914-43c9929e2880}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx</Extensions>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\config.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\Audio_#1.1.h">
+      <Filter>Source Files\main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\Controller_#1.1.h">
+      <Filter>Source Files\main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\crypt.h">
+      <Filter>Source Files\main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\Gfx_#1.3.h">
+      <Filter>Source Files\main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\guifuncs.h">
+      <Filter>Source Files\main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\ioapi.h">
+      <Filter>Source Files\main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\iowin32.h">
+      <Filter>Source Files\main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\main.h">
+      <Filter>Source Files\main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\md5.h">
+      <Filter>Source Files\main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\mupenIniApi.h">
+      <Filter>Source Files\main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\mztools.h">
+      <Filter>Source Files\main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\plugin.h">
+      <Filter>Source Files\main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\rom.h">
+      <Filter>Source Files\main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\Rsp_#1.1.h">
+      <Filter>Source Files\main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\savestates.h">
+      <Filter>Source Files\main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\unzip.h">
+      <Filter>Source Files\main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\vcr.h">
+      <Filter>Source Files\main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\vcr_compress.h">
+      <Filter>Source Files\main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\vcr_resample.h">
+      <Filter>Source Files\main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\winlnxdefs.h">
+      <Filter>Source Files\main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\zip.h">
+      <Filter>Source Files\main</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\win\commandline.h">
+      <Filter>Source Files\main\win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\win\Config.h">
+      <Filter>Source Files\main\win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\win\configdialog.h">
+      <Filter>Source Files\main\win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\win\DebugInfo.hpp">
+      <Filter>Source Files\main\win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\win\DebugView.h">
+      <Filter>Source Files\main\win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\win\dumplist.h">
+      <Filter>Source Files\main\win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\win\GUI_LogWindow.h">
+      <Filter>Source Files\main\win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\win\inifunctions.h">
+      <Filter>Source Files\main\win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\win\kaillera.h">
+      <Filter>Source Files\main\win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\win\main_win.h">
+      <Filter>Source Files\main\win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\win\rombrowser.h">
+      <Filter>Source Files\main\win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\win\RomSettings.h">
+      <Filter>Source Files\main\win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\win\timers.h">
+      <Filter>Source Files\main\win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\win\translation.h">
+      <Filter>Source Files\main\win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\main\win\vfw.h">
+      <Filter>Source Files\main\win</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\r4300\exception.h">
+      <Filter>Source Files\r4300</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\r4300\interupt.h">
+      <Filter>Source Files\r4300</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\r4300\macros.h">
+      <Filter>Source Files\r4300</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\r4300\ops.h">
+      <Filter>Source Files\r4300</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\r4300\r4300.h">
+      <Filter>Source Files\r4300</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\r4300\recomp.h">
+      <Filter>Source Files\r4300</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\r4300\recomph.h">
+      <Filter>Source Files\r4300</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\r4300\x86\assemble.h">
+      <Filter>Source Files\r4300\x86</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\r4300\x86\interpret.h">
+      <Filter>Source Files\r4300\x86</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\r4300\x86\regcache.h">
+      <Filter>Source Files\r4300\x86</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\lua\LuaConsole.h">
+      <Filter>Source Files\lua</Filter>
+    </ClInclude>
+    <ClInclude Include="..\resource.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\main\adler32.c">
+      <Filter>Source Files\main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\ioapi.c">
+      <Filter>Source Files\main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\iowin32.c">
+      <Filter>Source Files\main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\main.c">
+      <Filter>Source Files\main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\md5.c">
+      <Filter>Source Files\main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\mupenIniApi.c">
+      <Filter>Source Files\main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\mztools.c">
+      <Filter>Source Files\main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\plugin.c">
+      <Filter>Source Files\main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\rom.c">
+      <Filter>Source Files\main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\savestates.c">
+      <Filter>Source Files\main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\unzip.c">
+      <Filter>Source Files\main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\vcr.c">
+      <Filter>Source Files\main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\vcr_compress.cpp">
+      <Filter>Source Files\main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\vcr_resample.c">
+      <Filter>Source Files\main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\zip.c">
+      <Filter>Source Files\main</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\win\commandline.c">
+      <Filter>Source Files\main\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\win\Config.c">
+      <Filter>Source Files\main\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\win\configdialog.c">
+      <Filter>Source Files\main\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\win\dumplist.c">
+      <Filter>Source Files\main\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\win\GUI_LogWindow.c">
+      <Filter>Source Files\main\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\win\guifuncs.c">
+      <Filter>Source Files\main\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\win\inifunctions.c">
+      <Filter>Source Files\main\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\win\kaillera.c">
+      <Filter>Source Files\main\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\win\main_win.cpp">
+      <Filter>Source Files\main\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\win\rombrowser.c">
+      <Filter>Source Files\main\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\win\RomSettings.c">
+      <Filter>Source Files\main\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\win\timers.c">
+      <Filter>Source Files\main\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\win\translation.c">
+      <Filter>Source Files\main\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\win\vcr_compress.c">
+      <Filter>Source Files\main\win</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\gui_gtk\aboutdialog.c">
+      <Filter>Source Files\main\gui_gtk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\gui_gtk\config.c">
+      <Filter>Source Files\main\gui_gtk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\gui_gtk\configdialog.c">
+      <Filter>Source Files\main\gui_gtk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\gui_gtk\dirbrowser.c">
+      <Filter>Source Files\main\gui_gtk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\gui_gtk\main_gtk.c">
+      <Filter>Source Files\main\gui_gtk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\gui_gtk\messagebox.c">
+      <Filter>Source Files\main\gui_gtk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\gui_gtk\rombrowser.c">
+      <Filter>Source Files\main\gui_gtk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\gui_gtk\romproperties.c">
+      <Filter>Source Files\main\gui_gtk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\gui_gtk\support.c">
+      <Filter>Source Files\main\gui_gtk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\gui_gtk\translate.c">
+      <Filter>Source Files\main\gui_gtk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\gui_gtk\vcrcomp_dialog.c">
+      <Filter>Source Files\main\gui_gtk</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\r4300\bc.c">
+      <Filter>Source Files\r4300</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\r4300\compare_core.c">
+      <Filter>Source Files\r4300</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\r4300\cop0.c">
+      <Filter>Source Files\r4300</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\r4300\cop1.c">
+      <Filter>Source Files\r4300</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\r4300\cop1_d.c">
+      <Filter>Source Files\r4300</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\r4300\cop1_l.c">
+      <Filter>Source Files\r4300</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\r4300\cop1_s.c">
+      <Filter>Source Files\r4300</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\r4300\cop1_w.c">
+      <Filter>Source Files\r4300</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\r4300\exception.c">
+      <Filter>Source Files\r4300</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\r4300\interupt.c">
+      <Filter>Source Files\r4300</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\r4300\profile.c">
+      <Filter>Source Files\r4300</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\r4300\pure_interp.c">
+      <Filter>Source Files\r4300</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\r4300\r4300.c">
+      <Filter>Source Files\r4300</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\r4300\recomp.c">
+      <Filter>Source Files\r4300</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\r4300\regimm.c">
+      <Filter>Source Files\r4300</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\r4300\special.c">
+      <Filter>Source Files\r4300</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\r4300\tlb.c">
+      <Filter>Source Files\r4300</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\r4300\x86\assemble.c">
+      <Filter>Source Files\r4300\x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\r4300\x86\debug.c">
+      <Filter>Source Files\r4300\x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\r4300\x86\gbc.c">
+      <Filter>Source Files\r4300\x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\r4300\x86\gcop0.c">
+      <Filter>Source Files\r4300\x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\r4300\x86\gcop1.c">
+      <Filter>Source Files\r4300\x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\r4300\x86\gcop1_d.c">
+      <Filter>Source Files\r4300\x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\r4300\x86\gcop1_l.c">
+      <Filter>Source Files\r4300\x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\r4300\x86\gcop1_s.c">
+      <Filter>Source Files\r4300\x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\r4300\x86\gcop1_w.c">
+      <Filter>Source Files\r4300\x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\r4300\x86\gr4300.c">
+      <Filter>Source Files\r4300\x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\r4300\x86\gregimm.c">
+      <Filter>Source Files\r4300\x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\r4300\x86\gspecial.c">
+      <Filter>Source Files\r4300\x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\r4300\x86\gtlb.c">
+      <Filter>Source Files\r4300\x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\r4300\x86\regcache.c">
+      <Filter>Source Files\r4300\x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\r4300\x86\rjump.c">
+      <Filter>Source Files\r4300\x86</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\lua\LuaConsole.cpp">
+      <Filter>Source Files\lua</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\rsrc.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Makefile" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuildStep Include="..\..\main\gui_gtk\aboutdialog.h">
+      <Filter>Source Files\main\gui_gtk</Filter>
+    </CustomBuildStep>
+    <CustomBuildStep Include="..\..\main\gui_gtk\config.h">
+      <Filter>Source Files\main\gui_gtk</Filter>
+    </CustomBuildStep>
+    <CustomBuildStep Include="..\..\main\gui_gtk\configdialog.h">
+      <Filter>Source Files\main\gui_gtk</Filter>
+    </CustomBuildStep>
+    <CustomBuildStep Include="..\..\main\gui_gtk\dirbrowser.h">
+      <Filter>Source Files\main\gui_gtk</Filter>
+    </CustomBuildStep>
+    <CustomBuildStep Include="..\..\main\gui_gtk\main_gtk.h">
+      <Filter>Source Files\main\gui_gtk</Filter>
+    </CustomBuildStep>
+    <CustomBuildStep Include="..\..\main\gui_gtk\messagebox.h">
+      <Filter>Source Files\main\gui_gtk</Filter>
+    </CustomBuildStep>
+    <CustomBuildStep Include="..\..\main\gui_gtk\rombrowser.h">
+      <Filter>Source Files\main\gui_gtk</Filter>
+    </CustomBuildStep>
+    <CustomBuildStep Include="..\..\main\gui_gtk\romproperties.h">
+      <Filter>Source Files\main\gui_gtk</Filter>
+    </CustomBuildStep>
+    <CustomBuildStep Include="..\..\main\gui_gtk\support.h">
+      <Filter>Source Files\main\gui_gtk</Filter>
+    </CustomBuildStep>
+    <CustomBuildStep Include="..\..\main\gui_gtk\translate.h">
+      <Filter>Source Files\main\gui_gtk</Filter>
+    </CustomBuildStep>
+    <CustomBuildStep Include="..\..\main\gui_gtk\vcrcomp_dialog.h">
+      <Filter>Source Files\main\gui_gtk</Filter>
+    </CustomBuildStep>
+  </ItemGroup>
+</Project>
