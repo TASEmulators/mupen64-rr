@@ -1,0 +1,57 @@
+# Project: mupen64_rsp_hle
+# Makefile created by Dev-C++ 4.9.8.1
+
+CPP  = g++.exe
+CC   = gcc.exe
+WINDRES = windres.exe
+RES  = mupen64_rsp_hle_private.res
+OBJ  = ../main.o ../disasm.o ../jpeg.o ../ucode1.o ../ucode3.o ../ucode2.o ../win/win.o ../win/Config.o $(RES)
+LINKOBJ  = ../main.o ../disasm.o ../jpeg.o ../ucode1.o ../ucode3.o ../ucode2.o ../win/win.o ../win/Config.o $(RES)
+LIBS =  -L"C:/Dev-Cpp/lib" --no-export-all-symbols --add-stdcall-alias
+INCS =  -I"C:/Dev-Cpp/include" 
+CXXINCS =  -I"C:/Dev-Cpp/include/c++"  -I"C:/Dev-Cpp/include/c++/mingw32"  -I"C:/Dev-Cpp/include/c++/backward"  -I"C:/Dev-Cpp/include" 
+BIN  = mupen64_rsp_hle.dll
+CXXFLAGS = $(CXXINCS)  -fexpensive-optimizations -O3 -mwindows
+CFLAGS = $(INCS)-DBUILDING_DLL=1 -D__WIN32__  -fmessage-length=0 -fexpensive-optimizations -O3 -mwindows
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before mupen64_rsp_hle.dll all-after
+
+
+clean: clean-custom
+	rm -f $(OBJ) $(BIN)
+
+DLLWRAP=dllwrap.exe
+DEFFILE=libmupen64_rsp_hle.def
+STATICLIB=libmupen64_rsp_hle.a
+
+$(BIN): $(LINKOBJ)
+	$(DLLWRAP) --output-def $(DEFFILE) --implib $(STATICLIB) $(LINKOBJ) $(LIBS) -o $(BIN)
+
+../main.o: ../main.c
+	$(CC) -c ../main.c -o ../main.o $(CFLAGS)
+
+../disasm.o: ../disasm.c
+	$(CC) -c ../disasm.c -o ../disasm.o $(CFLAGS)
+
+../jpeg.o: ../jpeg.c
+	$(CC) -c ../jpeg.c -o ../jpeg.o $(CFLAGS)
+
+../ucode1.o: ../ucode1.c
+	$(CC) -c ../ucode1.c -o ../ucode1.o $(CFLAGS)
+
+../ucode3.o: ../ucode3.c
+	$(CC) -c ../ucode3.c -o ../ucode3.o $(CFLAGS)
+
+../ucode2.o: ../ucode2.c
+	$(CC) -c ../ucode2.c -o ../ucode2.o $(CFLAGS)
+
+../win/win.o: ../win/win.c
+	$(CC) -c ../win/win.c -o ../win/win.o $(CFLAGS)
+
+../win/Config.o: ../win/Config.c
+	$(CC) -c ../win/Config.c -o ../win/Config.o $(CFLAGS)
+
+mupen64_rsp_hle_private.res: mupen64_rsp_hle_private.rc res.rc 
+	$(WINDRES) -i mupen64_rsp_hle_private.rc -I rc -o mupen64_rsp_hle_private.res -O coff 

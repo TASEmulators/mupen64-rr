@@ -1,0 +1,183 @@
+[Polski]
+
+Translation Author = F1xat (mad_man@go2.pl)
+Version = 1.1 for Mupen64 0.2
+Creation Date = 23th August 2003
+
+
+;## Polish V1.1 ##
+
+General=Ogólne
+
+Alerts=Ostrze¿enia
+Alert Bad rom=Ostrzegaj o uszkodzonych romach
+Alert Hacked rom=Ostrzegaj o shackowanych romach
+Alert Saves errors=Ostrzegaj o uszkodzonych save'ach
+
+Fps / VIs=Fps / VIs
+Limit fps (auto)=Atomatycznie ogranicz szybkoœæ fps
+Show FPS=Poka¿ FPS
+Show VIs=Poka¿ VIs
+
+Language information=Informacje o t³umaczeniu...
+
+Settings=Ustawienia
+
+Close=Zamknij
+
+Play Game=Uruchom rom
+Refresh=Odœwie¿ listê romów
+
+;## Polish V1.1< ##
+
+Ini file=Plik INI
+Use compressed file=U¿ywaj skompresowanego pliku
+
+
+;######### MENU ###################
+;  File 
+File=&Plik
+Load Rom=&Wczytaj rom...
+Close Rom=&Zamknij rom
+Refresh Rom List=&Odœwie¿ listê romów
+Language=&Jêzyk
+Exit=Za&koñcz
+
+;  Run 
+Run=&Emulacja
+Reset=&Reset
+Pause=&Pauza
+Continue=&Kontynuuj
+Generate Bitmap=&ScreenShot
+Save State=&Zapisz stan
+Save as=Zapisz jako...
+Restore State=&Wczytaj stan
+Load=Wczytaj jako
+Current Save State=Aktualny zapis stanu
+
+;  Options 
+Options=&Opcje
+Configure=&Ustawienia...
+Video Settings=Ustawienia &Video...
+Input Settings=Ustawienia &Sterowania...
+Audio Settings=Ustawienia &DŸwiêku...
+RSP Settings=&Ustawienia RSP...
+Full Screen=&Pe³ny Ekran
+
+; Utilities menu
+Utilities=&Ró¿ne
+ROM Properties=Ustawienia romu...
+Audit ROMs=SprawdŸ rom...
+Generate ROM Info=Zapisz listê romów do pliku
+
+;  Help  
+Help=Pomo&c
+Contents=&Tematy Pomocy...    
+Whats new=&Co nowego...
+About=&O Mupen64...
+
+
+;######### CONFIG DIALOG ###########
+;## Plugins##
+
+GFX Plugin=Plugin Graficzny
+Input Plugin=Plugin Sterowania
+Sound Plugin=Plugin DŸwiêkowy
+RSP Plugin=Plugin RSP
+OK=OK
+Config=Konfiguruj
+Test=Test
+Plugin About=O Pluginie
+Config Plugins=Ustawienia Pluginów
+
+;Emulation Options=Opcje emulacji
+;Settings=Ustawienia
+;country=Wersja
+
+;## Directories ##
+Use directory recursion=Dodaj te¿ podkatalogi
+Add=Dodaj
+Remove=Usuñ
+Remove All=Usuñ wszystkie
+Directories=Katalogi
+Roms Directories=Katalogi z romami 
+Select Current Rom Browser Directory=Wska¿ katalog z romami
+
+Plugins Directory=Katalog pluginów
+Default Plugins Check=Domyœlny:
+Choose Plugins Directory=Wybierz...
+Saves Directory=Katalog save'ów
+Default Saves Check=Domyœlny:
+Choose Saves Directory=Wybierz...
+Screenshots Directory=Katalog screen'ów
+Default Screenshots Check=Domyœlny:
+Choose Screenshots Directory=Wybierz...
+
+;## General ##
+CPU Core=Styl j¹dra procesora
+Interpreter=Interpreter
+Dynamic Recompiler=Dynamic Recompiler
+Pure Interpreter=Pure Interpreter
+
+
+
+;######### AUDIT ROMS DIALOG ##########
+Audit Total ROMs=Romów razem:
+Audit Current ROM=Aktualny rom:
+Audit File Location=Lokalizacja pliku:
+Audit ROMs=SprawdŸ rom
+
+
+;######## ROM PROPERTIES DIALOG ########
+RP ROM Information=Informacje o romie:
+RP File Location=Lokalizacja oliku:
+RP Good Name=Good Name:
+RP Internal Name=Nazwa wew.:
+RP Size=Rozmiar:
+RP Country=Wersja:
+RP Ini Code=CRC:
+RP MD5 Checksum=MD5 Checksum:
+RP Calculate= Oblicz
+RP Comments=Komentarz:
+
+;####### LANGUAGE INFO DIALOG ########
+Translation Author TEXT=Autor t³umaczenia:
+Version TEXT=Wersja:
+Creation Date TEXT=Data:
+OK=OK
+
+;######### STATUS BAR STRINGS #########
+Emulation started=Emulacja rozpoczêta
+Rom Closed=Rom zamkniêty
+Emulation paused=Emulacja spauzowana
+Loading rom=Wczytujê rom
+Total Roms=Razem romów:
+
+
+;######### ROM BROWSER STRINGS #######
+Good Name=Nazwa
+File Name=Nazwa pliku
+Size=Rozmiar
+Comments=Komentarz
+Country=Wersja
+Demo=Demo
+Beta=Beta
+USA/Japan=Amerykañska/Japoñska
+German=Niemiecka
+USA=Amerykañska
+France=Francuska
+Italy=W³oska
+Japan=Japoñska
+Europe=Europejska
+Spain=Hiszpañska
+Australia=Australijska
+Unknown=Nieznana
+
+
+;######### TOOLTIPS ##################
+Stop Emulation=Zatrzymaj Emulacjê
+Run/Resume Rom=Rpzpocznij Emulacjê
+
+;######### HELP FILES ################
+Index=index.pdf
+WhatsNew=whatsnew.txt

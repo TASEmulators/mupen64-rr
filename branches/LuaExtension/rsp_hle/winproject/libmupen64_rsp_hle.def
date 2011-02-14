@@ -1,0 +1,10 @@
+; dlltool --base-file C:\DOCUME~1\CDRIC~1\LOCALS~1\Temp/cca03868.base --output-exp mupen64_rsp_hle.exp --dllname mupen64_rsp_hle.dll --output-def libmupen64_rsp_hle.def --no-export-all-symbols --add-stdcall-alias --exclude-symbol=DllMainCRTStartup@12 --def C:\DOCUME~1\CDRIC~1\LOCALS~1\Temp/cca03868.def --output-lib libmupen64_rsp_hle.a
+EXPORTS
+	DllAbout @ 1 ; 
+	DllConfig @ 2 ; 
+	DllTest @ 3 ; 
+	DoRspCycles @ 4 ; 
+	GetDllInfo @ 5 ; 
+	InitiateRSP @ 6 ; 
+	RomClosed @ 7 ; 
+	CloseDLL @ 8 ; 

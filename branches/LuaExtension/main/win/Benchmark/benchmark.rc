@@ -1,0 +1,122 @@
+//Microsoft Developer Studio generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "afxres.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Bulgarian resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_BGR)
+#ifdef _WIN32
+LANGUAGE LANG_BULGARIAN, SUBLANG_DEFAULT
+#pragma code_page(1251)
+#endif //_WIN32
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_BENCHMARK DIALOGEX 0, 0, 242, 234
+STYLE DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Benchmark"
+FONT 8, "MS Sans Serif"
+BEGIN
+    DEFPUSHBUTTON   "Start",IDSTART,128,213,50,14
+    PUSHBUTTON      "Close",IDSTOP,183,213,50,14
+    LTEXT           "ROM File Name:",IDC_ROMFILE_TEXT,7,10,61,8
+    LTEXT           "Replay File Name:",IDC_REPLAYFILE_TEXT,7,30,62,8
+    EDITTEXT        IDC_ROMFILENAME,72,7,105,14,ES_AUTOHSCROLL
+    EDITTEXT        IDC_REPLAYFILE,72,27,105,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Browse",IDC_ROMFILE_BROWSE,183,7,50,14
+    PUSHBUTTON      "Browse",IDC_REPLAYFILE_BROWSE,183,27,50,14
+    GROUPBOX        "AVI Encoding",IDC_AVIRECORDING_STRUCT,7,51,226,89
+    CONTROL         "Enable AVI encoding",IDC_ENABLEAVI,"Button",
+                    BS_AUTOCHECKBOX | WS_TABSTOP,14,65,83,10
+    LTEXT           "AVI File Name:",IDC_AVIFILE_TEXT,14,83,48,8,WS_DISABLED
+    EDITTEXT        IDC_AVIFILE,71,80,97,14,ES_AUTOHSCROLL | WS_DISABLED
+    PUSHBUTTON      "Browse",IDC_AVIFILE_BROWSE,175,80,50,14,WS_DISABLED
+    LTEXT           "Video Codec:",IDC_VIDEOCODEC_TEXT,14,102,44,8,
+                    WS_DISABLED
+    EDITTEXT        IDC_VIDEOCODEC,71,99,97,14,ES_AUTOHSCROLL | ES_READONLY | 
+                    WS_DISABLED
+    PUSHBUTTON      "Choose",IDC_VIDEOCODEC_CHOOSE,175,99,50,14,WS_DISABLED
+    LTEXT           "Results:",IDC_RESULTS_TEXT,7,149,26,8
+    EDITTEXT        IDC_RESULTS,7,160,226,43,ES_MULTILINE | ES_AUTOHSCROLL | 
+                    ES_READONLY | NOT WS_BORDER,WS_EX_STATICEDGE
+    LTEXT           "Audio Codec:",IDC_AUDIOCODEC_TEXT,13,121,44,8,
+                    WS_DISABLED
+    EDITTEXT        IDC_AUDIOCODEC,71,118,97,14,ES_AUTOHSCROLL | ES_READONLY | 
+                    WS_DISABLED
+    PUSHBUTTON      "Choose",IDC_AUDIOCODEC_CHOOSE,175,118,50,14,WS_DISABLED
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO DISCARDABLE 
+BEGIN
+    IDD_BENCHMARK, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 233
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 227
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "#include ""afxres.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE DISCARDABLE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+#endif    // Bulgarian resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
