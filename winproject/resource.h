@@ -46,7 +46,10 @@
 #define IDI_SIF        169 
 #define IDI_M64ICONSMALL 180
 #define IDI_M64ICONBIG   181 
+//Lua
+//#define IDD_LUAWINDOW 182
 #define IDC_WEBSITE 190
+
 
 #define IDC_COMBO_RSP 200
 #define IDRSPCONFIG 201
@@ -63,7 +66,6 @@
 #define REFRESH_ROM_BROWSER 1066
 #define EMU_VCRTOGGLEREADONLY 1067
 
-#define ID_EMULATOR_EXIT                40001
 #define IDC_TOOLBAR  1000
 #define IDB_TOOLBAR  1001
 #define IDC_MAIN_STATUS 1002
@@ -175,27 +177,6 @@
 #define IDC_INIFILE                 3100
 #define IDC_INI_COMPRESSED          3101
 
-#define IDI_GFX                         4101
-#define IDI_INPUT                       4103
-#define IDI_SOUND                       4104
-#define IDB_RSP                         4112
-#define IDB_SOUND                       4113
-#define IDB_CONTROL                     4114
-#define IDB_DISPLAY                     4115
-#define ROM_POPUP_MENU                  4116
-#define IDC_CURRENT_ROM_PROGRESS        5001
-#define IDC_TOTAL_ROMS_PROGRESS         5002
-#define IDC_IDC_ROM_MD5                 5011
-
-#define ID_RECENTROMS_RESET             6000
-#define ID_RECENTROMS_FREEZE            6001
-#define ID_RECENTROMS_FIRST             6002
-//reserved till 6020
-
-#define AC_PAUSE                        40004
-#define EMU_RESET                       40007
-
-
 #define IDC_DEFAULT_PLUGINS_CHECK       4000
 #define IDC_DEFAULT_SCREENSHOTS_CHECK   4001
 #define IDC_DEFAULT_SAVES_CHECK         4002
@@ -209,7 +190,20 @@
 #define IDC_CHOOSE_PLUGINS_DIR          4016
 #define IDC_SCREENSHOTS_DIR             4017
 #define IDC_CHOOSE_SCREENSHOTS_DIR      4018
+
+#define IDI_GFX                         4101
+#define IDI_INPUT                       4103
+#define IDI_SOUND                       4104
+#define IDB_RSP                         4112
+#define IDB_SOUND                       4113
+#define IDB_CONTROL                     4114
+#define IDB_DISPLAY                     4115
+#define ROM_POPUP_MENU                  4116
+
+#define IDC_CURRENT_ROM_PROGRESS        5001
+#define IDC_TOTAL_ROMS_PROGRESS         5002
 #define IDC_SAVES_DIR                   5004
+#define IDC_IDC_ROM_MD5                 5011
 #define IDC_CHOOSE_SAVES_DIR            5014
 #define GENERATE_BITMAP                 5015
 
@@ -231,8 +225,15 @@
 #define IDC_NO_AUDIO_DELAY              5515
 #define IDC_NO_COMPILED_JUMP            5516
 #define IDC_AUTOINCSAVESLOT             5517
-
 #define IDD_HOTKEY_CONFIG               5518
+
+#define ID_RECENTROMS_RESET             6000
+#define ID_RECENTROMS_FREEZE            6001
+#define ID_RECENTROMS_FIRST             6002
+#define ID_MENU_LUASCRIPT_NEW			6003
+#define ID_MENU_LUASCRIPT_CLOSEALL		6004
+//reserved till 6020
+
 #define IDC_HOTKEYS_FLOWGROUP           6101
 #define IDC_HOT_SCREENSHOT              6103
 #define IDC_HOT_PAUSE                   6104
@@ -372,8 +373,18 @@
 #define IDC_FROMSTART_RADIO             9506
 #define IDC_PAUSEAT_LABEL               9507
 #define IDC_PAUSEAT_FIELD               9508
+//Lua
+#define IDC_BUTTON_LUASTATE         9509
+//#define IDC_BUTTON_LUAEDIT              9510
+#define IDC_TEXTBOX_LUASCRIPTPATH       9511
+#define IDC_TEXTBOX_LUACONSOLE              9512
+#define IDC_BUTTON_LUABROWSE 9513
 
+
+#define ID_EMULATOR_EXIT                40001
 #define ID_LANG_INFO_MENU               40002
+#define AC_PAUSE                        40004
+#define EMU_RESET                       40007
 
 #define IDC_ROMLIST                     12347
 

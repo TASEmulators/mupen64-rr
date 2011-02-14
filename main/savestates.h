@@ -35,7 +35,7 @@ extern int savestates_job;
 void savestates_save();
 void savestates_load();
 
-void savestates_select_slot();
-void savestates_select_filename();
+void savestates_select_slot(unsigned int s);
+void savestates_select_filename(unsigned char *fn);
 
 unsigned const char * savestates_get_selected_filename();
