@@ -33,8 +33,8 @@
 #include <stdio.h>
 #include <string.h>
 #include "../main/rom.h"
-#include "../memory/tlb.h"
 #include "recomp.h"
+#include "../memory/tlb.h"
 
 extern precomp_instr *PC;
 

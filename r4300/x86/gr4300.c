@@ -38,8 +38,8 @@
 #include "../exception.h"
 #include "interpret.h"
 
-extern unsigned long op;
-extern unsigned long src;
+extern unsigned long op; //pure_interp.c
+extern unsigned long src; //recomp.c
 
 precomp_instr fake_instr;
 static int eax, ebx, ecx, edx, esp, ebp, esi, edi;

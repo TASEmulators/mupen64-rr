@@ -5,7 +5,7 @@
 #ifndef __VCR_COMPRESS_H__
 #define __VCR_COMPRESS_H__
 
-#if defined(__cplusplus)
+#if defined(__cplusplus) && !defined(_MSC_VER)
 extern "C" {
 #endif
 
@@ -18,8 +18,8 @@ void VCRComp_init();
 
 void VCRComp_startFile( const char *filename, long width, long height, int fps, int New);
 void VCRComp_finishFile(int split);
-BOOL VCRComp_addVideoFrame( const unsigned char *data );
-BOOL VCRComp_addAudioData( const unsigned char *data, int len );
+BOOL VCRComp_addVideoFrame( unsigned char *data );
+BOOL VCRComp_addAudioData( unsigned char *data, int len );
 
 int         VCRComp_numVideoCodecs();
 const char *VCRComp_videoCodecName( int index );
@@ -44,7 +44,7 @@ const char *VCRComp_audioCodecAttribOption( int cindex, int aindex, int oindex )
 void        VCRComp_selectAudioCodec( int index );
 unsigned int VCRComp_GetSize ( );
 
-#if defined(__cplusplus)
+#if defined(__cplusplus) && !defined(_MSC_VER)
 } // extern "C"
 #endif
 

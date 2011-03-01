@@ -19,7 +19,7 @@
 #include "LuaConsole.h"
 #include "win/DebugInfo.hpp"
 	
-#ifdef __cplusplus
+#if defined(__cplusplus) && !defined(_MSC_VER)
 extern "C" {
 #endif
 
@@ -51,14 +51,17 @@ extern "C" {
 #include "RomSettings.h"
 #include "GUI_logwindow.h"
 #include "commandline.h"
-#include "kaillera.h"
+
 #include "../vcr.h"
 #include "../../r4300/recomph.h"
+
+#define EMULATOR_MAIN_CPP_DEF
 #include "kaillera.h"
+#undef EMULATOR_MAIN_CPP_DEF
 
 extern void CountryCodeToCountryName(int countrycode,char *countryname);
 
-#ifdef __cplusplus
+#if defined(__cplusplus) && !defined(_MSC_VER)
 }
 #endif
 
@@ -82,7 +85,7 @@ HWND hwnd_plug;
 //int manualFPSLimit = 1 ;
 static void gui_ChangeWindow();
 
-CONTROL Controls[4];
+
 static GFX_INFO dummy_gfx_info;
 static GFX_INFO gfx_info;
 static CONTROL_INFO dummy_control_info;
@@ -93,6 +96,17 @@ static RSP_INFO dummy_rsp_info;
 static RSP_INFO rsp_info;
 static int currentSaveState = 1 ;
 static unsigned char DummyHeader[0x40];
+
+
+void (*moveScreen)(int xpos, int ypos);
+void (*CaptureScreen) ( char * Directory );
+void (*old_initiateControllers)(HWND hMainWindow, CONTROL Controls[4]);
+void (*aiUpdate)(BOOL Wait);
+
+
+#ifndef _MSC_VER
+
+CONTROL Controls[4];
 
 void (*getDllInfo)(PLUGIN_INFO *PluginInfo);
 void (*dllConfig)(HWND hParent);
@@ -110,24 +124,22 @@ void (*showCFB)();
 void (*updateScreen)();
 void (*viStatusChanged)();
 void (*viWidthChanged)();
-void (*moveScreen)(int xpos, int ypos);
-void (*CaptureScreen) ( char * Directory );
+
 
 void (*closeDLL_input)();
 void (*controllerCommand)(int Control, BYTE * Command);
 void (*getKeys)(int Control, BUTTONS *Keys);
 void (*initiateControllers)(CONTROL_INFO ControlInfo);
-void (*old_initiateControllers)(HWND hMainWindow, CONTROL Controls[4]);
 void (*readController)(int Control, BYTE *Command);
 void (*romClosed_input)();
 void (*romOpen_input)();
 void (*keyDown)(WPARAM wParam, LPARAM lParam);
 void (*keyUp)(WPARAM wParam, LPARAM lParam);
 
+
 void (*aiDacrateChanged)(int SystemType);
 void (*aiLenChanged)();
 DWORD (*aiReadLength)();
-void (*aiUpdate)(BOOL Wait);
 void (*closeDLL_audio)();
 BOOL (*initiateAudio)(AUDIO_INFO Audio_Info);
 void (*processAList)();
@@ -143,6 +155,8 @@ void (*fBRead)(DWORD addr);
 void (*fBWrite)(DWORD addr, DWORD size);
 void (*fBGetFrameBufferInfo)(void *p);
 extern void (*readScreen)(void **dest, long *width, long *height);
+
+#endif // !_MSC_VER
 
 /* dummy functions to prevent mupen from crashing if a plugin is missing */
 static void dummy_void() {}
@@ -547,7 +561,7 @@ void search_plugins()
 	String pluginDir;
 	if(Config.DefaultPluginsDir)
 	{
-		pluginDir.assign(AppPath) + "\\plugin";
+		pluginDir.assign(AppPath).append("\\plugin");
 	}
 	else
 	{
@@ -555,7 +569,7 @@ void search_plugins()
 	}
 
 	WIN32_FIND_DATA entry;
-	HANDLE dirHandle = ::FindFirstFile(pluginDir.c_str(), &entry);
+	HANDLE dirHandle = ::FindFirstFile((pluginDir + "\\*.dll").c_str(), &entry);
 	if(dirHandle == INVALID_HANDLE_VALUE)
 	{
 		return;
@@ -566,7 +580,8 @@ void search_plugins()
 		if(String(::getExtension(entry.cFileName)) == "dll")
 		{
 			String pluginPath;
-			pluginPath.assign(pluginDir) + "\\" + entry.cFileName;
+			pluginPath.assign(pluginDir)
+				.append("\\").append(entry.cFileName);
 			MUPEN64RR_DEBUGINFO(pluginPath);
 				
 			HMODULE pluginHandle = LoadLibrary(pluginPath.c_str());
@@ -1136,6 +1151,8 @@ void resumeEmu(BOOL quiet)
 //        AutoPause = 0;
 //    }    
 //}
+
+
 void pauseEmu(BOOL quiet)
 {
 	BOOL wasPaused = emu_paused;

@@ -37,6 +37,7 @@
 #include <commctrl.h> // for SendMessage, SB_SETTEXT
 #include <windows.h> // for truncate functions
 #include <../../winproject/resource.h> // for EMU_RESET
+
 #endif
 
 #ifndef PATH_MAX
@@ -101,7 +102,7 @@ static SMovieHeader m_header;
 static BOOL m_readOnly = FALSE;
 
 long m_currentSample = -1;	// should = length_samples when recording, and be < length_samples when playing
-long m_currentVI = -1;
+int m_currentVI = -1;
 static char* m_inputBuffer = NULL;
 static unsigned long m_inputBufferSize = 0;
 static char* m_inputBufferPtr = NULL;
@@ -1532,7 +1533,7 @@ VCR_updateScreen()
 //	{
 //		if(image)
 //		{
-			if(!VCRComp_addVideoFrame((const unsigned char*)image))
+			if(!VCRComp_addVideoFrame((unsigned char*)image))
 			{
 //				ShowInfo("Video codec failure!\nA call to addVideoFrame() (AVIStreamWrite) failed.\nPerhaps you ran out of memory?");
 				printError("Video codec failure!\nA call to addVideoFrame() (AVIStreamWrite) failed.\nPerhaps you ran out of memory?");
@@ -1614,7 +1615,7 @@ static void writeSound(char* buf, int len, int minWriteSize, int maxWriteSize, B
 					printf("[VCR]: Warning: Possible stereo sound error detected.\n");
 					fprintf(stderr, "[VCR]: Warning: Possible stereo sound error detected.\n");
 				}
-				if(!VCRComp_addAudioData((const unsigned char*)buf2, len2))
+				if(!VCRComp_addAudioData((unsigned char*)buf2, len2))
 				{
 //					ShowInfo("Audio output failure!\nA call to addAudioData() (AVIStreamWrite) failed.\nPerhaps you ran out of memory?");
 					printError("Audio output failure!\nA call to addAudioData() (AVIStreamWrite) failed.\nPerhaps you ran out of memory?");

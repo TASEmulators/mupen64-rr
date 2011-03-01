@@ -122,6 +122,8 @@ static FrameBufferInfo frameBufferInfos[6];
 static char framebufferRead[0x800];
 static int firstFrameBufferSetting;
 
+static const int MemoryMaxCount = 0xFFFF;
+
 int init_memory()
 {
    int i;
@@ -129,10 +131,11 @@ int init_memory()
    //swap rom
    unsigned long *roml;
    roml = (unsigned long *)rom;
-   for (i=0; i<(taille_rom/4); i++) roml[i] = sl(roml[i]);
+   for (i=0; i<(taille_rom/4); i++)
+		 roml[i] = sl(roml[i]);
    
    //init hash tables
-   for (i=0; i<(0x10000); i++)
+   for (i=0; i < MemoryMaxCount; i++)
      {
 	readmem[i] = read_nomem;
 	readmemb[i] = read_nomemb;
@@ -145,7 +148,8 @@ int init_memory()
      }
    
    //init RDRAM
-   for (i=0; i<(0x800000/4); i++) rdram[i]=0;
+   for (i=0; i<(0x800000/4); i++) 
+		 rdram[i]=0;
    for (i=0; i</*0x40*/0x80; i++) 
      {
 	readmem[(0x8000+i)] = read_rdram;
@@ -224,7 +228,8 @@ int init_memory()
    readrdramreg[0x20] = &rdram_register.rdram_addr_select;
    readrdramreg[0x24] = &rdram_register.rdram_device_manuf;
    
-   for (i=0x28; i<0x10000; i++) readrdramreg[i] = &trash;
+   for (i=0x28; i < MemoryMaxCount; i++)
+		 readrdramreg[i] = &trash;
    for (i=1; i<0x10; i++)
      {
 	readmem[0x83f0+i] = read_nothing;
@@ -262,8 +267,10 @@ int init_memory()
    writememh[0xa400] = write_rsp_memh;
    writememd[0x8400] = write_rsp_memd;
    writememd[0xa400] = write_rsp_memd;
-   for (i=0; i<(0x1000/4); i++) SP_DMEM[i]=0;
-   for (i=0; i<(0x1000/4); i++) SP_IMEM[i]=0;
+   for (i=0; i<(0x1000/4); i++) 
+		 SP_DMEM[i]=0;
+   for (i=0; i<(0x1000/4); i++) 
+		 SP_IMEM[i]=0;
    
    for (i=1; i<0x4; i++)
      {
@@ -335,7 +342,8 @@ int init_memory()
    readrspreg[0x18] = &sp_register.sp_dma_busy_reg;
    readrspreg[0x1c] = &sp_register.sp_semaphore_reg;
    
-   for (i=0x20; i<0x10000; i++) readrspreg[i] = &trash;
+   for (i=0x20; i < MemoryMaxCount; i++) 
+		 readrspreg[i] = &trash;
    for (i=5; i<8; i++)
      {
 	readmem[0x8400+i] = read_nothing;
@@ -377,7 +385,8 @@ int init_memory()
    readrsp[0x0] = &rsp_register.rsp_pc;
    readrsp[0x4] = &rsp_register.rsp_ibist;
    
-   for (i=0x8; i<0x10000; i++) readrsp[i] = &trash;
+   for (i=0x8; i < MemoryMaxCount; i++)
+		 readrsp[i] = &trash;
    for (i=9; i<0x10; i++)
      {
 	readmem[0x8400+i] = read_nothing;
@@ -444,7 +453,8 @@ int init_memory()
    readdp[0x18] = &dpc_register.dpc_pipebusy;
    readdp[0x1c] = &dpc_register.dpc_tmem;
    
-   for (i=0x20; i<0x10000; i++) readdp[i] = &trash;
+   for (i=0x20; i < MemoryMaxCount; i++)
+		 readdp[i] = &trash;
    for (i=1; i<0x10; i++)
      {
 	readmem[0x8410+i] = read_nothing;
@@ -491,7 +501,8 @@ int init_memory()
    readdps[0x8] = &dps_register.dps_buftest_addr;
    readdps[0xc] = &dps_register.dps_buftest_data;
    
-   for (i=0x10; i<0x10000; i++) readdps[i] = &trash;
+   for (i=0x10; i < MemoryMaxCount; i++) 
+		 readdps[i] = &trash;
    for (i=1; i<0x10; i++)
      {
 	readmem[0x8420+i] = read_nothing;
@@ -550,7 +561,8 @@ int init_memory()
    readmi[0x8] = &MI_register.mi_intr_reg;
    readmi[0xc] = &MI_register.mi_intr_mask_reg;
    
-   for (i=0x10; i<0x10000; i++) readmi[i] = &trash;
+   for (i=0x10; i < MemoryMaxCount; i++) 
+		 readmi[i] = &trash;
    for (i=1; i<0x10; i++)
      {
 	readmem[0x8430+i] = read_nothing;
@@ -617,7 +629,8 @@ int init_memory()
    readvi[0x30] = &vi_register.vi_x_scale;
    readvi[0x34] = &vi_register.vi_y_scale;
    
-   for (i=0x38; i<0x10000; i++) readvi[i] = &trash;
+   for (i=0x38; i < MemoryMaxCount; i++)
+		 readvi[i] = &trash;
    for (i=1; i<0x10; i++)
      {
 	readmem[0x8440+i] = read_nothing;
@@ -672,7 +685,8 @@ int init_memory()
    readai[0x10] = &ai_register.ai_dacrate;
    readai[0x14] = &ai_register.ai_bitrate;
    
-   for (i=0x18; i<0x10000; i++) readai[i] = &trash;
+   for (i=0x18; i < MemoryMaxCount; i++) 
+		 readai[i] = &trash;
    for (i=1; i<0x10; i++)
      {
 	readmem[0x8450+i] = read_nothing;
@@ -737,7 +751,8 @@ int init_memory()
    readpi[0x2c] = &pi_register.pi_bsd_dom2_pgs_reg;
    readpi[0x30] = &pi_register.pi_bsd_dom2_rls_reg;
    
-   for (i=0x34; i<0x10000; i++) readpi[i] = &trash;
+   for (i=0x34; i < MemoryMaxCount; i++) 
+		 readpi[i] = &trash;
    for (i=1; i<0x10; i++)
      {
 	readmem[0x8460+i] = read_nothing;
@@ -792,7 +807,8 @@ int init_memory()
    readri[0x18] = &ri_register.ri_error;
    readri[0x1c] = &ri_register.ri_werror;
    
-   for (i=0x20; i<0x10000; i++) readri[i] = &trash;
+   for (i=0x20; i < MemoryMaxCount; i++)
+		 readri[i] = &trash;
    for (i=1; i<0x10; i++)
      {
 	readmem[0x8470+i] = read_nothing;
@@ -841,7 +857,8 @@ int init_memory()
    readsi[0x14] = &trash;
    readsi[0x18] = &si_register.si_status;
    
-   for (i=0x1c; i<0x10000; i++) readsi[i] = &trash;
+   for (i=0x1c; i < MemoryMaxCount; i++) 
+		 readsi[i] = &trash;
    for (i=0x481; i<0x800; i++)
      {
 	readmem[0x8000+i] = read_nothing;
@@ -973,7 +990,8 @@ int init_memory()
    writememh[0xbfc0] = write_pifh;
    writememd[0x9fc0] = write_pifd;
    writememd[0xbfc0] = write_pifd;
-   for (i=0; i<(0x40/4); i++) PIF_RAM[i]=0;
+   for (i=0; i<(0x40/4); i++) 
+		 PIF_RAM[i]=0;
    
    for (i=0xfc1; i<0x1000; i++) 
      {

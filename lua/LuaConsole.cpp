@@ -11,13 +11,13 @@
 #include "win/DebugInfo.hpp"
 
 #include <assert.h>
-#ifdef __cplusplus
+#if defined(__cplusplus) && !defined(_MSC_VER)
 extern "C"
 {
 #endif
 #include "win/main_win.h"
 #include "../../memory/memory.h"
-#ifdef __cplusplus
+#if defined(__cplusplus) && !defined(_MSC_VER)
 }
 #endif
 
@@ -43,7 +43,7 @@ struct EmulationLock
 	~EmulationLock()
 	{
 		resumeEmu(FALSE);
-		MUPEN64RR_DEBUGINFO("Emulation UnLock");
+		MUPEN64RR_DEBUGINFO("Emulation Unlock");
 	}
 };
 
@@ -164,7 +164,7 @@ namespace EmuLua
 	void LuaWindow::Initialize()
 	{
 		MUPEN64RR_ASSERT(_handle != NULL);
-		//Luaレジストリに自身を登録
+		//Register the this pointer
 		_vm.PushLightUserData(static_cast<void*>(this));
 		_vm.SetField(LUA_REGISTRYINDEX, LuaWindow::LuaRegistryKey);
 

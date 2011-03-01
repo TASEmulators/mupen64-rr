@@ -27,9 +27,9 @@
  *
 **/
 
+#include "ops.h"
 #include "r4300.h"
 #include "macros.h"
-#include "ops.h"
 #include "recomph.h"
 #include "interupt.h"
 #include "../main/md5.h"
