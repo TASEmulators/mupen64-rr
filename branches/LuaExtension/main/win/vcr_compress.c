@@ -33,7 +33,13 @@
 #include "vfw.h"
 #include "../../winproject/resource.h"
 
+#include "../plugin.h"
+
+#include "../vcr_compress.h"
+
+#ifndef _MSC_VER
 void (*readScreen)(void **dest, long *width, long *height);
+#endif
 
 extern HWND mainHWND, hTool, hStatus;
 

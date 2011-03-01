@@ -5,13 +5,13 @@
 #include <string>
 #include <sstream>
 
-#ifdef __cplusplus
+#if defined(__cplusplus) && !defined(_MSC_VER)
 extern "C" {
 #endif
 #include <tchar.h>
 
 #include "win/GUI_LogWindow.h"
-#ifdef __cplusplus
+#if defined(__cplusplus) && !defined(_MSC_VER)
 }
 #endif
 

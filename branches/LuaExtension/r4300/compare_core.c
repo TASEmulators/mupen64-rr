@@ -118,18 +118,18 @@ void compare_core()
 	if (!pipe_opened)
 	  {
 #ifdef _MSC_VER
-			// TODO: handle close
+			// TODO: 適当に書いた。あと、CloseHandle()
 			HANDLE pipe = CreateNamedPipe(
-					"compare_pipe", /* パイプ名 */
-					PIPE_ACCESS_DUPLEX,          /* 双方向 */
-					PIPE_WAIT                    /* ブロッキング・モード */
-					| PIPE_READMODE_BYTE         /* バイト・モード */
+					"compare_pipe",
+					PIPE_ACCESS_DUPLEX,
+					PIPE_WAIT
+					| PIPE_READMODE_BYTE
 					| PIPE_TYPE_BYTE,
-					PIPE_UNLIMITED_INSTANCES,    /* インスタンス数の制限なし */
-					1024,												 /* 出力バッファ・サイズ */
-					1024,												 /* 入力バッファ・サイズ */
-					120 * 1000,                  /* タイムアウト */
-					NULL);												/* セキュリティ属性なし */
+					PIPE_UNLIMITED_INSTANCES,
+					1024,
+					1024,
+					120 * 1000,
+					NULL);
 			::ConnectNamedPipe(pipe, NULL);
 #else
 	     mkfifo("compare_pipe", 0600);

@@ -29,10 +29,10 @@
 
 #include <malloc.h>
 
+#include "ops.h"
 #include "recomp.h"
 #include "macros.h"
 #include "r4300.h"
-#include "ops.h"
 #include "../memory/memory.h"
 #include "recomph.h"
 
@@ -42,7 +42,7 @@ int code_length; // current real recompiled code length
 int max_code_length; // current recompiled code's buffer length
 unsigned char **inst_pointer; // output buffer for recompiled code
 precomp_block *dst_block; // the current block that we are recompiling
-long src; // the current recompiled instruction
+unsigned long src; // the current recompiled instruction
 int fast_memory;
 
 unsigned long *return_address; // that's where the dynarec will restart when

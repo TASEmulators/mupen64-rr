@@ -20,7 +20,7 @@
 #define KAILLERA_CLIENT_API_VERSION "0.8"
 
 
-
+#ifndef EMULATOR_MAIN_CPP_DEF
   typedef struct {
     char *appName;
     char *gameList;
@@ -123,7 +123,8 @@
   void WINAPI kailleraChatReceivedCallback(char *nick, char *text);
   void WINAPI kailleraClientDroppedCallback(char *nick, int playernb);
   void WINAPI kailleraMoreInfosCallback(char *gamename);
-  
+#endif //EMULATOR_MAIN_CPP_DEF
+
   /// Emulator functions 
   int LoadKaillera();
   void EndGameKaillera();

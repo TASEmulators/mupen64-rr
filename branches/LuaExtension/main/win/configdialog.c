@@ -859,9 +859,9 @@ BOOL CALLBACK AdvancedSettingsProc(HWND hwnd, UINT Message, WPARAM wParam, LPARA
          return TRUE;
          
       case WM_COMMAND:
-        switch(LOWORD(wParam))
-        {
-        }
+        //switch(LOWORD(wParam))
+        //{
+        //}
         break;
 
        case WM_NOTIFY:

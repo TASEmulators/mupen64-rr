@@ -283,9 +283,6 @@
     <ClCompile Include="..\..\main\win\translation.c">
       <Filter>Source Files\main\win</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main\win\vcr_compress.c">
-      <Filter>Source Files\main\win</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\main\gui_gtk\aboutdialog.c">
       <Filter>Source Files\main\gui_gtk</Filter>
     </ClCompile>
@@ -432,6 +429,9 @@
     </ClCompile>
     <ClCompile Include="..\..\memory\tlb.c">
       <Filter>Source Files\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\main\win\vcr_compress.c">
+      <Filter>Source Files\main\win</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
