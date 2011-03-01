@@ -92,7 +92,7 @@ void init_block(long *source, precomp_block *block);
 void recompile_opcode();
 void prefetch_opcode(unsigned long op);
 void dyna_jump();
-void dyna_start();
+void dyna_start(void (*code)());
 void dyna_stop();
 
 extern precomp_instr *dst;

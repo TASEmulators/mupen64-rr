@@ -501,7 +501,7 @@ char *getPluginName(char *pluginpath,int plugintype)
     
 }
 
-void *get_handle(plugins *p, char *name)
+HMODULE get_handle(plugins *p, char *name)
 {
    if (!p->next) return NULL;
    
@@ -509,9 +509,9 @@ void *get_handle(plugins *p, char *name)
      p->next->plugin_name[strlen(p->next->plugin_name)-1] = '\0';
    
    if (!strcmp(p->next->plugin_name, name))
-         return p->next->handle;
-   else  
-         return get_handle(p->next, name);
+		 return p->next->handle;
+   else
+		 return (HMODULE)get_handle(p->next, name);
 }
 
 char* getExtension(char *str)
@@ -722,33 +722,33 @@ int check_plugins()
    return 1;
 }
 
-int load_gfx(void *handle_gfx)
+int load_gfx(HMODULE handle_gfx)
 {
    if (handle_gfx)
    {
-   changeWindow = (void(__cdecl*)())GetProcAddress((HMODULE)handle_gfx, "ChangeWindow");
-   closeDLL_gfx = (void(__cdecl*)())GetProcAddress((HMODULE)handle_gfx, "CloseDLL");
-   dllAbout = (void(__cdecl*)(HWND hParent))GetProcAddress((HMODULE)handle_gfx, "DllAbout");
-   dllConfig = (void(__cdecl*)(HWND hParent))GetProcAddress((HMODULE)handle_gfx, "DllConfig");
-   dllTest = (void(__cdecl*)(HWND hParent))GetProcAddress((HMODULE)handle_gfx, "DllTest");
-   initiateGFX = (BOOL(__cdecl*)(GFX_INFO Gfx_Info))GetProcAddress((HMODULE)handle_gfx, "InitiateGFX");
-   processDList = (void(__cdecl*)())GetProcAddress((HMODULE)handle_gfx, "ProcessDList");
-   processRDPList = (void(__cdecl*)())GetProcAddress((HMODULE)handle_gfx, "ProcessRDPList");
-   romClosed_gfx = (void(__cdecl*)())GetProcAddress((HMODULE)handle_gfx, "RomClosed");
-   romOpen_gfx = (void(__cdecl*)())GetProcAddress((HMODULE)handle_gfx, "RomOpen");
-   showCFB = (void(__cdecl*)())GetProcAddress((HMODULE)handle_gfx, "ShowCFB");
-   updateScreen = (void(__cdecl*)())GetProcAddress((HMODULE)handle_gfx, "UpdateScreen");
-   viStatusChanged = (void(__cdecl*)())GetProcAddress((HMODULE)handle_gfx, "ViStatusChanged");
-   viWidthChanged = (void(__cdecl*)())GetProcAddress((HMODULE)handle_gfx, "ViWidthChanged");
-   moveScreen = (void(__cdecl*)(int, int))GetProcAddress((HMODULE)handle_gfx, "MoveScreen");
-   CaptureScreen = (void(__cdecl*)(char *Directory))GetProcAddress((HMODULE)handle_gfx, "CaptureScreen");
-   readScreen = (void(__cdecl*)(void **dest, long *width, long *height))GetProcAddress((HMODULE)handle_gfx, "ReadScreen");
+   changeWindow = (void(__cdecl*)())GetProcAddress(handle_gfx, "ChangeWindow");
+   closeDLL_gfx = (void(__cdecl*)())GetProcAddress(handle_gfx, "CloseDLL");
+   dllAbout = (void(__cdecl*)(HWND hParent))GetProcAddress(handle_gfx, "DllAbout");
+   dllConfig = (void(__cdecl*)(HWND hParent))GetProcAddress(handle_gfx, "DllConfig");
+   dllTest = (void(__cdecl*)(HWND hParent))GetProcAddress(handle_gfx, "DllTest");
+   initiateGFX = (BOOL(__cdecl*)(GFX_INFO Gfx_Info))GetProcAddress(handle_gfx, "InitiateGFX");
+   processDList = (void(__cdecl*)())GetProcAddress(handle_gfx, "ProcessDList");
+   processRDPList = (void(__cdecl*)())GetProcAddress(handle_gfx, "ProcessRDPList");
+   romClosed_gfx = (void(__cdecl*)())GetProcAddress(handle_gfx, "RomClosed");
+   romOpen_gfx = (void(__cdecl*)())GetProcAddress(handle_gfx, "RomOpen");
+   showCFB = (void(__cdecl*)())GetProcAddress(handle_gfx, "ShowCFB");
+   updateScreen = (void(__cdecl*)())GetProcAddress(handle_gfx, "UpdateScreen");
+   viStatusChanged = (void(__cdecl*)())GetProcAddress(handle_gfx, "ViStatusChanged");
+   viWidthChanged = (void(__cdecl*)())GetProcAddress(handle_gfx, "ViWidthChanged");
+   moveScreen = (void(__cdecl*)(int, int))GetProcAddress(handle_gfx, "MoveScreen");
+   CaptureScreen = (void(__cdecl*)(char *Directory))GetProcAddress(handle_gfx, "CaptureScreen");
+   readScreen = (void(__cdecl*)(void **dest, long *width, long *height))GetProcAddress(handle_gfx, "ReadScreen");
    if(readScreen == NULL) externalReadScreen = 0;
    else externalReadScreen = 1;
    
-   fBRead = (void(__cdecl*)(DWORD))GetProcAddress((HMODULE)handle_gfx, "FBRead");
-   fBWrite = (void(__cdecl*)(DWORD, DWORD))GetProcAddress((HMODULE)handle_gfx, "FBWrite");
-   fBGetFrameBufferInfo = (void(__cdecl*)(void*))GetProcAddress((HMODULE)handle_gfx, "FBGetFrameBufferInfo");
+   fBRead = (void(__cdecl*)(DWORD))GetProcAddress(handle_gfx, "FBRead");
+   fBWrite = (void(__cdecl*)(DWORD, DWORD))GetProcAddress(handle_gfx, "FBWrite");
+   fBGetFrameBufferInfo = (void(__cdecl*)(void*))GetProcAddress(handle_gfx, "FBGetFrameBufferInfo");
    
     if (changeWindow == NULL) changeWindow = dummy_void;
     if (closeDLL_gfx == NULL) closeDLL_gfx = dummy_void;
@@ -817,27 +817,27 @@ int load_gfx(void *handle_gfx)
    }
    return 0;
 }
-int load_input(void *handle_input)
+int load_input(HMODULE handle_input)
 {
    int i ;
    PLUGIN_INFO PluginInfo;
    if (handle_input)
    {
-   getDllInfo = (void(__cdecl*)(PLUGIN_INFO *PluginInfo))GetProcAddress((HMODULE)handle_input, "GetDllInfo");
+   getDllInfo = (void(__cdecl*)(PLUGIN_INFO *PluginInfo))GetProcAddress(handle_input, "GetDllInfo");
    getDllInfo(&PluginInfo);
    
-   closeDLL_input = (void(__cdecl*)())GetProcAddress((HMODULE)handle_input, "CloseDLL");
-   controllerCommand = (void(__cdecl*)(int Control, BYTE * Command))GetProcAddress((HMODULE)handle_input, "ControllerCommand");
-   getKeys = (void(__cdecl*)(int Control, BUTTONS *Keys))GetProcAddress((HMODULE)handle_input, "GetKeys");
+   closeDLL_input = (void(__cdecl*)())GetProcAddress(handle_input, "CloseDLL");
+   controllerCommand = (void(__cdecl*)(int Control, BYTE * Command))GetProcAddress(handle_input, "ControllerCommand");
+   getKeys = (void(__cdecl*)(int Control, BUTTONS *Keys))GetProcAddress(handle_input, "GetKeys");
    if (PluginInfo.Version == 0x0101)
-       initiateControllers = (void(__cdecl*)(CONTROL_INFO ControlInfo))GetProcAddress((HMODULE)handle_input, "InitiateControllers");
+       initiateControllers = (void(__cdecl*)(CONTROL_INFO ControlInfo))GetProcAddress(handle_input, "InitiateControllers");
    else
-       old_initiateControllers = (void(__cdecl*)(HWND hMainWindow, CONTROL Controls[4]))GetProcAddress((HMODULE)handle_input, "InitiateControllers");
-   readController = (void(__cdecl*)(int Control, BYTE *Command))GetProcAddress((HMODULE)handle_input, "ReadController");
-   romClosed_input = (void(__cdecl*)())GetProcAddress((HMODULE)handle_input, "RomClosed");
-   romOpen_input = (void(__cdecl*)())GetProcAddress((HMODULE)handle_input, "RomOpen");
-   keyDown = (void(__cdecl*)(WPARAM wParam, LPARAM lParam))GetProcAddress((HMODULE)handle_input, "WM_KeyDown");
-   keyUp = (void(__cdecl*)(WPARAM wParam, LPARAM lParam))GetProcAddress((HMODULE)handle_input, "WM_KeyUp");
+       old_initiateControllers = (void(__cdecl*)(HWND hMainWindow, CONTROL Controls[4]))GetProcAddress(handle_input, "InitiateControllers");
+   readController = (void(__cdecl*)(int Control, BYTE *Command))GetProcAddress(handle_input, "ReadController");
+   romClosed_input = (void(__cdecl*)())GetProcAddress(handle_input, "RomClosed");
+   romOpen_input = (void(__cdecl*)())GetProcAddress(handle_input, "RomOpen");
+   keyDown = (void(__cdecl*)(WPARAM wParam, LPARAM lParam))GetProcAddress(handle_input, "WM_KeyDown");
+   keyUp = (void(__cdecl*)(WPARAM wParam, LPARAM lParam))GetProcAddress(handle_input, "WM_KeyUp");
    
    if (closeDLL_input == NULL) closeDLL_input = dummy_void;
 	if (controllerCommand == NULL) controllerCommand = dummy_controllerCommand;
@@ -886,19 +886,19 @@ int load_input(void *handle_input)
 }
 
 
-int load_sound(void *handle_sound )
+int load_sound(HMODULE handle_sound )
 {
     if (handle_sound)
      {
-    closeDLL_audio = (void (__cdecl *)(void))GetProcAddress((HMODULE)handle_sound, "CloseDLL" );
-	aiDacrateChanged = (void (__cdecl *)(int))GetProcAddress((HMODULE)handle_sound, "AiDacrateChanged" );
-	aiLenChanged = (void (__cdecl *)(void))GetProcAddress((HMODULE)handle_sound, "AiLenChanged" );
-	aiReadLength = (DWORD (__cdecl *)(void))GetProcAddress((HMODULE)handle_sound, "AiReadLength" );
-	initiateAudio = (BOOL (__cdecl *)(AUDIO_INFO))GetProcAddress((HMODULE)handle_sound, "InitiateAudio" );
-	romClosed_audio = (void (__cdecl *)(void))GetProcAddress((HMODULE)handle_sound, "RomClosed" );
-	romOpen_audio = (void (__cdecl *)(void))GetProcAddress((HMODULE)handle_sound, "RomOpen" );
-	processAList = (void (__cdecl *)(void))GetProcAddress((HMODULE)handle_sound, "ProcessAList" );	
-	aiUpdate = (void (__cdecl *)(BOOL))GetProcAddress((HMODULE)handle_sound, "AiUpdate" );
+    closeDLL_audio = (void (__cdecl *)(void))GetProcAddress(handle_sound, "CloseDLL" );
+	aiDacrateChanged = (void (__cdecl *)(int))GetProcAddress(handle_sound, "AiDacrateChanged" );
+	aiLenChanged = (void (__cdecl *)(void))GetProcAddress(handle_sound, "AiLenChanged" );
+	aiReadLength = (DWORD (__cdecl *)(void))GetProcAddress(handle_sound, "AiReadLength" );
+	initiateAudio = (BOOL (__cdecl *)(AUDIO_INFO))GetProcAddress(handle_sound, "InitiateAudio" );
+	romClosed_audio = (void (__cdecl *)(void))GetProcAddress(handle_sound, "RomClosed" );
+	romOpen_audio = (void (__cdecl *)(void))GetProcAddress(handle_sound, "RomOpen" );
+	processAList = (void (__cdecl *)(void))GetProcAddress(handle_sound, "ProcessAList" );	
+	aiUpdate = (void (__cdecl *)(BOOL))GetProcAddress(handle_sound, "AiUpdate" );
 	
 	if (aiDacrateChanged == NULL) aiDacrateChanged = dummy_aiDacrateChanged;
 	if (aiLenChanged == NULL) aiLenChanged = dummy_void;
@@ -946,15 +946,15 @@ int load_sound(void *handle_sound )
      return 0;
 }
 
-int load_rsp(void *handle_RSP)
+int load_rsp(HMODULE handle_RSP)
 {
     int i = 4 ;
     if (handle_RSP)
      {
-    closeDLL_RSP = (void (__cdecl *)(void))GetProcAddress((HMODULE)handle_RSP, "CloseDLL" );	 
-	doRspCycles = (DWORD (__cdecl *)(DWORD))GetProcAddress((HMODULE)handle_RSP, "DoRspCycles" ); 
-	initiateRSP = (void (__cdecl *)( RSP_INFO, DWORD *))GetProcAddress((HMODULE)handle_RSP, "InitiateRSP" ); 
-	romClosed_RSP = (void (__cdecl *)(void))GetProcAddress((HMODULE)handle_RSP, "RomClosed" ); 
+    closeDLL_RSP = (void (__cdecl *)(void))GetProcAddress(handle_RSP, "CloseDLL" );	 
+	doRspCycles = (DWORD (__cdecl *)(DWORD))GetProcAddress(handle_RSP, "DoRspCycles" ); 
+	initiateRSP = (void (__cdecl *)( RSP_INFO, DWORD *))GetProcAddress(handle_RSP, "InitiateRSP" ); 
+	romClosed_RSP = (void (__cdecl *)(void))GetProcAddress(handle_RSP, "RomClosed" ); 
 	
 	if (closeDLL_RSP == NULL) closeDLL_RSP = dummy_void;
 	if (doRspCycles == NULL) doRspCycles = dummy_doRspCycles;
@@ -1002,7 +1002,7 @@ int load_rsp(void *handle_RSP)
 
 int load_plugins()
 {
-   void *handle_gfx, *handle_input, *handle_sound, *handle_rsp ;
+   HMODULE handle_gfx, handle_input, handle_sound, handle_rsp ;
       
    DEFAULT_ROM_SETTINGS TempRomSettings;
    
@@ -2395,35 +2395,41 @@ void ProcessToolTips(LPARAM lParam)
 
 void EnableStatusbar()
 {
-    if (Config.GuiStatusbar) {
-        if (!IsWindow( hStatus )) {
-           CreateStatusBarWindow( mainHWND );
-           ResizeRomListControl();
-        }
-    }
-    else {
-        DestroyWindow( hStatus );
-        hStatus = NULL;
-        ResizeRomListControl(); 
-    }    
+	if (Config.GuiStatusbar)
+	{
+		if (!IsWindow( hStatus ))
+		{
+			CreateStatusBarWindow( mainHWND );
+			ResizeRomListControl();
+		}
+	}
+	else
+	{
+		DestroyWindow( hStatus );
+		hStatus = NULL;
+		ResizeRomListControl(); 
+	}    
 }
 
-void EnableToolbar() {
-    if (Config.GuiToolbar && !VCR_isCapturing()) {
+void EnableToolbar()
+{
+	if (Config.GuiToolbar && !VCR_isCapturing())
+	{
 		if(!hTool || !IsWindow(hTool))
 		{
 			CreateToolBarWindow( mainHWND);
 			ResizeRomListControl();
 		}
-    }
-    else {
+	}
+	else
+	{
 		if(hTool && IsWindow(hTool))
 		{
 			DestroyWindow( hTool);
 			hTool = NULL ;
 			ResizeRomListControl(); 
 		}
-    }
+	}
 }
 
 
@@ -2477,24 +2483,24 @@ LRESULT CALLBACK NoGuiWndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lPa
 
 LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
 {
-     char path_buffer[_MAX_PATH];
-     OPENFILENAME oifn;
-     int ret;
-     int i;
-     static PAINTSTRUCT	ps;
-     BOOL	minimize ;
-     HMENU hMenu;
-     hMenu = GetMenu(hwnd);
-                     
-     switch(Message)
-     {
-       case WM_KEYDOWN:
-       case WM_SYSKEYDOWN:
+	char path_buffer[_MAX_PATH];
+	OPENFILENAME oifn;
+	int ret;
+	int i;
+	static PAINTSTRUCT	ps;
+	BOOL	minimize ;
+	HMENU hMenu;
+	hMenu = GetMenu(hwnd);
+	
+	switch(Message)
+	{
+	case WM_KEYDOWN:
+	case WM_SYSKEYDOWN:
 		{
 			BOOL hit = FALSE;
 			if(manualFPSLimit)
 			{
-				if(wParam == Config.hotkey[0].key) // fast-forward on
+				if((int)wParam == Config.hotkey[0].key) // fast-forward on
 				{
 					if(((GetKeyState(VK_SHIFT) & 0x8000) ? 1 : 0) == Config.hotkey[0].shift
 					&& ((GetKeyState(VK_CONTROL) & 0x8000) ? 1 : 0) == Config.hotkey[0].ctrl
@@ -2507,7 +2513,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
 			}
 			for(i = 1 ; i < NUM_HOTKEYS ; i++)
 			{
-				if(wParam == Config.hotkey[i].key)
+				if((int)wParam == Config.hotkey[i].key)
 				{
 					if(((GetKeyState(VK_SHIFT) & 0x8000) ? 1 : 0) == Config.hotkey[i].shift
 					&& ((GetKeyState(VK_CONTROL) & 0x8000) ? 1 : 0) == Config.hotkey[i].ctrl
@@ -2523,8 +2529,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
 			if(!hit)
 				return DefWindowProc(hwnd, Message, wParam, lParam);
         }	break;
-        case WM_KEYUP:
-			if(wParam == Config.hotkey[0].key) // fast-forward off
+	case WM_KEYUP:
+			if((int)wParam == Config.hotkey[0].key) // fast-forward off
 			{
             	manualFPSLimit = 1 ; 
 			}
@@ -2532,7 +2538,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
 				keyUp(wParam, lParam);
            return DefWindowProc(hwnd, Message, wParam, lParam);
            break;
-        case WM_NOTIFY:
+	case WM_NOTIFY:
             if (wParam == IDC_ROMLIST) { 
              RomListNotify((LPNMHDR)lParam); 
             }
@@ -2543,20 +2549,20 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
 				    break;
 		        }
 		    return 0;
-		case WM_MOVE:
+	case WM_MOVE:
             if (emu_launched&&!FullScreenMode) {
                      moveScreen(wParam, lParam);
                     }
             break;
-        case WM_SIZE:
+	case WM_SIZE:
              if (!FullScreenMode) {
               SendMessage(hTool, TB_AUTOSIZE, 0, 0);
               SendMessage(hStatus, WM_SIZE, 0, 0);  
               ResizeRomListControl();      
              } 
             break;  
-        case WM_USER + 17:  SetFocus(mainHWND); break;      
-        case WM_CREATE:
+	case WM_USER + 17:  SetFocus(mainHWND); break;
+	case WM_CREATE:
             // searching the plugins...........
             GetModuleFileName(NULL, path_buffer, sizeof(path_buffer));
             search_plugins();
@@ -2571,21 +2577,21 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
             EnableStatusbar();
             ////////////////////////////
             return TRUE;
-        case WM_CLOSE:
-             if(emu_launched)
-             {
-                  shut_window = 1;
-                  exit_emu(0);
-                  return 0;
-             }
-             else
-             {
-                 exit_emu(1);
-                 //DestroyWindow(hwnd);
-             }
-             break;
+	case WM_CLOSE:
+		if(emu_launched)
+		{
+			shut_window = 1;
+			exit_emu(0);
+			return 0;
+		}
+		else
+		{
+			exit_emu(1);
+			//DestroyWindow(hwnd);
+		}
+		break;
         
-        case WM_PAINT:
+	case WM_PAINT:
 /*			if(emu_launched && emu_paused)
 			{
 				//// doesn't work...
@@ -2605,23 +2611,23 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
 //			if(VCR_isCapturing())
 //				VCR_invalidatedCaptureFrame();
 
-			BeginPaint(hwnd, &ps);
+		BeginPaint(hwnd, &ps);
 
 //			if(VCR_isCapturing())
 //				VCR_invalidatedCaptureFrame();
 
-			EndPaint(hwnd, &ps);
+		EndPaint(hwnd, &ps);
 
 //			if(VCR_isCapturing())
 //				VCR_invalidatedCaptureFrame();
 
-			return 0;
+		return 0;
 
 //		case WM_SETCURSOR:
 //			SetCursor(FALSE);
 //			return 0;
 	    
-        case WM_ENTERMENULOOP:       
+	case WM_ENTERMENULOOP:       
              AutoPause = emu_paused;
              if (!emu_paused)
              {
@@ -2630,14 +2636,14 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
              }  
              break;
         
-        case WM_EXITMENULOOP:
+	case WM_EXITMENULOOP:
 			 MenuPaused = FALSE;
              if (emu_paused&&!AutoPause)
              {
                 resumeEmu(FALSE) ;
              }
              break;
-        case WM_ACTIVATE:
+	case WM_ACTIVATE:
 			minimize = (BOOL) HIWORD(wParam);
 			
 			switch(LOWORD(wParam))
@@ -2657,8 +2663,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
                   }
 			break;
 			}
-		 break;
-    case WM_COMMAND:
+			break;
+	case WM_COMMAND:
 		{
 			switch(LOWORD(wParam))
 			{
@@ -2684,7 +2690,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
                  if (emu_launched&&emu_paused&&!wasPaused)
                     resumeEmu(FALSE);
 				}	break;
-                case IDINPUTCONFIG:
+			case IDINPUTCONFIG:
 				{
 				 BOOL wasPaused = emu_paused;
                  if (emu_launched&&!emu_paused)
@@ -2696,7 +2702,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
                  if (emu_launched&&emu_paused&&!wasPaused)
                     resumeEmu(FALSE);
 				}	break;
-                case IDSOUNDCONFIG:
+			case IDSOUNDCONFIG:
 				{
 				 BOOL wasPaused = emu_paused;
                  if (emu_launched&&!emu_paused)
@@ -2708,7 +2714,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
                  if (emu_launched&&emu_paused&&!wasPaused)
                     resumeEmu(FALSE);
 				}	break;
-                case IDRSPCONFIG:
+			case IDRSPCONFIG:
 				{
 				 BOOL wasPaused = emu_paused;
                  if (emu_launched&&!emu_paused)
@@ -2719,8 +2725,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
 
                  if (emu_launched&&emu_paused&&!wasPaused)
                     resumeEmu(FALSE);
-				}	break;                     
-                case EMU_STOP:
+				}	break;  
+			case EMU_STOP:
                  if (emu_launched) {
                        //closeRom();
                        stop_it();
@@ -2731,7 +2737,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
                      }
                  break;
                 
-                case EMU_PAUSE:
+			case EMU_PAUSE:
                  if (!emu_paused) {
                    pauseEmu(VCR_isActive()) ; 
                  }
@@ -2739,8 +2745,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
                    resumeEmu(VCR_isActive());               
                  }
                 break;
-                
-                case EMU_FRAMEADVANCE:
+               
+			case EMU_FRAMEADVANCE:
                 {
 					extern int frame_advancing;
 					frame_advancing = 1; 
@@ -2748,14 +2754,14 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
 
                 }
                 break;
-                
-                case EMU_VCRTOGGLEREADONLY:
+               
+			case EMU_VCRTOGGLEREADONLY:
 				{
 					VCR_toggleReadOnly();
 				}
 				break;
                 
-                case EMU_PLAY:
+			case EMU_PLAY:
                  if (emu_launched) 
                  {
                    if (emu_paused) {
@@ -2772,11 +2778,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
                  }
                  break;
                 
-                case EMU_RESET:
+			case EMU_RESET:
                  resetEmu() ;
                  break;
-                                   
-                case ID_LOAD_CONFIG:
+               
+			case ID_LOAD_CONFIG:
 				{
 				 BOOL wasPaused = emu_paused;
                  if (emu_launched&&!emu_paused) {
@@ -2789,23 +2795,23 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
                  }
 				}
                  break;
-                case ID_AUDIT_ROMS:
+			case ID_AUDIT_ROMS:
                      ret = DialogBox(GetModuleHandle(NULL), 
                      MAKEINTRESOURCE(IDD_AUDIT_ROMS_DIALOG), hwnd, AuditDlgProc);
                      break;
-                case ID_HELP_ABOUT:
+			case ID_HELP_ABOUT:
                      ret = DialogBox(GetModuleHandle(NULL), 
                      MAKEINTRESOURCE(IDD_ABOUT), hwnd, AboutDlgProc);
                      break;
-                case ID_HELP_CONTENS:
+			case ID_HELP_CONTENS:
                      sprintf(TempMessage,"%sreadme.pdf",AppPath);
                      ShellExecute(hwnd, "open", TempMessage, NULL, NULL, SW_SHOWNORMAL);           
                      break;
-                case ID_HELP_WHATSNEW:
+			case ID_HELP_WHATSNEW:
                      sprintf(TempMessage,"%swhatsnew.txt",AppPath);
                      ShellExecute(hwnd, "open", TempMessage, NULL, NULL, SW_SHOWNORMAL);           
                      break;
-                case IDLOAD:   
+			case IDLOAD:   
                      ZeroMemory(&oifn, sizeof(OPENFILENAME));
                      oifn.lStructSize = sizeof(OPENFILENAME);
                      oifn.hwndOwner = NULL;
@@ -2824,7 +2830,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
                         {
 						    char temp_buffer [_MAX_PATH];
 						    strcpy(temp_buffer, path_buffer);
-							int i; for(i = 0 ; i < strlen(temp_buffer) ; i++)
+							unsigned int i; for(i = 0 ; i < strlen(temp_buffer) ; i++)
 							           if(temp_buffer[i] == '/')
 							               temp_buffer[i] = '\\';
 	                        char* slash = strrchr(temp_buffer, '\\');
@@ -2894,7 +2900,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
                      oifn.nMaxFileTitle = 0;
                      oifn.lpstrInitialDir = "";
                     if (GetSaveFileName (&oifn)) {
-                     savestates_select_filename((unsigned char*)path_buffer);
+                     savestates_select_filename(path_buffer);
                      savestates_job = SAVESTATE;
                     }                       
                     }
@@ -2922,7 +2928,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
                      oifn.lpstrInitialDir = "";
                      oifn.Flags = OFN_PATHMUSTEXIST | OFN_FILEMUSTEXIST;
                      if (GetOpenFileName(&oifn)) {
-                          savestates_select_filename((unsigned char*)path_buffer);
+                          savestates_select_filename(path_buffer);
                           savestates_job = LOADSTATE;                
                         }
 //                     }
@@ -3114,222 +3120,232 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
                      }
 			         break;    
             }
-       }    break;
-       default:
-            return DefWindowProc(hwnd, Message, wParam, lParam);
-    }
-    return TRUE;	
+       }    
+			 break;
+	default:
+		return DefWindowProc(hwnd, Message, wParam, lParam);
+	}
+	
+	return TRUE;	
 }
 
 
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
-                             LPSTR lpCmdLine, int nCmdShow)
+int WINAPI WinMain(
+	HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
+	FILE *newfp;
+	newfp = freopen("stdout.txt", "w", stdout);
+	if ( newfp == NULL )
+	{
+		newfp = fopen("stdout.txt", "w");
+		if ( newfp )
+		{
+ 			*stdout = *newfp;
+ 		}
+	}
+	
+	newfp = freopen("stderr.txt", "w", stderr);
+	if ( newfp == NULL )
+	{
+		newfp = fopen("stderr.txt", "w");
+		if ( newfp )
+		{
+ 			*stderr = *newfp;
+ 		}
+	}
+	
+	/* Put absolute App path to AppPath variable */  
+	getAppFullPath( AppPath );
+  app_hInstance = hInstance;
+  InitCommonControls(); 
+  SaveCmdLineParameter(lpCmdLine);
+  ini_openFile();
     
-    WNDCLASSEX wc;
+  // ensure folders exist!
+  // FIXME: should probably take into account user directory customization
+  {
+	  char tempStr [MAX_PATH];
+	  sprintf(tempStr, "%ssave", AppPath);
+	  mkdir(tempStr);
+	  sprintf(tempStr, "%sMempaks", AppPath);
+	  mkdir(tempStr);
+	  sprintf(tempStr, "%sLang", AppPath);
+	  mkdir(tempStr);
+	  sprintf(tempStr, "%sScreenShots", AppPath);
+	  mkdir(tempStr);
+	  sprintf(tempStr, "%splugin", AppPath);
+	  mkdir(tempStr);
+	}
+           
+  emu_launched = 0;
+  emu_paused = 1;
+  /************    Loading Config  *******/
+	LoadConfig() ;
+  /************************************************************************/
+
+	WNDCLASSEX wc;
 	HWND hwnd;
 	MSG Msg;
 	HACCEL Accel;
-    FILE *newfp;
-    newfp = freopen("stdout.txt", "w", stdout);
-     if ( newfp == NULL ) {
-        	newfp = fopen("stdout.txt", "w");
-    		if ( newfp ) {
- 			*stdout = *newfp;
- 		}
-    }
-    newfp = freopen("stderr.txt", "w", stderr);
-     if ( newfp == NULL ) {
-        	newfp = fopen("stderr.txt", "w");
-    		if ( newfp ) {
- 			*stderr = *newfp;
- 		}
-    }
-    /* Put absolute App path to AppPath variable */  
-	getAppFullPath( AppPath );
-    app_hInstance = hInstance;
-    InitCommonControls(); 
-    SaveCmdLineParameter(lpCmdLine);
-    ini_openFile();
-    
-    // ensure folders exist!
-    // FIXME: should probably take into account user directory customization
-    {
-	    char tempStr [MAX_PATH];
-	    sprintf(tempStr, "%ssave", AppPath);
-	    mkdir(tempStr);
-	    sprintf(tempStr, "%sMempaks", AppPath);
-	    mkdir(tempStr);
-	    sprintf(tempStr, "%sLang", AppPath);
-	    mkdir(tempStr);
-	    sprintf(tempStr, "%sScreenShots", AppPath);
-	    mkdir(tempStr);
-	    sprintf(tempStr, "%splugin", AppPath);
-	    mkdir(tempStr);
-	}
-           
-    emu_launched = 0;
-    emu_paused = 1;
-    /************    Loading Config  *******/
-      LoadConfig() ;
-    /************************************************************************/
-    
-  
-if (GuiDisabled()) {
+
+	if (GuiDisabled())
+	{
     wc.cbSize		 = sizeof(WNDCLASSEX);
-	wc.style		 = 0;
-	wc.lpfnWndProc	 = NoGuiWndProc;
-	wc.cbClsExtra	 = 0;
-	wc.cbWndExtra	 = 0;
-	wc.hInstance	 = hInstance;
-	wc.hIcon		 = LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_M64ICONBIG));
-	wc.hIconSm		 = LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_M64ICONSMALL));
-    wc.hCursor		 = LoadCursor(NULL, IDC_ARROW);
-	wc.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);
-	wc.lpszMenuName  = NULL;
-	wc.lpszClassName = g_szClassName;
+		wc.style		 = 0;
+		wc.lpfnWndProc	 = NoGuiWndProc;
+		wc.cbClsExtra	 = 0;
+		wc.cbWndExtra	 = 0;
+		wc.hInstance	 = hInstance;
+		wc.hIcon		 = LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_M64ICONBIG));
+		wc.hIconSm		 = LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_M64ICONSMALL));
+		wc.hCursor		 = LoadCursor(NULL, IDC_ARROW);
+		wc.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);
+		wc.lpszMenuName  = NULL;
+		wc.lpszClassName = g_szClassName;
  
     if(!RegisterClassEx(&wc))
 	  {
-		MessageBox(NULL, "Window Registration Failed!", "Error!",
-			MB_ICONEXCLAMATION | MB_OK);
-		return 0;
+			MessageBox(NULL, "Window Registration Failed!", "Error!",
+				MB_ICONEXCLAMATION | MB_OK);
+			return 0;
 	  }
-      hwnd = CreateWindowEx(
-		0 ,
-		g_szClassName,
-		MUPEN_VERSION,
-		WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN,
-		Config.WindowPosX, Config.WindowPosY, Config.WindowWidth, Config.WindowHeight,
-		NULL, NULL, hInstance, NULL);
+		
+		hwnd = CreateWindowEx(
+			0 ,
+			g_szClassName,
+			MUPEN_VERSION,
+			WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN,
+			Config.WindowPosX, Config.WindowPosY, Config.WindowWidth, Config.WindowHeight,
+			NULL, NULL, hInstance, NULL);
         
-        GUI_CreateLogWindow(hwnd);
-        mainHWND = hwnd ;
-        ShowWindow(hwnd, nCmdShow);
-	    UpdateWindow(hwnd);
+		GUI_CreateLogWindow(hwnd);
+		mainHWND = hwnd ;
+		ShowWindow(hwnd, nCmdShow);
+		UpdateWindow(hwnd);
      
-        StartGameByCommandLine();
-
-        ShowInfo("Mupen64 - Nintendo 64 emulator - Guiless mode");
+		StartGameByCommandLine();
+		
+		ShowInfo("Mupen64 - Nintendo 64 emulator - Guiless mode");
         
-        while(GetMessage(&Msg, NULL, 0, 0) > 0)
-	    {
-	   	      TranslateMessage(&Msg);
-		      DispatchMessage(&Msg);
-		}   
-    }
-else {
-//window initialize
+		while(GetMessage(&Msg, NULL, 0, 0) > 0)
+		{
+			TranslateMessage(&Msg);
+			DispatchMessage(&Msg);
+		}
+	}
+	else
+	{
+	//window initialize
 #if 1
-	wc.cbSize		 = sizeof(WNDCLASSEX);
-	wc.style		 = 0;
-	wc.lpfnWndProc	 = WndProc;
-	wc.cbClsExtra	 = 0;
-	wc.cbWndExtra	 = 0;
-	wc.hInstance	 = hInstance;
-	wc.hIcon		 = LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_M64ICONBIG));
-	wc.hIconSm		 = LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_M64ICONSMALL));
-	wc.hCursor		 = LoadCursor(NULL, IDC_ARROW);
-	wc.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);//(HBRUSH)(COLOR_WINDOW+11);
-	wc.lpszMenuName  = MAKEINTRESOURCE(IDR_MYMENU);
-	wc.lpszClassName = g_szClassName;
+		wc.cbSize		 = sizeof(WNDCLASSEX);
+		wc.style		 = 0;
+		wc.lpfnWndProc	 = WndProc;
+		wc.cbClsExtra	 = 0;
+		wc.cbWndExtra	 = 0;
+		wc.hInstance	 = hInstance;
+		wc.hIcon		 = LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_M64ICONBIG));
+		wc.hIconSm		 = LoadIcon(GetModuleHandle(NULL), MAKEINTRESOURCE(IDI_M64ICONSMALL));
+		wc.hCursor		 = LoadCursor(NULL, IDC_ARROW);
+		wc.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);//(HBRUSH)(COLOR_WINDOW+11);
+		wc.lpszMenuName  = MAKEINTRESOURCE(IDR_MYMENU);
+		wc.lpszClassName = g_szClassName;
 	
-    if(!RegisterClassEx(&wc))
-	{
-		MessageBox(NULL, "Window Registration Failed!", "Error!",
-			MB_ICONEXCLAMATION | MB_OK);
-		return 0;
-	}
-
-    Accel = LoadAccelerators(hInstance,MAKEINTRESOURCE(IDR_ACCEL));
-    
-    hwnd = CreateWindowEx(
-		0 ,
-		g_szClassName,
-		MUPEN_VERSION,
-		WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN | WS_EX_TOPMOST,
-		Config.WindowPosX, Config.WindowPosY, Config.WindowWidth, Config.WindowHeight,
-		NULL, NULL, hInstance, NULL);
+		if(!RegisterClassEx(&wc))
+		{
+			MessageBox(NULL, "Window Registration Failed!", "Error!",
+				MB_ICONEXCLAMATION | MB_OK);
+			return 0;
+		}
 	
-    if(hwnd == NULL)
-	{
-		MessageBox(NULL, "Window Creation Failed!", "Error!",
-			MB_ICONEXCLAMATION | MB_OK);
-		return 0;
-	}
-
-    mainHWND = hwnd ;
-	ShowWindow(hwnd, nCmdShow);
-	UpdateWindow(hwnd);
-#endif
-
-    GUI_CreateLogWindow(hwnd);
-    if (!extLogger)  {
-                //DeleteMenu( GetMenu(hwnd), ID_LOG_WINDOW, MF_BYCOMMAND);
-		        EnableMenuItem(GetMenu(hwnd), ID_LOG_WINDOW, MF_GRAYED);
-          }
+		Accel = LoadAccelerators(hInstance,MAKEINTRESOURCE(IDR_ACCEL));
     
-	if (!isKailleraExist())	{
-                DeleteMenu( GetMenu(hwnd), ID_KAILLERA, MF_BYCOMMAND);
-    }   
-    
-    SetupDummyInfo(); 
-    
-    EnableEmulationMenuItems( 0 );
-    if (!StartGameByCommandLine()) {
-           cmdlineMode = 0;
-    }
-
-    ShowInfo("Mupen64 - Nintendo 64 emulator - re-recording v8 - GUI mode");
-    SetStatusTranslatedString( hStatus, 0, "Mupen64 - Nintendo 64 emulator - re-recording v8" );
-    
-	while(GetMessage(&Msg, NULL, 0, 0) > 0)
-	{
-	   	if (!TranslateAccelerator(mainHWND,Accel,&Msg)
-	   	&& !::IsLuaConsoleMessage(&Msg)) {
-             TranslateMessage(&Msg);
-		     DispatchMessage(&Msg);
+		hwnd = CreateWindowEx(
+			0 ,
+			g_szClassName,
+			MUPEN_VERSION,
+			WS_OVERLAPPEDWINDOW | WS_CLIPCHILDREN | WS_EX_TOPMOST,
+			Config.WindowPosX, Config.WindowPosY, Config.WindowWidth, Config.WindowHeight,
+			NULL, NULL, hInstance, NULL);
+	
+		if(hwnd == NULL)
+		{
+			MessageBox(NULL, "Window Creation Failed!", "Error!",
+				MB_ICONEXCLAMATION | MB_OK);
+			return 0;
 		}
 
-		// modifier-only checks, cannot be obtained through windows messaging...
-		int i;
-        for(i = 0 ; i < NUM_HOTKEYS ; i++)
-        {
-			if(!Config.hotkey[i].key && (Config.hotkey[i].shift || Config.hotkey[i].ctrl || Config.hotkey[i].alt))
+		mainHWND = hwnd ;
+		ShowWindow(hwnd, nCmdShow);
+		UpdateWindow(hwnd);
+#endif
+
+		GUI_CreateLogWindow(hwnd);
+		if (!extLogger)
+		{
+			//DeleteMenu( GetMenu(hwnd), ID_LOG_WINDOW, MF_BYCOMMAND);
+			EnableMenuItem(GetMenu(hwnd), ID_LOG_WINDOW, MF_GRAYED);
+		}
+    
+		if (!isKailleraExist())
+		{
+			DeleteMenu( GetMenu(hwnd), ID_KAILLERA, MF_BYCOMMAND);
+		}   
+    
+		SetupDummyInfo(); 
+    
+		EnableEmulationMenuItems( 0 );
+		if (!StartGameByCommandLine())
+		{
+			cmdlineMode = 0;
+		}
+
+		ShowInfo("Mupen64 - Nintendo 64 emulator - re-recording v8 - GUI mode");
+		SetStatusTranslatedString( hStatus, 0, "Mupen64 - Nintendo 64 emulator - re-recording v8" );
+    
+		while(GetMessage(&Msg, NULL, 0, 0) > 0)
+		{
+			if (!TranslateAccelerator(mainHWND,Accel,&Msg)
+			&& !::IsLuaConsoleMessage(&Msg))
 			{
-				if(i != 0)
+				TranslateMessage(&Msg);
+				DispatchMessage(&Msg);
+			}
+	
+			// modifier-only checks, cannot be obtained through windows messaging...
+			int i;
+			for(i = 0 ; i < NUM_HOTKEYS ; i++)
+			{
+				if(!Config.hotkey[i].key && (Config.hotkey[i].shift || Config.hotkey[i].ctrl || Config.hotkey[i].alt))
 				{
-					if(((GetKeyState(VK_SHIFT) & 0x8000) ? 1 : 0) == Config.hotkey[i].shift
-					&& ((GetKeyState(VK_CONTROL) & 0x8000) ? 1 : 0) == Config.hotkey[i].ctrl
-					&& ((GetKeyState(VK_MENU) & 0x8000) ? 1 : 0) == Config.hotkey[i].alt)
+					if(i != 0)
 					{
-						SendMessage(hwnd, WM_COMMAND, Config.hotkey[i].command, 0);
+						if(((GetKeyState(VK_SHIFT) & 0x8000) ? 1 : 0) == Config.hotkey[i].shift
+						&& ((GetKeyState(VK_CONTROL) & 0x8000) ? 1 : 0) == Config.hotkey[i].ctrl
+						&& ((GetKeyState(VK_MENU) & 0x8000) ? 1 : 0) == Config.hotkey[i].alt)
+						{
+							SendMessage(hwnd, WM_COMMAND, Config.hotkey[i].command, 0);
+						}
 					}
-				}
-				else // fast-forward 
-				{
-					if(((GetKeyState(VK_SHIFT) & 0x8000) ? 1 : 0) == Config.hotkey[i].shift
-					&& ((GetKeyState(VK_CONTROL) & 0x8000) ? 1 : 0) == Config.hotkey[i].ctrl
-					&& ((GetKeyState(VK_MENU) & 0x8000) ? 1 : 0) == Config.hotkey[i].alt)
+					else // fast-forward 
 					{
-	                  manualFPSLimit = 0 ; 
-					}
-					else
-					{
-	                  manualFPSLimit = 1 ; 
+						if(((GetKeyState(VK_SHIFT) & 0x8000) ? 1 : 0) == Config.hotkey[i].shift
+						&& ((GetKeyState(VK_CONTROL) & 0x8000) ? 1 : 0) == Config.hotkey[i].ctrl
+						&& ((GetKeyState(VK_MENU) & 0x8000) ? 1 : 0) == Config.hotkey[i].alt)
+						{
+							manualFPSLimit = 0 ; 
+						}
+						else
+						{
+							manualFPSLimit = 1 ; 
+						}
 					}
 				}
 			}
 		}
-	}	
-}
+	}
         
 	fclose(newfp);
 	CloseLogWindow();
 	CloseKaillera();
 	return Msg.wParam;
-
 }
-
-
-

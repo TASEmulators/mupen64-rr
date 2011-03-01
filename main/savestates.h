@@ -36,6 +36,6 @@ void savestates_save();
 void savestates_load();
 
 void savestates_select_slot(unsigned int s);
-void savestates_select_filename(unsigned char *fn);
+void savestates_select_filename(const char *fn);
 
 unsigned const char * savestates_get_selected_filename();
