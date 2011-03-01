@@ -90,107 +90,110 @@ void GetCmdLineParameter(CmdLineParameterType arg, char *buf)
 	
 	if ( arg == CMDLINE_NO_GUI )
 	{
-	    strcpy(buf, "1");
+		strcpy(buf, "1");
 		return;
-    }
+	}
     
-    if ( arg == CMDLINE_SAVE_OPTIONS )
+	if ( arg == CMDLINE_SAVE_OPTIONS )
 	{
-	    strcpy(buf, "1");
+		strcpy(buf, "1");
 		return;
-    }
+	}
 	
 	ptr1 = strstr(cmdLineParameterBuf,CmdLineArgFlags[arg]);
 	ptr1 += strlen(CmdLineArgFlags[arg]);	//Skip the flag
 	
-    while( *ptr1 != 0 && isspace(*ptr1) )
+	while( *ptr1 != 0 && isspace(*ptr1) )
 	{
 		ptr1++;	//skip all spaces
 	}
 	
-	if (strncmp (ptr1, "\"",1)==0) {
-	    ptr1++;   //skipping first "
-	    while( !(strncmp (ptr1, "\"",1)==0) && (*ptr1 != 0)) {
-	        *ptr2++ = *ptr1++;  
-        }
-    }
-    else {
-	    while( !isspace(*ptr1) && *ptr1 != 0)
-	    {
-		   *ptr2++ = *ptr1++;
-	    };
+	if (strncmp (ptr1, "\"",1)==0)
+	{
+		ptr1++;   //skipping first "
+		while( !(strncmp (ptr1, "\"",1)==0) && (*ptr1 != 0))
+		{
+			*ptr2++ = *ptr1++;
+		}
+	}
+	else
+	{
+		while( !isspace(*ptr1) && *ptr1 != 0)
+		{
+			*ptr2++ = *ptr1++;
+		};
 	}
 	*ptr2 = 0;
 }
 
 void setPluginFromCmndLine( CmdLineParameterType plugintype, char *PluginVar, int spec_type)
 {
-    char tempstr[100];
-    char *tempPluginStr;
-    GetCmdLineParameter( plugintype, tempstr);
-    if( strlen(tempstr) > 0 )
-	  {
-        ShowInfo("Command Line: Checking plugin name: %s",tempstr);
-        tempPluginStr = getPluginName( tempstr, spec_type);
-        if (tempPluginStr) {
-          sprintf(PluginVar,tempPluginStr);
-          ShowInfo("Command Line: Loaded Plugin : %s",PluginVar);
-         }    
-   	  }
-  
+	char tempstr[100];
+  char *tempPluginStr;
+  GetCmdLineParameter( plugintype, tempstr);
+  if( strlen(tempstr) > 0 )
+	{
+		ShowInfo("Command Line: Checking plugin name: %s",tempstr);
+		tempPluginStr = getPluginName( tempstr, spec_type);
+		if (tempPluginStr)
+		{
+			sprintf(PluginVar,tempPluginStr);
+      ShowInfo("Command Line: Loaded Plugin : %s",PluginVar);
+		}
+	}
 }
 
 BOOL StartGameByCommandLine()
 {
 	char szFileName[MAX_PATH];
 	
-    if( strlen(cmdLineParameterBuf) == 0 ) {
-        ShowInfo("No command line params specified");
-        return FALSE;
-    }
-    
-    cmdlineMode = 1;
+	if( strlen(cmdLineParameterBuf) == 0 )
+	{
+		ShowInfo("No command line params specified");
+		return FALSE;
+	}
+	
+	cmdlineMode = 1;
 		
 	/// Reading command line params
-	
 	if( CmdLineParameterExist(CMDLINE_FULL_SCREEN_FLAG))
 	{
-		 ShowInfo("Command Line: Fullscreen mode on");
-         Config.StartFullScreen = 1;
+		ShowInfo("Command Line: Fullscreen mode on");
+		Config.StartFullScreen = 1;
 	}
 	
 	if( CmdLineParameterExist(CMDLINE_SAVE_OPTIONS) )
 	{
-		 ShowInfo("Command Line: Save mode on");
-         cmdlineSave = 1;
+		ShowInfo("Command Line: Save mode on");
+		cmdlineSave = 1;
 	}
+
 	//Plugins
-    setPluginFromCmndLine( CMDLINE_AUDIO_PLUGIN, sound_name, PLUGIN_TYPE_AUDIO);
-    setPluginFromCmndLine( CMDLINE_VIDEO_PLUGIN, gfx_name, PLUGIN_TYPE_GFX);
-    setPluginFromCmndLine( CMDLINE_CONTROLLER_PLUGIN, input_name, PLUGIN_TYPE_CONTROLLER);
-    setPluginFromCmndLine( CMDLINE_RSP_PLUGIN, rsp_name, PLUGIN_TYPE_RSP);
+  setPluginFromCmndLine( CMDLINE_AUDIO_PLUGIN, sound_name, PLUGIN_TYPE_AUDIO);
+  setPluginFromCmndLine( CMDLINE_VIDEO_PLUGIN, gfx_name, PLUGIN_TYPE_GFX);
+  setPluginFromCmndLine( CMDLINE_CONTROLLER_PLUGIN, input_name, PLUGIN_TYPE_CONTROLLER);
+  setPluginFromCmndLine( CMDLINE_RSP_PLUGIN, rsp_name, PLUGIN_TYPE_RSP);
     
-    if( !CmdLineParameterExist(CMDLINE_GAME_FILENAME) )
+	if( !CmdLineParameterExist(CMDLINE_GAME_FILENAME) )
 	{
 		ShowInfo("Command Line: Rom name not specified");
 		return FALSE;
-    }
+	}
 	else 
 	{
-	    GetCmdLineParameter(CMDLINE_GAME_FILENAME, szFileName);
-        ShowInfo("Command Line: Rom Name :%s",szFileName);
-    }
-    
-   	if(!StartRom(szFileName))
+		GetCmdLineParameter(CMDLINE_GAME_FILENAME, szFileName);
+		ShowInfo("Command Line: Rom Name :%s",szFileName);
+	}
+	
+	if(!StartRom(szFileName))
 	{
-	     return TRUE;
+		return TRUE;
 	}
 	else
 	{
-		 ShowInfo("Command Line: Rom not found");
-         return FALSE;
+		ShowInfo("Command Line: Rom not found");
+		return FALSE;
 	}
-
 }
 
 BOOL GuiDisabled() 

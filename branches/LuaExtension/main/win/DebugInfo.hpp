@@ -68,9 +68,9 @@ public:
 		_ss.clear(ostringstream_type::goodbit); //clear the stream state.
 	}
 };
-//todo MSVC‚È‚ñ‚¿‚á‚ç‚¾‚Á‚¯
-#ifdef _VC
-#define MUPEN64_RR_FUNCTION_SIG __func__
+
+#ifdef _MSC_VER
+#define MUPEN64_RR_FUNCTION_SIG __FUNCTION__
 #else
 #define MUPEN64_RR_FUNCTION_SIG __PRETTY_FUNCTION__
 #endif
