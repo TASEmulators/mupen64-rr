@@ -930,7 +930,7 @@ void SB()
 {
    PC++;
    address = lsaddr;
-   byte = (unsigned char)(lsrt & 0xFF);
+   g_byte = (unsigned char)(lsrt & 0xFF);
    write_byte_in_memory();
    check_memory();
 }
@@ -980,7 +980,7 @@ void SWL()
 	break;
       case 3:
 	address = lsaddr;
-	byte = (unsigned char)(lsrt >> 24);
+	g_byte = (unsigned char)(lsrt >> 24);
 	write_byte_in_memory();
 	check_memory();
 	break;

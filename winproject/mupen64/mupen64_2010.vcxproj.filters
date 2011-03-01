@@ -27,6 +27,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx</Extensions>
     </Filter>
+    <Filter Include="Source Files\memory">
+      <UniqueIdentifier>{352b1079-a128-48b6-934f-03fb115ed9ed}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config.h">
@@ -175,6 +178,24 @@
     </ClInclude>
     <ClInclude Include="..\resource.h">
       <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\memory\dma.h">
+      <Filter>Source Files\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\memory\flashram.h">
+      <Filter>Source Files\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\memory\memory.h">
+      <Filter>Source Files\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\memory\pif.h">
+      <Filter>Source Files\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\memory\pif2.h">
+      <Filter>Source Files\memory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\memory\tlb.h">
+      <Filter>Source Files\memory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -397,14 +418,26 @@
     <ClCompile Include="..\..\lua\LuaConsole.cpp">
       <Filter>Source Files\lua</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\memory\dma.c">
+      <Filter>Source Files\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\memory\flashram.c">
+      <Filter>Source Files\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\memory\memory.c">
+      <Filter>Source Files\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\memory\pif.c">
+      <Filter>Source Files\memory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\memory\tlb.c">
+      <Filter>Source Files\memory</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="..\rsrc.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\Makefile" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuildStep Include="..\..\main\gui_gtk\aboutdialog.h">
@@ -440,5 +473,8 @@
     <CustomBuildStep Include="..\..\main\gui_gtk\vcrcomp_dialog.h">
       <Filter>Source Files\main\gui_gtk</Filter>
     </CustomBuildStep>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Makefile" />
   </ItemGroup>
 </Project>

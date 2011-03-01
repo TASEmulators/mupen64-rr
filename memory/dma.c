@@ -53,7 +53,7 @@ void dma_pi_read()
 	  {
 	     char *filename;
 	     FILE *f;
-	     filename = malloc(strlen(get_savespath())+
+	     filename = (char*)malloc(strlen(get_savespath())+
 			       strlen(ROM_SETTINGS.goodname)+4+1);
 	     strcpy(filename, get_savespath());
 	     strcat(filename, ROM_SETTINGS.goodname);
@@ -100,7 +100,7 @@ void dma_pi_write()
 		  char *filename;
 		  FILE *f;
 		  int i;
-		  filename = malloc(strlen(get_savespath())+
+		  filename = (char*)malloc(strlen(get_savespath())+
 				    strlen(ROM_SETTINGS.goodname)+4+1);
 		  strcpy(filename, get_savespath());
 		  strcat(filename, ROM_SETTINGS.goodname);

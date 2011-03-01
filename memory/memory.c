@@ -82,7 +82,7 @@ static unsigned short *address_low = (unsigned short *)(&address);
 
 // values that are being written are stored in these variables
 unsigned long word;
-unsigned char byte;
+unsigned char g_byte;
 unsigned short hword;
 unsigned long long int dword;
 
@@ -128,7 +128,7 @@ int init_memory()
    
    //swap rom
    unsigned long *roml;
-   roml = (void *)rom;
+   roml = (unsigned long *)rom;
    for (i=0; i<(taille_rom/4); i++) roml[i] = sl(roml[i]);
    
    //init hash tables
@@ -1535,7 +1535,7 @@ void write_rdram()
 
 void write_rdramb()
 {
-   *((rdramb + ((address & 0xFFFFFF)^S8))) = byte;
+   *((rdramb + ((address & 0xFFFFFF)^S8))) = g_byte;
 }
 
 void write_rdramh()
@@ -1652,7 +1652,7 @@ void write_rdramreg()
 void write_rdramregb()
 {
    *((unsigned char*)readrdramreg[*address_low & 0xfffc]
-     + ((*address_low&3)^S8) ) = byte;
+     + ((*address_low&3)^S8) ) = g_byte;
 }
 
 void write_rdramregh()
@@ -1726,9 +1726,9 @@ void write_rsp_mem()
 void write_rsp_memb()
 {
    if (*address_low < 0x1000)
-     *(SP_DMEMb + (*address_low^S8)) = byte;
+     *(SP_DMEMb + (*address_low^S8)) = g_byte;
    else if (*address_low < 0x2000)
-     *(SP_IMEMb + ((*address_low&0xFFF)^S8)) = byte;
+     *(SP_IMEMb + ((*address_low&0xFFF)^S8)) = g_byte;
    else
      write_nomemb();
 }
@@ -1846,7 +1846,7 @@ void write_rsp_regb()
       case 0x12:
       case 0x13:
 	*((unsigned char*)&sp_register.w_sp_status_reg
-	  + ((*address_low&3)^S8) ) = byte;
+	  + ((*address_low&3)^S8) ) = g_byte;
       case 0x14:
       case 0x15:
       case 0x16:
@@ -1859,7 +1859,7 @@ void write_rsp_regb()
 	break;
      }
    *((unsigned char*)readrspreg[*address_low & 0xfffc]
-     + ((*address_low&3)^S8) ) = byte;
+     + ((*address_low&3)^S8) ) = g_byte;
    switch(*address_low)
      {
       case 0x8:
@@ -1973,7 +1973,7 @@ void write_rsp()
 void write_rspb()
 {
    *((unsigned char*)readrsp[*address_low & 0xfffc]
-     + ((*address_low&3)^S8) ) = byte;
+     + ((*address_low&3)^S8) ) = g_byte;
 }
 
 void write_rsph()
@@ -2049,7 +2049,7 @@ void write_dpb()
       case 0xe:
       case 0xf:
 	*((unsigned char*)&dpc_register.w_dpc_status
-	  + ((*address_low&3)^S8) ) = byte;
+	  + ((*address_low&3)^S8) ) = g_byte;
 	update_DPC();
       case 0x8:
       case 0x9:
@@ -2075,7 +2075,7 @@ void write_dpb()
 	break;
      }
    *((unsigned char*)readdp[*address_low & 0xfffc]
-     + ((*address_low&3)^S8) ) = byte;
+     + ((*address_low&3)^S8) ) = g_byte;
    switch(*address_low)
      {
       case 0x0:
@@ -2192,7 +2192,7 @@ void write_dps()
 void write_dpsb()
 {
    *((unsigned char*)readdps[*address_low & 0xfffc]
-     + ((*address_low&3)^S8) ) = byte;
+     + ((*address_low&3)^S8) ) = g_byte;
 }
 
 void write_dpsh()
@@ -2258,7 +2258,7 @@ void write_mib()
       case 0x2:
       case 0x3:
 	*((unsigned char*)&MI_register.w_mi_init_mode_reg
-	  + ((*address_low&3)^S8) ) = byte;
+	  + ((*address_low&3)^S8) ) = g_byte;
 	update_MI_init_mode_reg();
 	break;
       case 0xc:
@@ -2266,7 +2266,7 @@ void write_mib()
       case 0xe:
       case 0xf:
 	*((unsigned char*)&MI_register.w_mi_intr_mask_reg
-	  + ((*address_low&3)^S8) ) = byte;
+	  + ((*address_low&3)^S8) ) = g_byte;
 	update_MI_intr_mask_reg();
 	
 	check_interupt();
@@ -2417,7 +2417,7 @@ void write_vib()
       case 0x3:
 	temp = vi_register.vi_status;
 	*((unsigned char*)&temp
-	  + ((*address_low&3)^S8) ) = byte;
+	  + ((*address_low&3)^S8) ) = g_byte;
 	if (vi_register.vi_status != temp)
 	  {
 	     vi_register.vi_status = temp;
@@ -2431,7 +2431,7 @@ void write_vib()
       case 0xb:
 	temp = vi_register.vi_status;
 	*((unsigned char*)&temp
-	  + ((*address_low&3)^S8) ) = byte;
+	  + ((*address_low&3)^S8) ) = g_byte;
 	if (vi_register.vi_width != temp)
 	  {
 	     vi_register.vi_width = temp;
@@ -2449,7 +2449,7 @@ void write_vib()
 	break;
      }
    *((unsigned char*)readvi[*address_low & 0xfffc]
-     + ((*address_low&3)^S8) ) = byte;
+     + ((*address_low&3)^S8) ) = g_byte;
 }
 
 void write_vih()
@@ -2719,7 +2719,7 @@ void write_aib()
       case 0x7:
 	temp = ai_register.ai_len;
 	*((unsigned char*)&temp
-	  + ((*address_low&3)^S8) ) = byte;
+	  + ((*address_low&3)^S8) ) = g_byte;
 	ai_register.ai_len = temp;
 #ifndef VCR_SUPPORT
 	aiLenChanged();
@@ -2778,7 +2778,7 @@ void write_aib()
       case 0x13:
 	temp = ai_register.ai_dacrate;
 	*((unsigned char*)&temp
-	  + ((*address_low&3)^S8) ) = byte;
+	  + ((*address_low&3)^S8) ) = g_byte;
 	if (ai_register.ai_dacrate != temp)
 	  {
 	     ai_register.ai_dacrate = temp;
@@ -2814,7 +2814,7 @@ void write_aib()
 	break;
      }
    *((unsigned char*)readai[*address_low & 0xfffc]
-     + ((*address_low&3)^S8) ) = byte;
+     + ((*address_low&3)^S8) ) = g_byte;
 }
 
 void write_aih()
@@ -3084,7 +3084,7 @@ void write_pib()
       case 0xa:
       case 0xb:
 	*((unsigned char*)&pi_register.pi_rd_len_reg
-	  + ((*address_low&3)^S8) ) = byte;
+	  + ((*address_low&3)^S8) ) = g_byte;
 	dma_pi_read();
 	return;
 	break;
@@ -3093,7 +3093,7 @@ void write_pib()
       case 0xe:
       case 0xf:
 	*((unsigned char*)&pi_register.pi_wr_len_reg
-	  + ((*address_low&3)^S8) ) = byte;
+	  + ((*address_low&3)^S8) ) = g_byte;
 	dma_pi_write();
 	return;
 	break;
@@ -3133,7 +3133,7 @@ void write_pib()
 	break;
      }
    *((unsigned char*)readpi[*address_low & 0xfffc]
-     + ((*address_low&3)^S8) ) = byte;
+     + ((*address_low&3)^S8) ) = g_byte;
 }
 
 void write_pih()
@@ -3248,7 +3248,7 @@ void write_ri()
 void write_rib()
 {
    *((unsigned char*)readri[*address_low & 0xfffc]
-     + ((*address_low&3)^S8) ) = byte;
+     + ((*address_low&3)^S8) ) = g_byte;
 }
 
 void write_rih()
@@ -3322,7 +3322,7 @@ void write_sib()
       case 0x2:
       case 0x3:
 	*((unsigned char*)&si_register.si_dram_addr
-	  + ((*address_low&3)^S8) ) = byte;
+	  + ((*address_low&3)^S8) ) = g_byte;
 	return;
 	break;
       case 0x4:
@@ -3330,7 +3330,7 @@ void write_sib()
       case 0x6:
       case 0x7:
 	*((unsigned char*)&si_register.si_pif_addr_rd64b
-	  + ((*address_low&3)^S8) ) = byte;
+	  + ((*address_low&3)^S8) ) = g_byte;
 	dma_si_read();
 	return;
 	break;
@@ -3339,7 +3339,7 @@ void write_sib()
       case 0x12:
       case 0x13:
 	*((unsigned char*)&si_register.si_pif_addr_wr64b
-	  + ((*address_low&3)^S8) ) = byte;
+	  + ((*address_low&3)^S8) ) = g_byte;
 	dma_si_write();
 	return;
 	break;
@@ -3601,7 +3601,7 @@ void write_pifb()
 	return;
      }
 #endif
-   *(PIF_RAMb + (address & 0x7FF) - 0x7C0) = byte;
+   *(PIF_RAMb + (address & 0x7FF) - 0x7C0) = g_byte;
    if ((address & 0x7FF) == 0x7FF)
      {
 	if (PIF_RAMb[0x3F] == 0x08)

@@ -17,8 +17,7 @@
 #include <windows.h>
 #include <stdlib.h>
 #include <stdio.h>
-#ifdef _MSC_VER
-#else
+#ifndef _MSC_VER
 #include <dirent.h>
 #endif
 #ifndef _WIN32_IE

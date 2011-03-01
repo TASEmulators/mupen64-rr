@@ -21,6 +21,14 @@ extern "C"
 }
 #endif
 
+#ifdef _MSC_VER
+//#ifdef _DEBUG
+//#pargma comment(lib, "lua5.1_debug.lib")
+//#else
+#pragma comment(lib, "lua5.1.lib")
+//#endif
+#endif
+
 
 #define MUPEN64RR_ASSERT(expr) assert(expr)
 

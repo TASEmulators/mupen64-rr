@@ -67,7 +67,7 @@ extern int no_compiled_jump;
 void go();
 void pure_interpreter();
 void compare_core();
-inline void jump_to_func();
+__inline void jump_to_func();
 void update_count();
 int check_cop1_unusable();
 

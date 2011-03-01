@@ -30,8 +30,7 @@ extern "C" {
 #include <commctrl.h>
 #include <stdlib.h>
 #include <math.h>
-#ifdef _MSC_VER
-#else
+#ifndef _MSC_VER
 #include <dirent.h>
 #endif
 #include "../../winproject/resource.h"
@@ -62,6 +61,7 @@ extern void CountryCodeToCountryName(int countrycode,char *countryname);
 #ifdef __cplusplus
 }
 #endif
+
 
 
 #ifdef _MSC_VER
@@ -520,57 +520,72 @@ char* getExtension(char *str)
     else return NULL;
 }
 
+
+
+struct ProcAddress
+{
+	FARPROC _fp;
+  ProcAddress(HMODULE module, LPCSTR name) : _fp(NULL)
+	{
+    _fp = ::GetProcAddress(module, name);
+  }
+  template<class T>
+	operator T() const
+	{
+		return reinterpret_cast<T>(_fp);
+	}
+};
+
 void search_plugins()
 {
-    DIR *dir;
-    char cwd[MAX_PATH];
-    char name[MAX_PATH];
-    struct dirent *entry;
-    
-        
-    liste_plugins = (plugins*)malloc(sizeof(plugins));
-    liste_plugins->type = -1;
-    liste_plugins->next = NULL;
-    
-    if (Config.DefaultPluginsDir) {
-        sprintf(cwd, "%s\\plugin",AppPath);
-        }
-    else {
-        sprintf(cwd, "%s",Config.PluginsDir);
-    }  
-    dir = opendir(cwd);
-    while((entry = readdir(dir)) != NULL)
-    {
-        HMODULE handle;
-       
-        strcpy(name, cwd);
-        strcat(name, "\\");
-        strcat(name, entry->d_name);
-       
-        if (getExtension(entry->d_name) != NULL && strcmp(getExtension(entry->d_name),"dll")==0) {
-        MUPEN64RR_DEBUGINFO(name);
-        handle = LoadLibrary(name);
-        
-        if (handle)
-        {
-            PLUGIN_INFO PluginInfo;
-            getDllInfo = (void(__cdecl*)(PLUGIN_INFO *PluginInfo))GetProcAddress(handle, "GetDllInfo");
-            if (getDllInfo)
-            {
-                getDllInfo(&PluginInfo);
-                while(PluginInfo.Name[strlen(PluginInfo.Name)-1] == ' ') 
-                     PluginInfo.Name[strlen(PluginInfo.Name)-1] = '\0';
-                insert_plugin(liste_plugins, entry->d_name, PluginInfo.Name, 
-                                             handle, PluginInfo.Type, 0);
-                                  
-            }
-        }
-      }
-    }
-    current = liste_plugins;
+	// TODO: この辺りなにしてるかよく見てない
+	liste_plugins = (plugins*)malloc(sizeof(plugins));
+	liste_plugins->type = -1;
+	liste_plugins->next = NULL;
+	current = liste_plugins;
+
+	String pluginDir;
+	if(Config.DefaultPluginsDir)
+	{
+		pluginDir.assign(AppPath) + "\\plugin";
+	}
+	else
+	{
+		pluginDir.assign(Config.PluginsDir);
+	}
+
+	WIN32_FIND_DATA entry;
+	HANDLE dirHandle = ::FindFirstFile(pluginDir.c_str(), &entry);
+	if(dirHandle == INVALID_HANDLE_VALUE)
+	{
+		return;
+	}
+
+	do
+	{ //pluginディレクトリを読んで、プラグインリストを生成
+		if(String(::getExtension(entry.cFileName)) == "dll")
+		{
+			String pluginPath;
+			pluginPath.assign(pluginDir) + "\\" + entry.cFileName;
+			MUPEN64RR_DEBUGINFO(pluginPath);
+				
+			HMODULE pluginHandle = LoadLibrary(pluginPath.c_str());
+			if(pluginHandle != NULL
+				&& (getDllInfo = ProcAddress(pluginHandle, "GetDllInfo")) != NULL)
+			{
+				PLUGIN_INFO pluginInfo;
+				getDllInfo(&pluginInfo);
+				while(pluginInfo.Name[strlen(pluginInfo.Name)-1] == ' ')
+				{
+					pluginInfo.Name[strlen(pluginInfo.Name)-1] = '\0';
+				}
+				insert_plugin(liste_plugins, entry.cFileName, pluginInfo.Name,
+					pluginHandle, pluginInfo.Type, 0);
+			}
+		}
+	} while(!!FindNextFile(dirHandle, &entry));
+
 }
-
-
 
 void exec_config(char *name)
 {
@@ -2417,7 +2432,7 @@ void EnableToolbar()
 	{
 		if(!hTool || !IsWindow(hTool))
 		{
-			CreateToolBarWindow( mainHWND);
+			CreateToolBarWindow(mainHWND);
 			ResizeRomListControl();
 		}
 	}
@@ -3129,7 +3144,6 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
 	return TRUE;	
 }
 
-
 int WINAPI WinMain(
 	HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
@@ -3162,19 +3176,13 @@ int WINAPI WinMain(
   ini_openFile();
     
   // ensure folders exist!
-  // FIXME: should probably take into account user directory customization
   {
-	  char tempStr [MAX_PATH];
-	  sprintf(tempStr, "%ssave", AppPath);
-	  mkdir(tempStr);
-	  sprintf(tempStr, "%sMempaks", AppPath);
-	  mkdir(tempStr);
-	  sprintf(tempStr, "%sLang", AppPath);
-	  mkdir(tempStr);
-	  sprintf(tempStr, "%sScreenShots", AppPath);
-	  mkdir(tempStr);
-	  sprintf(tempStr, "%splugin", AppPath);
-	  mkdir(tempStr);
+		String path = AppPath;
+		CreateDirectory((path + "save").c_str(), NULL);
+		CreateDirectory((path + "Mempaks").c_str(), NULL);
+		CreateDirectory((path + "Lang").c_str(), NULL);
+		CreateDirectory((path + "ScreenShots").c_str(), NULL);
+		CreateDirectory((path + "plugin").c_str(), NULL);
 	}
            
   emu_launched = 0;

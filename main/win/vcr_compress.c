@@ -87,7 +87,7 @@ void win_readScreen(void **dest, long *width, long *height)
 	// copy to a context in memory to speed up process
 	HDC copy = CreateCompatibleDC(dc);
 	HBITMAP bitmap = CreateCompatibleBitmap(dc, *width, *height);
-	HBITMAP oldbitmap = SelectObject(copy, bitmap);
+	HBITMAP oldbitmap = (HBITMAP)SelectObject(copy, bitmap);
 	if(copy)
 		BitBlt(copy, 0, 0, *width, *height, dc, 0, heightT + (origHeight - *height), SRCCOPY);
 	

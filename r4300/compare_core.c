@@ -27,12 +27,20 @@
  *
 **/
 
+
+
 #include <sys/stat.h>
 #include "r4300.h"
 #include "../memory/memory.h"
-#include "../main/winlnxdefs.h"
 #include "../main/plugin.h"
 #include "../r4300/recomph.h"
+
+#ifdef _MSC_VER
+#include <Windows.h>
+#else
+#include "../main/winlnxdefs.h"
+#endif
+
 
 static FILE *f;
 static int pipe_opened = 0;
@@ -109,7 +117,23 @@ void compare_core()
      {
 	if (!pipe_opened)
 	  {
+#ifdef _MSC_VER
+			// TODO: handle close
+			HANDLE pipe = CreateNamedPipe(
+					"compare_pipe", /* パイプ名 */
+					PIPE_ACCESS_DUPLEX,          /* 双方向 */
+					PIPE_WAIT                    /* ブロッキング・モード */
+					| PIPE_READMODE_BYTE         /* バイト・モード */
+					| PIPE_TYPE_BYTE,
+					PIPE_UNLIMITED_INSTANCES,    /* インスタンス数の制限なし */
+					1024,												 /* 出力バッファ・サイズ */
+					1024,												 /* 入力バッファ・サイズ */
+					120 * 1000,                  /* タイムアウト */
+					NULL);												/* セキュリティ属性なし */
+			::ConnectNamedPipe(pipe, NULL);
+#else
 	     mkfifo("compare_pipe", 0600);
+#endif
 	     f = fopen("compare_pipe", "r");
 	     pipe_opened = 1;
 	  }

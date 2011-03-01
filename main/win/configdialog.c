@@ -19,12 +19,11 @@
 #define _WIN32_WINNT 0x0500
 #endif
 */
-#include <windows.h>
+
 #include <shlobj.h>
 #include <stdio.h>
 #include "main_win.h"
 #include "../../winproject/resource.h"
-#include "configdialog.h"
 #include "../plugin.h"
 #include "rombrowser.h"
 #include "../guifuncs.h"
@@ -35,6 +34,8 @@
 #include "../rom.h"
 #include "inifunctions.h"
 
+#include "configdialog.h"
+
 #ifdef _MSC_VER
 #define snprintf	_snprintf
 #define strcasecmp	_stricmp
@@ -42,7 +43,7 @@
 #endif
 
 
-HWND romInfoHWND;
+//HWND romInfoHWND;
 static DWORD dwExitCode;
 static DWORD Id;
 BOOL stopScan = FALSE;
