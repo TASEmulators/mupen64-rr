@@ -615,7 +615,7 @@ extern zipFile ZEXPORT zipOpen2 (
 
         if (size_comment>0)
         {
-            ziinit.globalcomment = ALLOC(size_comment+1);
+            ziinit.globalcomment = (char*)ALLOC(size_comment+1);
             if (ziinit.globalcomment)
             {
                size_comment = ZREAD(ziinit.z_filefunc, ziinit.filestream,ziinit.globalcomment,size_comment);
@@ -967,9 +967,9 @@ extern int ZEXPORT zipWriteInFileInZip (
     if (zi->in_opened_file_inzip == 0)
         return ZIP_PARAMERROR;
 
-    zi->ci.stream.next_in = (void*)buf;
+    zi->ci.stream.next_in = (Bytef*)(void*)buf;
     zi->ci.stream.avail_in = len;
-    zi->ci.crc32 = crc32(zi->ci.crc32,buf,len);
+    zi->ci.crc32 = crc32(zi->ci.crc32, (const Bytef*)buf,len);
 
     while ((err==ZIP_OK) && (zi->ci.stream.avail_in>0))
     {

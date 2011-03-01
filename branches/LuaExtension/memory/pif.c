@@ -91,7 +91,7 @@ void EepromCommand(BYTE *Command)
 	     char *filename;
 	     FILE *f;
 	     int i;
-	     filename = malloc(strlen(get_savespath())+
+	     filename = (char*)malloc(strlen(get_savespath())+
 			       strlen(ROM_SETTINGS.goodname)+4+1);
 	     strcpy(filename, get_savespath());
 	     strcat(filename, ROM_SETTINGS.goodname);
@@ -112,7 +112,7 @@ void EepromCommand(BYTE *Command)
 	     char *filename;
 	     FILE *f;
 	     int i;
-	     filename = malloc(strlen(get_savespath())+
+	     filename = (char*)malloc(strlen(get_savespath())+
 			       strlen(ROM_SETTINGS.goodname)+4+1);
 	     strcpy(filename, get_savespath());
 	     strcat(filename, ROM_SETTINGS.goodname);
@@ -278,7 +278,7 @@ void internal_ControllerCommand(int Control, BYTE *Command)
 			      {
 				 char *filename;
 				 FILE *f;
-				 filename = malloc(strlen(get_savespath())+
+				 filename = (char*)malloc(strlen(get_savespath())+
 						   strlen(ROM_SETTINGS.goodname)+4+1);
 				 strcpy(filename, get_savespath());
 				 strcat(filename, ROM_SETTINGS.goodname);
@@ -332,7 +332,7 @@ void internal_ControllerCommand(int Control, BYTE *Command)
 			      {
 				 char *filename;
 				 FILE *f;
-				 filename = malloc(strlen(get_savespath())+
+				 filename = (char*)malloc(strlen(get_savespath())+
 						   strlen(ROM_SETTINGS.goodname)+4+1);
 				 strcpy(filename, get_savespath());
 				 strcat(filename, ROM_SETTINGS.goodname);

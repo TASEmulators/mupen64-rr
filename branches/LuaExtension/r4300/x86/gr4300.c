@@ -1573,7 +1573,7 @@ void gensb()
    
    mov_m32_imm32((void *)(&PC), (unsigned long)(dst+1)); // 10
    mov_m32_reg32((unsigned long *)(&address), EBX); // 6
-   mov_m8_reg8((unsigned char *)(&byte), CL); // 6
+   mov_m8_reg8((unsigned char *)(&g_byte), CL); // 6
    shr_reg32_imm8(EBX, 16); // 3
    mov_reg32_preg32x4pimm32(EBX, EBX, (unsigned long)writememb); // 7
    call_reg32(EBX); // 2

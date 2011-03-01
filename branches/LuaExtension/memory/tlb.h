@@ -60,4 +60,12 @@ extern unsigned long tlb_LUT_w[0x100000];
 unsigned long virtual_to_physical_address(unsigned long addresse, int w);
 int probe_nop(unsigned long address);
 
+//unsigned long& get_tlb_LUT_r(int index)
+//{
+//	return ::tlb_LUT_r[index];
+//}
+//unsigned long& get_tlb_LUT_w(int index)
+//{
+//	return ::tlb_LUT_w[index];
+//}
 #endif

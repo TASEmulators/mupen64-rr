@@ -37,6 +37,8 @@
 #include "macros.h"
 #include "interupt.h"
 
+#include "../memory/tlb.h"
+
 #ifdef _MSC_VER
 #define isnan _isnan
 #endif
@@ -52,7 +54,7 @@ static long skip;
 
 void prefetch();
 
-static void (*interp_ops[64])(void);
+extern void (*interp_ops[64])(void);
 
 extern unsigned long next_vi;
 
@@ -2718,7 +2720,7 @@ static void SB()
 {
    interp_addr+=4;
    address = iimmediate + irs32;
-   byte = (unsigned char)(irt & 0xFF);
+   g_byte = (unsigned char)(irt & 0xFF);
    write_byte_in_memory();
 }
 
@@ -2757,7 +2759,7 @@ static void SWL()
 	break;
       case 3:
 	address = iimmediate + irs32;
-	byte = (unsigned char)(irt >> 24);
+	g_byte = (unsigned char)(irt >> 24);
 	write_byte_in_memory();
 	break;
      }

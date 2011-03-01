@@ -27,6 +27,7 @@
  *
 **/
 
+#include "tlb.h"
 #include "memory.h"
 #include "../r4300/r4300.h"
 #include "../r4300/exception.h"

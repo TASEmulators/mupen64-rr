@@ -30,12 +30,6 @@
 #ifndef MEMORY_H
 #define MEMORY_H
 
-#include "tlb.h"
-
-#ifdef __WIN32__
-#define byte __byte_
-#endif
-
 int init_memory();
 void free_memory();
 #define read_word_in_memory() readmem[address>>16]()
@@ -53,7 +47,7 @@ extern unsigned long PIF_RAM[0x40/4];
 extern unsigned char *PIF_RAMb;
 extern unsigned long rdram[0x800000/4];
 extern unsigned long address, word;
-extern unsigned char byte;
+extern unsigned char g_byte;
 extern unsigned short hword;
 extern unsigned long long int dword, *rdword;
 

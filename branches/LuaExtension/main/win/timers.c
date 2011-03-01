@@ -16,7 +16,9 @@
 
 #include <windows.h>
 #include <stdio.h>
+#ifndef _WIN32_IE
 #define _WIN32_IE 0x0500
+#endif
 #include <commctrl.h>
 #include "../guifuncs.h"
 #include "main_win.h"

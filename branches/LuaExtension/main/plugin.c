@@ -34,7 +34,7 @@
 #ifdef _MSC_VER
 inline char* realpath(const char *pathname, char *resolvedname)
 {
-	_fullpath(resolvedname, pathname, _MAX_PATH);
+	return _fullpath(resolvedname, pathname, _MAX_PATH);
 }
 #else
 #include <dlfcn.h>
@@ -42,12 +42,12 @@ inline char* realpath(const char *pathname, char *resolvedname)
 #include <unistd.h>
 #endif
 
-#include "winlnxdefs.h"
 #include "plugin.h"
 #include "rom.h"
 #include "../memory/memory.h"
 #include "../r4300/interupt.h"
 #include "../r4300/r4300.h"
+
 
 #ifndef PATH_MAX
 #define PATH_MAX _MAX_PATH
@@ -235,6 +235,7 @@ static void sucre()
    //printf("sucre\n");
 }
 
+#ifndef _MSC_VER
 void plugin_scan_directory(const char *directory)
 {
    DIR *dir;
@@ -548,3 +549,6 @@ void plugin_load_plugins(const char *gfx_name,
 	romClosed_RSP = dummy_void;
      }
 }
+
+
+#endif

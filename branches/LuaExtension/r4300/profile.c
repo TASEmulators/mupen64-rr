@@ -28,8 +28,7 @@
 **/
 
 #include "r4300.h"
-#ifdef _MSC_VER
-#else
+#ifndef _MSC_VER
 #include "sys/time.h"
 #endif
 

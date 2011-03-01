@@ -15,6 +15,8 @@
  ***************************************************************************/ 
 
 
+#include <Windows.h>
+
 void ChangeSettings(HWND hwndOwner);
 BOOL CALLBACK AboutDlgProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam);
 BOOL CALLBACK DirectoriesCfg(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam);

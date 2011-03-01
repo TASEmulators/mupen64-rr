@@ -30,6 +30,12 @@
 #ifndef PLUGIN_H
 #define PLUGIN_H
 
+#ifdef __WIN32__
+#include <Windows.h>
+#else
+#include "../main/winlnxdefs.h"
+#endif
+
 void  plugin_scan_directory(const char *directory);
 void  plugin_load_plugins(const char *gfx_name, 
 			  const char *audio_name, 
