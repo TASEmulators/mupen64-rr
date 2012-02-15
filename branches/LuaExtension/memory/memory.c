@@ -1274,7 +1274,7 @@ void update_SP()
 	  {
 	     //processAList();
 	     rsp_register.rsp_pc &= 0xFFF;
-	     start_section(AUDIO_SECTION);
+	     start_section(AUDIO_zSECTION);
 	     doRspCycles(100);
 	     end_section(AUDIO_SECTION);
 	     rsp_register.rsp_pc |= save_pc;

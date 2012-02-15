@@ -38,6 +38,8 @@
 #include "recomp.h"
 #include "recomph.h"
 #include <malloc.h>
+#define LUACONSOLE_H_NOINCLUDE_WINDOWS_H
+#include "../lua/LuaConsole.h"
 
 #ifdef DBG
 extern int debugger_mode;
@@ -1762,6 +1764,9 @@ void go()
 		 virtual_to_physical_address(PC->addr, 2);
 	     compare_core();
 #endif
+#ifdef LUA_PCBREAK_INTERP
+			if(enablePCBreak)LuaPCBreakInterp();
+#endif
 	     PC->ops();
 	     /*if (j!= (Count & 0xFFF00000))
 	       {
@@ -1810,7 +1815,7 @@ void go()
 	  ,(unsigned int)debug_count);
    for (i=0; i<0x100000; i++)
      {
-	if (blocks[i])
+	if ((unsigned)blocks[i]+1!=1)	//optimaze bug
 	  {
 	     if (blocks[i]->block) {
 		free(blocks[i]->block);

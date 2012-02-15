@@ -9,6 +9,7 @@
 #include "rom.h"
 #include "savestates.h"
 #include "../memory/memory.h"
+#include "../lua/LuaConsole.h"
 
 #include <errno.h>
 #include <limits.h>
@@ -813,6 +814,18 @@ VCR_getKeys( int Control, BUTTONS *Keys )
 {
 	if (m_task != Playback && m_task != StartPlayback && m_task != StartPlaybackFromSnapshot)
 		getKeys( Control, Keys );
+#ifdef LUA_JOYPAD
+			 lastInputLua[Control] = *(DWORD*)Keys;
+			 AtInputLuaCallback(Control);
+			 if(0 <= Control && Control < 4) {
+					 if(rewriteInputFlagLua[Control]) {
+						   *(DWORD*)Keys = 
+								 lastInputLua[Control] =
+								 rewriteInputLua[Control];
+							 rewriteInputFlagLua[Control] = false;
+					 }
+			 }
+#endif
 
 	if(Control == 0)
 		memcpy(&m_lastController1Keys, Keys, sizeof(unsigned long));
@@ -1461,6 +1474,7 @@ VCR_updateScreen()
 //	static void* lastImage = NULL;
 	long width, height;
 	static int frame = 0;
+	int redraw = 1;
 
 	if (m_capture == 0 || readScreen == 0)
 	{
@@ -1471,11 +1485,19 @@ VCR_updateScreen()
 			// skip 7/8 frames if fast-forwarding and not capturing to AVI
 			frame++;
 			if((frame % 8) != 0)
-				return;
+				redraw = 0;
 		}
 #endif
+#ifdef LUA_SPEEDMODE
+		if(maximumSpeedMode)redraw = 0;
+#endif
 
-		updateScreen();
+		if(redraw) {
+			updateScreen();
+		}
+#ifdef LUA_GUI
+		LuaDCUpadate(redraw);
+#endif
 //		captureFrameValid = TRUE;
 		return;
 	}
@@ -1485,7 +1507,16 @@ VCR_updateScreen()
 //	if (!frame)
 //		return;
 
+#ifdef LUA_SPEEDMODE
+	if(!maximumSpeedMode)redraw=0;
+#endif
+
+		if(redraw) {
 	updateScreen();
+		}
+#ifdef LUA_GUI
+		LuaDCUpadate(redraw);
+#endif
 //	captureFrameValid = TRUE;
 	readScreen( &image, &width, &height );
 	if (image == 0)

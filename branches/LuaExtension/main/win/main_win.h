@@ -69,7 +69,7 @@ typedef struct _HOTKEY {
     BOOL alt;
     int command;
 } HOTKEY;
-#define NUM_HOTKEYS (40)
+#define NUM_HOTKEYS (42)
 
 typedef struct _CONFIG {
     unsigned char ConfigVersion ;
@@ -136,6 +136,9 @@ typedef struct _CONFIG {
     BOOL RomBrowserRecursion;
     
     HOTKEY hotkey [NUM_HOTKEYS];
+
+		//Lua
+		char LuaScriptPath[MAX_PATH];
 } CONFIG;
 
 extern CONFIG Config;

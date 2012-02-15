@@ -40,7 +40,8 @@ $(bin): $(objs)
 	$(CXX) $(objs) -o "mupen64.exe" $(LIBS)
 
 .c.o:
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+#	$(CC) $(CFLAGS) -c $< -o $@
 
 .cpp.o:
 	$(CXX) $(CXXFLAGS) -c $< -o $@

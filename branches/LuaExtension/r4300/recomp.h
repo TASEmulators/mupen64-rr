@@ -31,6 +31,7 @@
 #define RECOMP_H
 
 #include "x86/assemble.h"
+#include "../lua/LuaDefine.h"
 
 typedef struct _precomp_instr
 {
@@ -67,10 +68,17 @@ typedef struct _precomp_instr
 	     unsigned char fs;
 	     unsigned char fd;
 	  } cf;
+#ifdef LUA_BREAKPOINTSYNC_INTERP
+	 unsigned char stype;
+#endif
      } f;
    unsigned long addr;
    unsigned long local_addr;
    reg_cache_struct reg_cache_infos;
+#ifdef LUA_TRACEINTERP
+	 void (*s_ops)();
+	 unsigned long src;
+#endif
 } precomp_instr;
 
 typedef struct _precomp_block

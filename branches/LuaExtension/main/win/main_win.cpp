@@ -61,6 +61,8 @@ extern "C" {
 
 extern void CountryCodeToCountryName(int countrycode,char *countryname);
 
+typedef std::string String;
+
 #if defined(__cplusplus) && !defined(_MSC_VER)
 }
 #endif
@@ -98,82 +100,82 @@ static int currentSaveState = 1 ;
 static unsigned char DummyHeader[0x40];
 
 
-void (*moveScreen)(int xpos, int ypos);
-void (*CaptureScreen) ( char * Directory );
-void (*old_initiateControllers)(HWND hMainWindow, CONTROL Controls[4]);
-void (*aiUpdate)(BOOL Wait);
+void (__cdecl*moveScreen)(int xpos, int ypos);
+void (__cdecl*CaptureScreen) ( char * Directory );
+void (__cdecl*old_initiateControllers)(HWND hMainWindow, CONTROL Controls[4]);
+void (__cdecl*aiUpdate)(BOOL Wait);
 
 
 #ifndef _MSC_VER
 
 CONTROL Controls[4];
 
-void (*getDllInfo)(PLUGIN_INFO *PluginInfo);
-void (*dllConfig)(HWND hParent);
-void (*dllTest)(HWND hParent);
-void (*dllAbout)(HWND hParent);
+void (__cdecl*getDllInfo)(PLUGIN_INFO *PluginInfo);
+void (__cdecl*dllConfig)(HWND hParent);
+void (__cdecl*dllTest)(HWND hParent);
+void (__cdecl*dllAbout)(HWND hParent);
 
-void (*changeWindow)();
-void (*closeDLL_gfx)();
-BOOL (*initiateGFX)(GFX_INFO Gfx_Info);
-void (*processDList)();
-void (*processRDPList)();
-void (*romClosed_gfx)();
-void (*romOpen_gfx)();
-void (*showCFB)();
-void (*updateScreen)();
-void (*viStatusChanged)();
-void (*viWidthChanged)();
-
-
-void (*closeDLL_input)();
-void (*controllerCommand)(int Control, BYTE * Command);
-void (*getKeys)(int Control, BUTTONS *Keys);
-void (*initiateControllers)(CONTROL_INFO ControlInfo);
-void (*readController)(int Control, BYTE *Command);
-void (*romClosed_input)();
-void (*romOpen_input)();
-void (*keyDown)(WPARAM wParam, LPARAM lParam);
-void (*keyUp)(WPARAM wParam, LPARAM lParam);
+void (__cdecl*changeWindow)();
+void (__cdecl*closeDLL_gfx)();
+BOOL (__cdecl*initiateGFX)(GFX_INFO Gfx_Info);
+void (__cdecl*processDList)();
+void (__cdecl*processRDPList)();
+void (__cdecl*romClosed_gfx)();
+void (__cdecl*romOpen_gfx)();
+void (__cdecl*showCFB)();
+void (__cdecl*updateScreen)();
+void (__cdecl*viStatusChanged)();
+void (__cdecl*viWidthChanged)();
 
 
-void (*aiDacrateChanged)(int SystemType);
-void (*aiLenChanged)();
-DWORD (*aiReadLength)();
-void (*closeDLL_audio)();
-BOOL (*initiateAudio)(AUDIO_INFO Audio_Info);
-void (*processAList)();
-void (*romClosed_audio)();
-void (*romOpen_audio)();
+void (__cdecl*closeDLL_input)();
+void (__cdecl*controllerCommand)(int Control, BYTE * Command);
+void (__cdecl*getKeys)(int Control, BUTTONS *Keys);
+void (__cdecl*initiateControllers)(CONTROL_INFO ControlInfo);
+void (__cdecl*readController)(int Control, BYTE *Command);
+void (__cdecl*romClosed_input)();
+void (__cdecl*romOpen_input)();
+void (__cdecl*keyDown)(WPARAM wParam, LPARAM lParam);
+void (__cdecl*keyUp)(WPARAM wParam, LPARAM lParam);
 
-void (*closeDLL_RSP)() ;
-DWORD (*doRspCycles)(DWORD Cycles) ;
-void (*initiateRSP)(RSP_INFO Rsp_Info, DWORD * CycleCount) ;
-void (*romClosed_RSP)() ; 
 
-void (*fBRead)(DWORD addr);
-void (*fBWrite)(DWORD addr, DWORD size);
-void (*fBGetFrameBufferInfo)(void *p);
-extern void (*readScreen)(void **dest, long *width, long *height);
+void (__cdecl*aiDacrateChanged)(int SystemType);
+void (__cdecl*aiLenChanged)();
+DWORD (__cdecl*aiReadLength)();
+void (__cdecl*closeDLL_audio)();
+BOOL (__cdecl*initiateAudio)(AUDIO_INFO Audio_Info);
+void (__cdecl*processAList)();
+void (__cdecl*romClosed_audio)();
+void (__cdecl*romOpen_audio)();
+
+void (__cdecl*closeDLL_RSP)() ;
+DWORD (__cdecl*doRspCycles)(DWORD Cycles) ;
+void (__cdecl*initiateRSP)(RSP_INFO Rsp_Info, DWORD * CycleCount) ;
+void (__cdecl*romClosed_RSP)() ; 
+
+void (__cdecl*fBRead)(DWORD addr);
+void (__cdecl*fBWrite)(DWORD addr, DWORD size);
+void (__cdecl*fBGetFrameBufferInfo)(void *p);
+extern void (__cdecl*readScreen)(void **dest, long *width, long *height);
 
 #endif // !_MSC_VER
 
 /* dummy functions to prevent mupen from crashing if a plugin is missing */
-static void dummy_void() {}
-static BOOL dummy_initiateGFX(GFX_INFO Gfx_Info) { return TRUE; }
-static BOOL dummy_initiateAudio(AUDIO_INFO Audio_Info) { return TRUE; }
-static void dummy_initiateControllers(CONTROL_INFO Control_Info) {}
-static void dummy_aiDacrateChanged(int SystemType) {}
-static DWORD dummy_aiReadLength() { return 0; }
+static void __cdecl dummy_void() {}
+static BOOL __cdecl dummy_initiateGFX(GFX_INFO Gfx_Info) { return TRUE; }
+static BOOL __cdecl dummy_initiateAudio(AUDIO_INFO Audio_Info) { return TRUE; }
+static void __cdecl dummy_initiateControllers(CONTROL_INFO Control_Info) {}
+static void __cdecl dummy_aiDacrateChanged(int SystemType) {}
+static DWORD __cdecl dummy_aiReadLength() { return 0; }
 //static void dummy_aiUpdate(BOOL Wait) {}
-static void dummy_controllerCommand(int Control, BYTE * Command) {}
-static void dummy_getKeys(int Control, BUTTONS *Keys) {}
-static void dummy_readController(int Control, BYTE *Command) {}
-static void dummy_keyDown(WPARAM wParam, LPARAM lParam) {}
-static void dummy_keyUp(WPARAM wParam, LPARAM lParam) {}
+static void __cdecl dummy_controllerCommand(int Control, BYTE * Command) {}
+static void __cdecl dummy_getKeys(int Control, BUTTONS *Keys) {}
+static void __cdecl dummy_readController(int Control, BYTE *Command) {}
+static void __cdecl dummy_keyDown(WPARAM wParam, LPARAM lParam) {}
+static void __cdecl dummy_keyUp(WPARAM wParam, LPARAM lParam) {}
 static unsigned long dummy;
-static DWORD dummy_doRspCycles(DWORD Cycles) { return Cycles; };
-static void dummy_initiateRSP(RSP_INFO Rsp_Info, DWORD * CycleCount) {};
+static DWORD __cdecl dummy_doRspCycles(DWORD Cycles) { return Cycles; };
+static void __cdecl dummy_initiateRSP(RSP_INFO Rsp_Info, DWORD * CycleCount) {};
 
 static DWORD WINAPI ThreadFunc(LPVOID lpParam);
 
@@ -271,7 +273,7 @@ void getAppFullPath (char *ret) {
     strcat(ret, dirn);
 }
 
-static void sucre()
+static void __cdecl sucre()
 {
    //printf("sucre\n");
 }
@@ -791,7 +793,7 @@ int load_gfx(HMODULE handle_gfx)
 	if (updateScreen == NULL) updateScreen = dummy_void;
 	if (viStatusChanged == NULL) viStatusChanged = dummy_void;
 	if (viWidthChanged == NULL) viWidthChanged = dummy_void;
-    if (CaptureScreen == NULL) CaptureScreen = (void(*)(char*))dummy_void;
+    if (CaptureScreen == NULL) CaptureScreen = (void(__cdecl*)(char*))dummy_void;
     
    gfx_info.hWnd = mainHWND;
    if (Config.GuiStatusbar) {
@@ -1225,6 +1227,7 @@ BOOL StartRom(char *fullRomPath)
                              saveMD5toCache(ROM_SETTINGS.MD5);
                              AddToRecentList( mainHWND, fullRomPath) ; 
                              InitTimer();
+
                              EnableEmulationMenuItems(TRUE);
                              ShowRomBrowser(FALSE);
                              SaveGlobalPlugins(TRUE);
@@ -2524,6 +2527,9 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
 	HMENU hMenu;
 	hMenu = GetMenu(hwnd);
 	
+#ifdef LUA_WINDOWMESSAGE
+			LuaWindowMessage(hwnd, Message, wParam, lParam);
+#endif
 	switch(Message)
 	{
 	case WM_KEYDOWN:
@@ -2650,6 +2656,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
 
 		EndPaint(hwnd, &ps);
 
+
 //			if(VCR_isCapturing())
 //				VCR_invalidatedCaptureFrame();
 
@@ -2702,14 +2709,41 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
 			{
 			case ID_MENU_LUASCRIPT_NEW:
 				{
+#ifdef LUA_CONSOLE
 					MUPEN64RR_DEBUGINFO("LuaScript New");
-					::NewLuaScript(app_hInstance, mainHWND);
+					::NewLuaScript((void(*)())lParam);
+#endif
 				} break;
 			case ID_MENU_LUASCRIPT_CLOSEALL:
 				{
+#ifdef LUA_CONSOLE
 					MUPEN64RR_DEBUGINFO("LuaScript CloseALL");
 					::CloseAllLuaScript();
+#endif
 				} break;
+			case ID_TRACELOG:
+#ifdef LUA_TRACELOG
+#ifdef LUA_TRACEINTERP
+				if(!dynacore) {
+					::LuaTraceLogState();
+				}else {
+					MessageBox(mainHWND,
+						"trace logging works only in (pure) interpreter core\n"
+						"(Menu->Option->Settings->General->CPU Core->(Pure) Interpreter)",
+						NULL, 0);
+				}
+#else
+				if(!dynacore && interpcore == 1) {
+					::LuaTraceLogState();
+				}else {
+					MessageBox(mainHWND,
+						"trace logging works only in pure interpreter core\n"
+						"(Menu->Option->Settings->General->CPU Core->Pure Interpreter)",
+						NULL, 0);
+				}
+#endif
+#endif
+				break;
 			case IDGFXCONFIG:
 				{
 				 BOOL wasPaused = emu_paused;
@@ -3130,6 +3164,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
                      Config.FPSmodifier = 100;
                      InitTimer();
                      break;                                                 
+								case ID_LUA_RELOAD:
+#ifdef LUA_CONSOLE
+									LuaReload();
+#endif
+									break;
                 default :
                      //Language Support  from ID_LANG_ENGLISH to ID_LANG_ENGLISH+100
                      if (LOWORD(wParam) >= ID_LANG_ENGLISH && LOWORD(wParam) <= (ID_LANG_ENGLISH + 100)) {
@@ -3330,7 +3369,10 @@ int WINAPI WinMain(
 		while(GetMessage(&Msg, NULL, 0, 0) > 0)
 		{
 			if (!TranslateAccelerator(mainHWND,Accel,&Msg)
-			&& !::IsLuaConsoleMessage(&Msg))
+#ifdef LUA_CONSOLE
+			&& !::IsLuaConsoleMessage(&Msg)
+#endif
+			)
 			{
 				TranslateMessage(&Msg);
 				DispatchMessage(&Msg);

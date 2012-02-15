@@ -39,6 +39,9 @@
 
 #include "../memory/tlb.h"
 
+#define LUACONSOLE_H_NOINCLUDE_WINDOWS_H
+#include "../../lua/LuaConsole.h"
+
 #ifdef _MSC_VER
 #define isnan _isnan
 #endif
@@ -54,7 +57,7 @@ static long skip;
 
 void prefetch();
 
-void (*interp_ops[])(void);
+extern void (*interp_ops[])(void);
 
 extern unsigned long next_vi;
 
@@ -149,7 +152,11 @@ static void SYSCALL()
 
 static void SYNC()
 {
+#ifdef LUA_BREAKPOINTSYNC_PURE
+	LuaBreakpointSyncPure();
+#else
    interp_addr+=4;
+#endif
 }
 
 static void MFHI()
@@ -3056,13 +3063,16 @@ void prefetch()
    //printf("addr:%x\n", interp_addr);
    if ((interp_addr >= 0x80000000) && (interp_addr < 0xc0000000))
      {
-	if ((interp_addr >= 0x80000000) && (interp_addr < 0x80800000))
+	if (/*(interp_addr >= 0x80000000) && */(interp_addr < 0x80800000))
 	  {
-	     op = rdram[(interp_addr&0xFFFFFF)/4];
+	     op = *(unsigned long*)&((unsigned char*)rdram)[(interp_addr&0xFFFFFF)];
 	     /*if ((debug_count+Count) > 0xabaa20)
 	       printf("count:%x, add:%x, op:%x, l%d\n", (int)(Count+debug_count),
 		      interp_addr, op, line);*/
 	     prefetch_opcode(op);
+#ifdef LUA_PCBREAK_PURE
+			 if(enablePCBreak)LuaPCBreakPure();
+#endif
 	  }
 	else if ((interp_addr >= 0xa4000000) && (interp_addr < 0xa4001000))
 	  {
@@ -3096,6 +3106,10 @@ void prefetch()
 	//tlb_used = 0;
 	interp_addr = addr;
      }
+#ifdef LUA_TRACEPURE
+	if(enableTraceLog)LuaTraceLoggingPure();
+#endif
+
 }
 
 void pure_interpreter()
@@ -3133,6 +3147,9 @@ void interprete_section(unsigned long addr)
    while (!stop && (addr >> 12) == (interp_addr >> 12))
      {
 	prefetch();
+#ifdef LUA_TRACEPURE
+	if(enableTraceLog)LuaTraceLoggingPure();
+#endif
 #ifdef COMPARE_CORE
 	compare_core();
 #endif

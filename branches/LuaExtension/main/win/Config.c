@@ -99,7 +99,33 @@ void LoadRecentRoms()
   
 }
 
-
+void ReadHotkeyConfig(int n, char *name, int cmd, int def) {
+	HOTKEY *h;
+	char t[128];
+	h = &Config.hotkey[n];
+	sprintf(t, "%s Key", name);
+	h->key = ReadCfgInt("Hotkeys",t,def&0xFF);
+	sprintf(t, "%s Shift", name);
+	h->shift = ReadCfgInt("Hotkeys",t,def&0x100?1:0);
+	sprintf(t, "%s Ctrl", name);
+	h->ctrl = ReadCfgInt("Hotkeys",t,def&0x200?1:0);
+	sprintf(t, "%s Alt", name);
+	h->alt = ReadCfgInt("Hotkeys",t,def&0x400?1:0);
+	h->command = cmd;
+}
+void WriteHotkeyConfig(int n, char *name) {
+	HOTKEY *h;
+	char t[128];
+	h = &Config.hotkey[n];
+	sprintf(t, "%s Key", name);
+	WriteCfgInt("Hotkeys", t, h->key);
+	sprintf(t, "%s Shift", name);
+	WriteCfgInt("Hotkeys", t, h->shift);
+	sprintf(t, "%s Ctrl", name);
+	WriteCfgInt("Hotkeys", t, h->ctrl);
+	sprintf(t, "%s Alt", name);
+	WriteCfgInt("Hotkeys", t, h->alt);
+}
 
 void LoadConfig()
 {
@@ -174,83 +200,19 @@ void LoadConfig()
 
 	// Load A Whole Whackton Of Hotkeys:
 
-    Config.hotkey[0].key = ReadCfgInt("Hotkeys","Fast Forward Key",VK_TAB);
-    Config.hotkey[0].shift = ReadCfgInt("Hotkeys","Fast Forward Shift",0);
-    Config.hotkey[0].ctrl = ReadCfgInt("Hotkeys","Fast Forward Ctrl",0);
-    Config.hotkey[0].alt = ReadCfgInt("Hotkeys","Fast Forward Alt",0);
-    Config.hotkey[0].command = 0; // handled specially
-
-    Config.hotkey[1].key = ReadCfgInt("Hotkeys","Speed Up Key",/*VK_OEM_PLUS*/0xBB);
-    Config.hotkey[1].shift = ReadCfgInt("Hotkeys","Speed Up Shift",0);
-    Config.hotkey[1].ctrl = ReadCfgInt("Hotkeys","Speed Up Ctrl",0);
-    Config.hotkey[1].alt = ReadCfgInt("Hotkeys","Speed Up Alt",0);
-	Config.hotkey[1].command = IDC_INCREASE_MODIFIER;
-
-    Config.hotkey[2].key = ReadCfgInt("Hotkeys","Slow Down Key",/*VK_OEM_MINUS*/0xBD);
-    Config.hotkey[2].shift = ReadCfgInt("Hotkeys","Slow Down Shift",0);
-    Config.hotkey[2].ctrl = ReadCfgInt("Hotkeys","Slow Down Ctrl",0);
-    Config.hotkey[2].alt = ReadCfgInt("Hotkeys","Slow Down Alt",0);
-	Config.hotkey[2].command = IDC_DECREASE_MODIFIER;
-
-    Config.hotkey[3].key = ReadCfgInt("Hotkeys","Frame Advance Key",VK_OEM_5);
-    Config.hotkey[3].shift = ReadCfgInt("Hotkeys","Frame Advance Shift",0);
-    Config.hotkey[3].ctrl = ReadCfgInt("Hotkeys","Frame Advance Ctrl",0);
-    Config.hotkey[3].alt = ReadCfgInt("Hotkeys","Frame Advance Alt",0);
-	Config.hotkey[3].command = EMU_FRAMEADVANCE;
-
-    Config.hotkey[4].key = ReadCfgInt("Hotkeys","Pause Resume Key",VK_PAUSE);
-    Config.hotkey[4].shift = ReadCfgInt("Hotkeys","Pause Resume Shift",0);
-    Config.hotkey[4].ctrl = ReadCfgInt("Hotkeys","Pause Resume Ctrl",0);
-    Config.hotkey[4].alt = ReadCfgInt("Hotkeys","Pause Resume Alt",0);
-	Config.hotkey[4].command = EMU_PAUSE;
-
-    Config.hotkey[5].key = ReadCfgInt("Hotkeys","ReadOnly Key",'8');
-    Config.hotkey[5].shift = ReadCfgInt("Hotkeys","ReadOnly Shift",1);
-    Config.hotkey[5].ctrl = ReadCfgInt("Hotkeys","ReadOnly Ctrl",0);
-    Config.hotkey[5].alt = ReadCfgInt("Hotkeys","ReadOnly Alt",0);
-	Config.hotkey[5].command = EMU_VCRTOGGLEREADONLY;
-
-    Config.hotkey[6].key = ReadCfgInt("Hotkeys","Play Key",'P');
-    Config.hotkey[6].shift = ReadCfgInt("Hotkeys","Play Shift",1);
-    Config.hotkey[6].ctrl = ReadCfgInt("Hotkeys","Play Ctrl",1);
-    Config.hotkey[6].alt = ReadCfgInt("Hotkeys","Play Alt",0);
-	Config.hotkey[6].command = ID_START_PLAYBACK;
-
-    Config.hotkey[7].key = ReadCfgInt("Hotkeys","PlayStop Key",'S');
-    Config.hotkey[7].shift = ReadCfgInt("Hotkeys","PlayStop Shift",1);
-    Config.hotkey[7].ctrl = ReadCfgInt("Hotkeys","PlayStop Ctrl",1);
-    Config.hotkey[7].alt = ReadCfgInt("Hotkeys","PlayStop Alt",0);
-	Config.hotkey[7].command = ID_STOP_PLAYBACK;
-
-    Config.hotkey[8].key = ReadCfgInt("Hotkeys","Record Key",'R');
-    Config.hotkey[8].shift = ReadCfgInt("Hotkeys","Record Shift",1);
-    Config.hotkey[8].ctrl = ReadCfgInt("Hotkeys","Record Ctrl",1);
-    Config.hotkey[8].alt = ReadCfgInt("Hotkeys","Record Alt",0);
-	Config.hotkey[8].command = ID_START_RECORD;
-
-    Config.hotkey[9].key = ReadCfgInt("Hotkeys","RecordStop Key",'S');
-    Config.hotkey[9].shift = ReadCfgInt("Hotkeys","RecordStop Shift",1);
-    Config.hotkey[9].ctrl = ReadCfgInt("Hotkeys","RecordStop Ctrl",1);
-    Config.hotkey[9].alt = ReadCfgInt("Hotkeys","RecordStop Alt",0);
-	Config.hotkey[9].command = ID_STOP_RECORD;
-
-    Config.hotkey[10].key = ReadCfgInt("Hotkeys","Screenshot Key",VK_F12);
-    Config.hotkey[10].shift = ReadCfgInt("Hotkeys","Screenshot Shift",0);
-    Config.hotkey[10].ctrl = ReadCfgInt("Hotkeys","Screenshot Ctrl",0);
-    Config.hotkey[10].alt = ReadCfgInt("Hotkeys","Screenshot Alt",0);
-	Config.hotkey[10].command = GENERATE_BITMAP;
-
-    Config.hotkey[11].key = ReadCfgInt("Hotkeys","Save Current Key",VK_F5);
-    Config.hotkey[11].shift = ReadCfgInt("Hotkeys","Save Current Shift",0);
-    Config.hotkey[11].ctrl = ReadCfgInt("Hotkeys","Save Current Ctrl",1);
-    Config.hotkey[11].alt = ReadCfgInt("Hotkeys","Save Current Alt",0);
-	Config.hotkey[11].command = STATE_SAVE;
-
-    Config.hotkey[12].key = ReadCfgInt("Hotkeys","Load Current Key",VK_F7);
-    Config.hotkey[12].shift = ReadCfgInt("Hotkeys","Load Current Shift",0);
-    Config.hotkey[12].ctrl = ReadCfgInt("Hotkeys","Load Current Ctrl",1);
-    Config.hotkey[12].alt = ReadCfgInt("Hotkeys","Load Current Alt",0);
-	Config.hotkey[12].command = STATE_RESTORE;
+		ReadHotkeyConfig(0, "Fast Forward", 0, VK_TAB);	// handled specially
+		ReadHotkeyConfig(1, "Speed Up", IDC_INCREASE_MODIFIER, /*VK_OEM_PLUS*/0xBB);
+		ReadHotkeyConfig(2, "Slow Down", IDC_DECREASE_MODIFIER, /*VK_OEM_MINUS*/0xBD);
+		ReadHotkeyConfig(3, "Frame Advance", EMU_FRAMEADVANCE, VK_OEM_5);
+		ReadHotkeyConfig(4, "Pause Resume", EMU_PAUSE, VK_PAUSE);
+		ReadHotkeyConfig(5, "ReadOnly", EMU_VCRTOGGLEREADONLY, '8'|0x100);
+		ReadHotkeyConfig(6, "Play", ID_START_PLAYBACK, 'P'|0x300);
+		ReadHotkeyConfig(7, "PlayStop", ID_STOP_PLAYBACK, 'S'|0x300);
+		ReadHotkeyConfig(8, "Record", ID_START_RECORD, 'R'|0x300);
+		ReadHotkeyConfig(9, "RecordStop", ID_STOP_RECORD, 'S'|0x300);
+		ReadHotkeyConfig(10,"Screenshot", GENERATE_BITMAP, VK_F12);
+    ReadHotkeyConfig(11,"Save Current", STATE_SAVE, VK_F5|0x200);
+		ReadHotkeyConfig(12,"Load Current", STATE_RESTORE, VK_F7|0x200);
 
     // Save/Load Hotkeys
     {
@@ -259,42 +221,26 @@ void LoadConfig()
 	    
 	    for(i = 1 ; i <= 9 ; i++)
 	    {
-			sprintf(str, "Save %d Key", i);
-		    Config.hotkey[12+i].key = ReadCfgInt("Hotkeys",str,(VK_F1-1)+i);
-			sprintf(str, "Save %d Shift", i);
-		    Config.hotkey[12+i].shift = ReadCfgInt("Hotkeys",str,1);
-			sprintf(str, "Save %d Ctrl", i);
-		    Config.hotkey[12+i].ctrl = ReadCfgInt("Hotkeys",str,0);
-			sprintf(str, "Save %d Alt", i);
-		    Config.hotkey[12+i].alt = ReadCfgInt("Hotkeys",str,0);
-		    Config.hotkey[12+i].command = (ID_SAVE_1-1) + i;
+			sprintf(str, "Save %d", i);
+			ReadHotkeyConfig(12+i, str, (ID_SAVE_1-1) + i, ((VK_F1-1)+i)|0x100);
 		}
 	    for(i = 1 ; i <= 9 ; i++)
 	    {
-			sprintf(str, "Load %d Key", i);
-		    Config.hotkey[12+9+i].key = ReadCfgInt("Hotkeys",str,(VK_F1-1)+i);
-			sprintf(str, "Load %d Shift", i);
-		    Config.hotkey[12+9+i].shift = ReadCfgInt("Hotkeys",str,0);
-			sprintf(str, "Load %d Ctrl", i);
-		    Config.hotkey[12+9+i].ctrl = ReadCfgInt("Hotkeys",str,0);
-			sprintf(str, "Load %d Alt", i);
-		    Config.hotkey[12+9+i].alt = ReadCfgInt("Hotkeys",str,0);
-		    Config.hotkey[12+9+i].command = (ID_LOAD_1-1) + i;
+			sprintf(str, "Load %d", i);
+			ReadHotkeyConfig(21+i, str, (ID_LOAD_1-1) + i, (VK_F1-1)+i);
 		}
 	    for(i = 1 ; i <= 9 ; i++)
 	    {
-			sprintf(str, "Select %d Key", i);
-		    Config.hotkey[12+9+9+i].key = ReadCfgInt("Hotkeys",str,'0'+i);
-			sprintf(str, "Select %d Shift", i);
-		    Config.hotkey[12+9+9+i].shift = ReadCfgInt("Hotkeys",str,0);
-			sprintf(str, "Select %d Ctrl", i);
-		    Config.hotkey[12+9+9+i].ctrl = ReadCfgInt("Hotkeys",str,0);
-			sprintf(str, "Select %d Alt", i);
-		    Config.hotkey[12+9+9+i].alt = ReadCfgInt("Hotkeys",str,0);
-		    Config.hotkey[12+9+9+i].command = (ID_CURRENTSAVE_1-1) + i;
+			sprintf(str, "Select %d", i);
+			ReadHotkeyConfig(30+i, str, (ID_CURRENTSAVE_1-1) + i, '0'+i);
 		}
 	}
-  
+	//Lua
+	//ダイアログに追加するの面倒くさい
+	ReadCfgString("Lua", "Script Path", "", Config.LuaScriptPath);
+  ReadHotkeyConfig(40, "Lua Script Reload", ID_LUA_RELOAD, VK_F3|0x200);
+  ReadHotkeyConfig(41, "Lua Script CloseAll", ID_MENU_LUASCRIPT_CLOSEALL, VK_F4|0x200);
+
 }
 
 /////////////////////////////////////////////////////////////////////////////////
@@ -401,71 +347,20 @@ void SaveConfig()
 
 	// Load A Whole Whackton Of Hotkeys:
 
-    WriteCfgInt("Hotkeys","Fast Forward Key",Config.hotkey[0].key);
-    WriteCfgInt("Hotkeys","Fast Forward Shift",Config.hotkey[0].shift);
-    WriteCfgInt("Hotkeys","Fast Forward Ctrl",Config.hotkey[0].ctrl);
-    WriteCfgInt("Hotkeys","Fast Forward Alt",Config.hotkey[0].alt);
+		WriteHotkeyConfig(0, "Fast Forward");
+		WriteHotkeyConfig(1, "Speed Up");
+		WriteHotkeyConfig(2, "Slow Down");
+		WriteHotkeyConfig(3, "Frame Advance");
+		WriteHotkeyConfig(4, "Pause Resume");
+		WriteHotkeyConfig(5, "ReadOnly");
+		WriteHotkeyConfig(6, "Play");
+		WriteHotkeyConfig(7, "PlayStop");
+		WriteHotkeyConfig(8, "Record");
+		WriteHotkeyConfig(9, "RecordStop");
+		WriteHotkeyConfig(10,"Screenshot");
+		WriteHotkeyConfig(11,"Save Current");
+		WriteHotkeyConfig(12,"Load Current");
 
-    WriteCfgInt("Hotkeys","Speed Up Key",Config.hotkey[1].key);
-    WriteCfgInt("Hotkeys","Speed Up Shift",Config.hotkey[1].shift);
-    WriteCfgInt("Hotkeys","Speed Up Ctrl",Config.hotkey[1].ctrl);
-    WriteCfgInt("Hotkeys","Speed Up Alt",Config.hotkey[1].alt);
-  
-    WriteCfgInt("Hotkeys","Slow Down Key",Config.hotkey[2].key);
-    WriteCfgInt("Hotkeys","Slow Down Shift",Config.hotkey[2].shift);
-    WriteCfgInt("Hotkeys","Slow Down Ctrl",Config.hotkey[2].ctrl);
-    WriteCfgInt("Hotkeys","Slow Down Alt",Config.hotkey[2].alt);
-
-    WriteCfgInt("Hotkeys","Frame Advance Key",Config.hotkey[3].key);
-    WriteCfgInt("Hotkeys","Frame Advance Shift",Config.hotkey[3].shift);
-    WriteCfgInt("Hotkeys","Frame Advance Ctrl",Config.hotkey[3].ctrl);
-    WriteCfgInt("Hotkeys","Frame Advance Alt",Config.hotkey[3].alt);
-
-    WriteCfgInt("Hotkeys","Pause Resume Key",Config.hotkey[4].key);
-    WriteCfgInt("Hotkeys","Pause Resume Shift",Config.hotkey[4].shift);
-    WriteCfgInt("Hotkeys","Pause Resume Ctrl",Config.hotkey[4].ctrl);
-    WriteCfgInt("Hotkeys","Pause Resume Alt",Config.hotkey[4].alt);
-
-    WriteCfgInt("Hotkeys","ReadOnly Key",Config.hotkey[5].key);
-    WriteCfgInt("Hotkeys","ReadOnly Shift",Config.hotkey[5].shift);
-    WriteCfgInt("Hotkeys","ReadOnly Ctrl",Config.hotkey[5].ctrl);
-    WriteCfgInt("Hotkeys","ReadOnly Alt",Config.hotkey[5].alt);
-
-    WriteCfgInt("Hotkeys","Play Key",Config.hotkey[6].key);
-    WriteCfgInt("Hotkeys","Play Shift",Config.hotkey[6].shift);
-    WriteCfgInt("Hotkeys","Play Ctrl",Config.hotkey[6].ctrl);
-    WriteCfgInt("Hotkeys","Play Alt",Config.hotkey[6].alt);
-
-    WriteCfgInt("Hotkeys","PlayStop Key",Config.hotkey[7].key);
-    WriteCfgInt("Hotkeys","PlayStop Shift",Config.hotkey[7].shift);
-    WriteCfgInt("Hotkeys","PlayStop Ctrl",Config.hotkey[7].ctrl);
-    WriteCfgInt("Hotkeys","PlayStop Alt",Config.hotkey[7].alt);
-
-    WriteCfgInt("Hotkeys","Record Key",Config.hotkey[8].key);
-    WriteCfgInt("Hotkeys","Record Shift",Config.hotkey[8].shift);
-    WriteCfgInt("Hotkeys","Record Ctrl",Config.hotkey[8].ctrl);
-    WriteCfgInt("Hotkeys","Record Alt",Config.hotkey[8].alt);
-
-    WriteCfgInt("Hotkeys","RecordStop Key",Config.hotkey[9].key);
-    WriteCfgInt("Hotkeys","RecordStop Shift",Config.hotkey[9].shift);
-    WriteCfgInt("Hotkeys","RecordStop Ctrl",Config.hotkey[9].ctrl);
-    WriteCfgInt("Hotkeys","RecordStop Alt",Config.hotkey[9].alt);
-
-    WriteCfgInt("Hotkeys","Screenshot Key",Config.hotkey[10].key);
-    WriteCfgInt("Hotkeys","Screenshot Shift",Config.hotkey[10].shift);
-    WriteCfgInt("Hotkeys","Screenshot Ctrl",Config.hotkey[10].ctrl);
-    WriteCfgInt("Hotkeys","Screenshot Alt",Config.hotkey[10].alt);
-
-    WriteCfgInt("Hotkeys","Save Current Key",Config.hotkey[11].key);
-    WriteCfgInt("Hotkeys","Save Current Shift",Config.hotkey[11].shift);
-    WriteCfgInt("Hotkeys","Save Current Ctrl",Config.hotkey[11].ctrl);
-    WriteCfgInt("Hotkeys","Save Current Alt",Config.hotkey[11].alt);
-  
-    WriteCfgInt("Hotkeys","Load Current Key",Config.hotkey[12].key);
-    WriteCfgInt("Hotkeys","Load Current Shift",Config.hotkey[12].shift);
-    WriteCfgInt("Hotkeys","Load Current Ctrl",Config.hotkey[12].ctrl);
-    WriteCfgInt("Hotkeys","Load Current Alt",Config.hotkey[12].alt);
-      
     // Save/Load Hotkeys
     {
 		int i;
@@ -473,38 +368,25 @@ void SaveConfig()
 	    
 	    for(i = 1 ; i <= 9 ; i++)
 	    {
-			sprintf(str, "Save %d Key", i);
-		    WriteCfgInt("Hotkeys",str,Config.hotkey[12+i].key);
-			sprintf(str, "Save %d Shift", i);
-		    WriteCfgInt("Hotkeys",str,Config.hotkey[12+i].shift);
-			sprintf(str, "Save %d Ctrl", i);
-		    WriteCfgInt("Hotkeys",str,Config.hotkey[12+i].ctrl);
-			sprintf(str, "Save %d Alt", i);
-		    WriteCfgInt("Hotkeys",str,Config.hotkey[12+i].alt);
+
+			sprintf(str, "Save %d", i);
+				WriteHotkeyConfig(12+i,str);
 		}
 	    for(i = 1 ; i <= 9 ; i++)
 	    {
-			sprintf(str, "Load %d Key", i);
-		    WriteCfgInt("Hotkeys",str,Config.hotkey[12+9+i].key);
-			sprintf(str, "Load %d Shift", i);
-		    WriteCfgInt("Hotkeys",str,Config.hotkey[12+9+i].shift);
-			sprintf(str, "Load %d Ctrl", i);
-		    WriteCfgInt("Hotkeys",str,Config.hotkey[12+9+i].ctrl);
-			sprintf(str, "Load %d Alt", i);
-		    WriteCfgInt("Hotkeys",str,Config.hotkey[12+9+i].alt);
+			sprintf(str, "Load %d", i);
+				WriteHotkeyConfig(21+i,str);
 		}
 	    for(i = 1 ; i <= 9 ; i++)
 	    {
-			sprintf(str, "Select %d Key", i);
-		    WriteCfgInt("Hotkeys",str,Config.hotkey[12+9+9+i].key);
-			sprintf(str, "Select %d Shift", i);
-		    WriteCfgInt("Hotkeys",str,Config.hotkey[12+9+9+i].shift);
-			sprintf(str, "Select %d Ctrl", i);
-		    WriteCfgInt("Hotkeys",str,Config.hotkey[12+9+9+i].ctrl);
-			sprintf(str, "Select %d Alt", i);
-		    WriteCfgInt("Hotkeys",str,Config.hotkey[12+9+9+i].alt);
+			sprintf(str, "Select %d", i);
+				WriteHotkeyConfig(30+i,str);
 		}
 	}
+	//Lua
+	WriteCfgString("Lua", "Script Path", Config.LuaScriptPath);
+  WriteHotkeyConfig(40, "Lua Script Reload");
+  WriteHotkeyConfig(41, "Lua Script CloseAll");
 }
 
 

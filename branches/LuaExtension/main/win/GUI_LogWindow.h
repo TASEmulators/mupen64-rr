@@ -18,6 +18,8 @@
 #ifndef _GUI_LOGWINDOW_H
 #define _GUI_LOGWINDOW_H
 
+#include <Windows.h>
+
 extern int extLogger ;
 int  GUI_CreateLogWindow( HWND hwnd );
 
@@ -29,6 +31,7 @@ void ShowLogWindow();
 void HideLogWindow();
 void ClearLogWindow();
 void CloseLogWindow();
+
 
 
 #endif

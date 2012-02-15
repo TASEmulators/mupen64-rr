@@ -35,6 +35,8 @@
 #include "r4300.h"
 #include "../memory/memory.h"
 #include "recomph.h"
+#define LUACONSOLE_H_NOINCLUDE_WINDOWS_H
+#include "../lua/LuaConsole.h"
 
 // global variables :
 precomp_instr *dst; // destination structure for the recompiled instruction
@@ -192,6 +194,9 @@ static void RBREAK()
 static void RSYNC()
 {
    dst->ops = SYNC;
+#ifdef LUA_BREAKPOINTSYNC_INTERP
+	 dst->f.stype = (src>>6)&0x1F;
+#endif
    if (dynacore) gensync();
 }
 
@@ -2300,6 +2305,8 @@ void init_block(long *source, precomp_block *block)
  **********************************************************************/
 void recompile_block(long *source, precomp_block *block, unsigned long func)
 {
+//void ShowInfo(char *Str, ...);
+//	ShowInfo("Recompile block %08X-%08X",block->start,block->end);
    int i, length, finished=0;
    start_section(COMPILER_SECTION);
    length = (block->end-block->start)/4;
@@ -2338,6 +2345,13 @@ void recompile_block(long *source, precomp_block *block, unsigned long func)
 	if (dynacore) gendebug();
 #endif
 	recomp_ops[((src >> 26) & 0x3F)]();
+#ifdef LUA_TRACEINTERP
+	if(enableTraceLog){
+		dst->s_ops = dst->ops;
+		dst->ops = LuaTraceLoggingInterpOps;
+		dst->src = src;
+	}
+#endif
 	dst = block->block + i;
 	/*if ((dst+1)->ops != NOTCOMPILED && !delay_slot_compiled &&
 	    i < length)
