@@ -64,7 +64,7 @@ static PAVISTREAM sound_stream;
 //static AVICOMPRESSOPTIONS sound_options;
 //static AVICOMPRESSOPTIONS *psound_options[1];
 
-void win_readScreen(void **dest, long *width, long *height)
+void __cdecl win_readScreen(void **dest, long *width, long *height)
 {
 //	void ShowInfo(char *Str, ...);
 //	ShowInfo("win_readScreen()");
@@ -256,7 +256,7 @@ void init_readScreen()
 {
 #ifdef __WIN32__
 	void ShowInfo(char *Str, ...);
-	ShowInfo((readScreen != NULL) ? "ReadScreen is implemented by this graphics plugin." : "ReadScreen not implemented by this graphics plugin - substituting...");
+	ShowInfo((readScreen != NULL) ? (char*)"ReadScreen is implemented by this graphics plugin." : (char*)"ReadScreen not implemented by this graphics plugin - substituting...");
 #endif
 
     if(readScreen == NULL)

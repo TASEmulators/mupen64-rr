@@ -1,71 +1,60 @@
+#ifndef LUA_CONSOLE_H
+#define LUA_CONSOLE_H
 
-#ifndef MUPEN64RR_LUACONSOLE_H
-#define MUPEN64RR_LUACONSOLE_H
+#include "luaDefine.h"
 
-#include <windows.h>
-#include <string>
+#ifdef LUA_CONSOLE
 
-#include "include/lua.hpp"
 
-#include <boost/optional.hpp>
-#include <boost/noncopyable.hpp>
-namespace boost
-{
-template<typename T> class shared_ptr;
+#include "../r4300/r4300.h"
+
+//識別子衝突対策
+//本当はヘッダ分割すべきか
+#ifndef LUACONSOLE_H_NOINCLUDE_WINDOWS_H
+#include <Windows.h>
+bool IsLuaConsoleMessage(MSG* msg);
+void InitalizeLuaDC(HWND mainWnd);
+void NewLuaScript(void(*callback)());
+void LuaWindowMessage(HWND, UINT, WPARAM, LPARAM);
+#endif
+void LuaReload();
+void CloseAllLuaScript();
+void AtUpdateScreenLuaCallback();
+void AtVILuaCallback();
+void GetLuaMessage();
+void AtInputLuaCallback(int n);
+void LuaBreakpointSyncPure();
+void LuaBreakpointSyncInterp();
+void LuaDCUpadate(int redraw);
+void LuaTraceLoggingPure();
+void LuaTraceLoggingInterpOps();
+void LuaTraceLogState();
+
+//無理やりinline関数に
+namespace LuaEngine{
+void PCBreak(void*,unsigned long);
+extern void *pcBreakMap_[0x800000/4];
 }
 
-typedef std::string String;
+inline void LuaPCBreakPure(){
+	void *p = LuaEngine::pcBreakMap_[(interp_addr&0x7FFFFF)>>2];
+	if(p)LuaEngine::PCBreak(p, interp_addr);
+}
+inline void LuaPCBreakInterp(){
+	void *p = LuaEngine::pcBreakMap_[(PC->addr&0x7FFFFF)>>2];
+	if(p)LuaEngine::PCBreak(p, PC->addr);
+}
 
-class Lua : private boost::noncopyable
-{
-	::lua_State* _lua;
-	bool _isRunning;
-	
-public:
-	Lua();
-	~Lua();
+extern unsigned long lastInputLua[4];
+extern unsigned long rewriteInputLua[4];
+extern bool rewriteInputFlagLua[4];
+extern bool enableTraceLog;
+extern bool traceLogMode;
+extern bool enablePCBreak;
+extern bool maximumSpeedMode;
 
-	void PushLightUserData(void* data);
-	void SetField(int index, const char* key);
-	void Register(const String& name, lua_CFunction function);
-	void Register(const char* name, lua_CFunction function);
 
-	boost::optional<int> Run(String scriptFilePath);
-};
 
-class LuaWindow
-{
-	HWND _handle;
-	Lua _vm;
-	String _scriptFilePath;
-	
-private:
-	void Initialize();
-
-public:
-	static const char* LuaRegistryKey;
-
-	String ScriptFilePath() const;
-	void ScriptFilePath(String filePath);
-
-	LuaWindow(HINSTANCE hInst, HWND parent);
-	LuaWindow(HWND hDialog);
-	~LuaWindow();
-	
-	bool Show();
-
-	void ConsoleWrite(const char* str);
-	void StateChangeButton_Clicked(HWND sender);
-	
-	bool operator<(const LuaWindow& other) const;
-};
-
-BOOL CALLBACK LuaWindowProc(HWND hDlg, UINT uMsg, WPARAM wParam, LPARAM lParam);
-
-bool IsLuaConsoleMessage(MSG* msg);
-
-void NewLuaScript(HINSTANCE hInst, HWND parent);
-
-void CloseAllLuaScript();
+#endif
 
 #endif

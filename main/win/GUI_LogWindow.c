@@ -102,8 +102,12 @@ void ShowInfo(char *Str, ...)
 		if ( Msg[ i ] == '\r' ) Msg[ i ] = ' ';
 		if ( Msg[ i ] == '\t' ) Msg[ i ] = ' ';		//tab
 	}
-   
+#if 0
+	OutputDebugString(Msg);
+	OutputDebugString("\n");
+#else
    if (DVMsg) DVMsg( DV_INFO, Msg) ;
+#endif
 }
 
 void ShowWarning(char *Str, ...)

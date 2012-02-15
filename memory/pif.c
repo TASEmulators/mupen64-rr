@@ -46,6 +46,8 @@
 #include "../main/guifuncs.h"
 #include "../main/vcr.h"
 
+#include "../lua/LuaConsole.h"
+
 unsigned char eeprom[0x800];
 unsigned char mempack[4][0x8000];
 
@@ -497,8 +499,22 @@ void update_pif_read()
 #ifdef VCR_SUPPORT
 			   && VCR_isIdle()
 #endif
-			   )
+			   ) {
 			 readController(channel, &PIF_RAMb[i]);
+#ifdef LUA_JOYPAD
+			 lastInputLua[channel] = *(DWORD*)&PIF_RAMb[i+3];
+			 AtInputLuaCallback(channel);
+			 if(0 <= channel && channel < 4) {
+					 if(rewriteInputFlagLua[channel]) {
+						   *(DWORD*)&PIF_RAMb[i+3] = 
+								 lastInputLua[channel] =
+								 rewriteInputLua[channel];
+							 rewriteInputFlagLua[channel] = false;
+					 }
+			 }
+#endif
+
+			 }
 		       else
 			 internal_ReadController(channel, &PIF_RAMb[i]);
 		    }

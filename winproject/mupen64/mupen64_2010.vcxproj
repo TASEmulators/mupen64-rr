@@ -107,7 +107,7 @@
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <DisableSpecificWarnings>4018;4244;%(DisableSpecificWarnings)</DisableSpecificWarnings>
-      <CompileAs>Default</CompileAs>
+      <CompileAs>CompileAsCpp</CompileAs>
     </ClCompile>
     <Link>
       <AdditionalDependencies>vfw32.lib;winmm.lib;Comctl32.lib;zlib-2008-x32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -120,11 +120,13 @@
       <DataExecutionPrevention>
       </DataExecutionPrevention>
       <TargetMachine>MachineX86</TargetMachine>
+      <IgnoreSpecificDefaultLibraries>
+      </IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
-      <AdditionalIncludeDirectories>E:\Programming\C++\Boost C++ Libraries;../zlib;../../main;../../lua;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>../zlib;../../main;../../lua;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>VCR_SUPPORT;WIN32;_WIN32;NDEBUG;_WINDOWS;__WIN32__;X86;VCR_SUPPORT;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -135,18 +137,30 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <WholeProgramOptimization>true</WholeProgramOptimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
+      <InlineFunctionExpansion>AnySuitable</InlineFunctionExpansion>
+      <Optimization>Full</Optimization>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <CallingConvention>FastCall</CallingConvention>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+      <BasicRuntimeChecks>
+      </BasicRuntimeChecks>
+      <BufferSecurityCheck>false</BufferSecurityCheck>
+      <FloatingPointModel>Strict</FloatingPointModel>
     </ClCompile>
     <Link>
       <AdditionalDependencies>vfw32.lib;winmm.lib;Comctl32.lib;zlib-2008-x32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFile>$(OutDir)$(TargetName)$(TargetExt)</OutputFile>
       <AdditionalLibraryDirectories>../zlib;../../lua;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Windows</SubSystem>
       <OptimizeReferences>true</OptimizeReferences>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
-      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <DataExecutionPrevention>false</DataExecutionPrevention>
       <TargetMachine>MachineX86</TargetMachine>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+      <Profile>false</Profile>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Profile|Win32'">
@@ -165,6 +179,7 @@
       <Optimization>Disabled</Optimization>
       <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
       <OmitFramePointers>true</OmitFramePointers>
+      <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
     <Link>
       <AdditionalDependencies>vfw32.lib;winmm.lib;Comctl32.lib;zlib-2008-x32.lib;%(AdditionalDependencies)</AdditionalDependencies>
@@ -176,6 +191,10 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <RandomizedBaseAddress>false</RandomizedBaseAddress>
       <TargetMachine>MachineX86</TargetMachine>
+      <LinkTimeCodeGeneration>Default</LinkTimeCodeGeneration>
+      <Profile>
+      </Profile>
+      <DataExecutionPrevention>false</DataExecutionPrevention>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Develop|Win32'">
@@ -234,9 +253,34 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\config.h" />
+    <ClInclude Include="..\..\lua\luaDefine.h" />
+    <ClInclude Include="..\..\lua\src\lapi.h" />
+    <ClInclude Include="..\..\lua\src\lauxlib.h" />
+    <ClInclude Include="..\..\lua\src\lcode.h" />
+    <ClInclude Include="..\..\lua\src\ldebug.h" />
+    <ClInclude Include="..\..\lua\src\ldo.h" />
+    <ClInclude Include="..\..\lua\src\lfunc.h" />
+    <ClInclude Include="..\..\lua\src\lgc.h" />
+    <ClInclude Include="..\..\lua\src\llex.h" />
+    <ClInclude Include="..\..\lua\src\llimits.h" />
+    <ClInclude Include="..\..\lua\src\lmem.h" />
+    <ClInclude Include="..\..\lua\src\lobject.h" />
+    <ClInclude Include="..\..\lua\src\lopcodes.h" />
+    <ClInclude Include="..\..\lua\src\lparser.h" />
+    <ClInclude Include="..\..\lua\src\lstate.h" />
+    <ClInclude Include="..\..\lua\src\lstring.h" />
+    <ClInclude Include="..\..\lua\src\ltable.h" />
+    <ClInclude Include="..\..\lua\src\ltm.h" />
+    <ClInclude Include="..\..\lua\src\lua.h" />
+    <ClInclude Include="..\..\lua\src\luaconf.h" />
+    <ClInclude Include="..\..\lua\src\lualib.h" />
+    <ClInclude Include="..\..\lua\src\lundump.h" />
+    <ClInclude Include="..\..\lua\src\lvm.h" />
+    <ClInclude Include="..\..\lua\src\lzio.h" />
     <ClInclude Include="..\..\main\Audio_#1.1.h" />
     <ClInclude Include="..\..\main\Controller_#1.1.h" />
     <ClInclude Include="..\..\main\crypt.h" />
+    <ClInclude Include="..\..\main\disasm.h" />
     <ClInclude Include="..\..\main\Gfx_#1.3.h" />
     <ClInclude Include="..\..\main\guifuncs.h" />
     <ClInclude Include="..\..\main\ioapi.h" />
@@ -373,6 +417,37 @@
     <ClInclude Include="..\resource.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\lua\src\lapi.c" />
+    <ClCompile Include="..\..\lua\src\lauxlib.c" />
+    <ClCompile Include="..\..\lua\src\lbaselib.c" />
+    <ClCompile Include="..\..\lua\src\lcode.c" />
+    <ClCompile Include="..\..\lua\src\ldblib.c" />
+    <ClCompile Include="..\..\lua\src\ldebug.c" />
+    <ClCompile Include="..\..\lua\src\ldo.c" />
+    <ClCompile Include="..\..\lua\src\ldump.c" />
+    <ClCompile Include="..\..\lua\src\lfunc.c" />
+    <ClCompile Include="..\..\lua\src\lgc.c" />
+    <ClCompile Include="..\..\lua\src\linit.c" />
+    <ClCompile Include="..\..\lua\src\liolib.c" />
+    <ClCompile Include="..\..\lua\src\llex.c" />
+    <ClCompile Include="..\..\lua\src\lmathlib.c" />
+    <ClCompile Include="..\..\lua\src\lmem.c" />
+    <ClCompile Include="..\..\lua\src\loadlib.c" />
+    <ClCompile Include="..\..\lua\src\lobject.c" />
+    <ClCompile Include="..\..\lua\src\lopcodes.c" />
+    <ClCompile Include="..\..\lua\src\loslib.c" />
+    <ClCompile Include="..\..\lua\src\lparser.c" />
+    <ClCompile Include="..\..\lua\src\lstate.c" />
+    <ClCompile Include="..\..\lua\src\lstring.c" />
+    <ClCompile Include="..\..\lua\src\lstrlib.c" />
+    <ClCompile Include="..\..\lua\src\ltable.c" />
+    <ClCompile Include="..\..\lua\src\ltablib.c" />
+    <ClCompile Include="..\..\lua\src\ltm.c" />
+    <ClCompile Include="..\..\lua\src\luac.c" />
+    <ClCompile Include="..\..\lua\src\lundump.c" />
+    <ClCompile Include="..\..\lua\src\lvm.c" />
+    <ClCompile Include="..\..\lua\src\lzio.c" />
+    <ClCompile Include="..\..\lua\src\print.c" />
     <ClCompile Include="..\..\main\adler32.c">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Default</CompileAs>
@@ -380,6 +455,7 @@
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Develop|Win32'">Default</CompileAs>
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='old_develop|Win32'">Default</CompileAs>
     </ClCompile>
+    <ClCompile Include="..\..\main\disasm.c" />
     <ClCompile Include="..\..\main\ioapi.c">
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">CompileAsCpp</CompileAs>
       <CompileAs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Default</CompileAs>

@@ -47,6 +47,7 @@
 #include "../main/guifuncs.h"
 #include "../main/savestates.h"
 #include "../main/vcr.h"
+#include "../lua/LuaConsole.h"
 
 
 unsigned long next_vi;
@@ -532,6 +533,9 @@ void gen_interupt()
      while(emu_paused)
      {
 		Sleep(10);
+#ifdef LUA_EMUPAUSED_WORK
+			 GetLuaMessage();
+#endif
 //		viStatusChanged();
 ////		processDList();
 //		processRDPList();

@@ -70,9 +70,9 @@ extern int branch_taken;
 void debug();
 
 
-__inline void put8(unsigned char octet);
-__inline void put32(unsigned long dword);
-__inline void put16(unsigned short word);
+void put8(unsigned char octet);
+void put32(unsigned long dword);
+void put16(unsigned short word);
 
 void push_reg32(int reg32);
 void mov_eax_memoffs32(void *_memoffs32);

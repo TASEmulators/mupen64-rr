@@ -47,7 +47,7 @@
 #define IDI_M64ICONSMALL 180
 #define IDI_M64ICONBIG   181 
 //Lua
-//#define IDD_LUAWINDOW 182
+#define IDD_LUAWINDOW 182
 #define IDC_WEBSITE 190
 
 
@@ -230,9 +230,10 @@
 #define ID_RECENTROMS_RESET             6000
 #define ID_RECENTROMS_FREEZE            6001
 #define ID_RECENTROMS_FIRST             6002
-#define ID_MENU_LUASCRIPT_NEW			6003
-#define ID_MENU_LUASCRIPT_CLOSEALL		6004
 //reserved till 6020
+#define ID_MENU_LUASCRIPT_NEW           6020
+#define ID_MENU_LUASCRIPT_CLOSEALL      6021
+#define ID_TRACELOG                     6022
 
 #define IDC_HOTKEYS_FLOWGROUP           6101
 #define IDC_HOT_SCREENSHOT              6103
@@ -374,11 +375,16 @@
 #define IDC_PAUSEAT_LABEL               9507
 #define IDC_PAUSEAT_FIELD               9508
 //Lua
-#define IDC_BUTTON_LUASTATE         9509
-//#define IDC_BUTTON_LUAEDIT              9510
-#define IDC_TEXTBOX_LUASCRIPTPATH       9511
-#define IDC_TEXTBOX_LUACONSOLE              9512
-#define IDC_BUTTON_LUABROWSE 9513
+#define IDC_TEXTBOX_LUASCRIPTPATH       9509
+#define IDC_TEXTBOX_LUACONSOLE          9510
+#define IDC_BUTTON_LUASTATE             9511
+#define IDC_BUTTON_LUAEDIT              9512
+#define IDC_BUTTON_LUABROWSE            9513
+#define IDC_BUTTON_LUACLEAR             9514
+#define IDC_BUTTON_LUASTOP              9515
+
+#define ID_LUA_RELOAD                   9600
+
 
 
 #define ID_EMULATOR_EXIT                40001

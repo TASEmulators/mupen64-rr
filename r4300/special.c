@@ -33,6 +33,8 @@
 #include "ops.h"
 #include "exception.h"
 #include "macros.h"
+#define LUACONSOLE_H_NOINCLUDE_WINDOWS_H
+#include "../lua/LuaConsole.h"
 
 void NOP()
 {
@@ -122,7 +124,11 @@ void SYSCALL()
 
 void SYNC()
 {
+#ifdef LUA_BREAKPOINTSYNC_INTERP
+	LuaBreakpointSyncInterp();
+#else
    PC++;
+#endif
 }
 
 void MFHI()

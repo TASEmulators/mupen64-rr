@@ -111,11 +111,11 @@ typedef struct {
 	DWORD * DPC_PIPEBUSY_REG;
 	DWORD * DPC_TMEM_REG;
 
-	void (*CheckInterrupts)( void );
-	void (*ProcessDlistList)( void );
-	void (*ProcessAlistList)( void );
-	void (*ProcessRdpList)( void );
-	void (*ShowCFB)( void );
+	void (__cdecl*CheckInterrupts)( void );
+	void (__cdecl*ProcessDlistList)( void );
+	void (__cdecl*ProcessAlistList)( void );
+	void (__cdecl*ProcessRdpList)( void );
+	void (__cdecl*ShowCFB)( void );
 } RSP_INFO;
 
 typedef struct {
@@ -159,7 +159,7 @@ typedef struct {
 	DWORD * VI_X_SCALE_REG;
 	DWORD * VI_Y_SCALE_REG;
 
-	void (*CheckInterrupts)( void );
+	void (__cdecl*CheckInterrupts)( void );
 } GFX_INFO;
 
 typedef struct {
@@ -185,7 +185,7 @@ typedef struct {
 	DWORD * AI_DACRATE_REG;
 	DWORD * AI_BITRATE_REG;
 
-	void (*CheckInterrupts)( void );
+	void (__cdecl*CheckInterrupts)( void );
 } AUDIO_INFO;
 
 typedef struct {
@@ -236,48 +236,48 @@ typedef struct {
 
 extern CONTROL Controls[4];
 
-extern void (*getDllInfo)(PLUGIN_INFO *PluginInfo);
-extern void (*dllConfig)(HWND hParent);
-extern void (*dllTest)(HWND hParent);
-extern void (*dllAbout)(HWND hParent);
+extern void (__cdecl*getDllInfo)(PLUGIN_INFO *PluginInfo);
+extern void (__cdecl*dllConfig)(HWND hParent);
+extern void (__cdecl*dllTest)(HWND hParent);
+extern void (__cdecl*dllAbout)(HWND hParent);
 
-extern void (*changeWindow)();
-extern void (*closeDLL_gfx)();
-extern BOOL (*initiateGFX)(GFX_INFO Gfx_Info);
-extern void (*processDList)();
-extern void (*processRDPList)();
-extern void (*romClosed_gfx)();
-extern void (*romOpen_gfx)();
-extern void (*showCFB)();
-extern void (*updateScreen)();
-extern void (*viStatusChanged)();
-extern void (*viWidthChanged)();
-extern void (*readScreen)(void **dest, long *width, long *height);
+extern void (__cdecl*changeWindow)();
+extern void (__cdecl*closeDLL_gfx)();
+extern BOOL (__cdecl*initiateGFX)(GFX_INFO Gfx_Info);
+extern void (__cdecl*processDList)();
+extern void (__cdecl*processRDPList)();
+extern void (__cdecl*romClosed_gfx)();
+extern void (__cdecl*romOpen_gfx)();
+extern void (__cdecl*showCFB)();
+extern void (__cdecl*updateScreen)();
+extern void (__cdecl*viStatusChanged)();
+extern void (__cdecl*viWidthChanged)();
+extern void (__cdecl*readScreen)(void **dest, long *width, long *height);
 
-extern void (*aiDacrateChanged)(int SystemType);
-extern void (*aiLenChanged)();
-extern DWORD (*aiReadLength)();
-//extern void (*aiUpdate)(BOOL Wait);
-extern void (*closeDLL_audio)();
-extern BOOL (*initiateAudio)(AUDIO_INFO Audio_Info);
-extern void (*processAList)();
-extern void (*romClosed_audio)();
-extern void (*romOpen_audio)();
+extern void (__cdecl*aiDacrateChanged)(int SystemType);
+extern void (__cdecl*aiLenChanged)();
+extern DWORD (__cdecl*aiReadLength)();
+//extern void (__cdecl*aiUpdate)(BOOL Wait);
+extern void (__cdecl*closeDLL_audio)();
+extern BOOL (__cdecl*initiateAudio)(AUDIO_INFO Audio_Info);
+extern void (__cdecl*processAList)();
+extern void (__cdecl*romClosed_audio)();
+extern void (__cdecl*romOpen_audio)();
 
-extern void (*closeDLL_input)();
-extern void (*controllerCommand)(int Control, BYTE * Command);
-extern void (*getKeys)(int Control, BUTTONS *Keys);
-extern void (*initiateControllers)(CONTROL_INFO ControlInfo);
-extern void (*readController)(int Control, BYTE *Command);
-extern void (*romClosed_input)();
-extern void (*romOpen_input)();
-extern void (*keyDown)(WPARAM wParam, LPARAM lParam);
-extern void (*keyUp)(WPARAM wParam, LPARAM lParam);
+extern void (__cdecl*closeDLL_input)();
+extern void (__cdecl*controllerCommand)(int Control, BYTE * Command);
+extern void (__cdecl*getKeys)(int Control, BUTTONS *Keys);
+extern void (__cdecl*initiateControllers)(CONTROL_INFO ControlInfo);
+extern void (__cdecl*readController)(int Control, BYTE *Command);
+extern void (__cdecl*romClosed_input)();
+extern void (__cdecl*romOpen_input)();
+extern void (__cdecl*keyDown)(WPARAM wParam, LPARAM lParam);
+extern void (__cdecl*keyUp)(WPARAM wParam, LPARAM lParam);
 
-extern void (*closeDLL_RSP)();
-extern DWORD (*doRspCycles)(DWORD Cycles);
-extern void (*initiateRSP)(RSP_INFO Rsp_Info, DWORD * CycleCount);
-extern void (*romClosed_RSP)();
+extern void (__cdecl*closeDLL_RSP)();
+extern DWORD (__cdecl*doRspCycles)(DWORD Cycles);
+extern void (__cdecl*initiateRSP)(RSP_INFO Rsp_Info, DWORD * CycleCount);
+extern void (__cdecl*romClosed_RSP)();
 
 // frame buffer plugin spec extension
 
@@ -289,8 +289,8 @@ typedef struct
    DWORD height;
 } FrameBufferInfo;
 
-extern void (*fBRead)(DWORD addr);
-extern void (*fBWrite)(DWORD addr, DWORD size);
-extern void (*fBGetFrameBufferInfo)(void *p);
+extern void (__cdecl *fBRead)(DWORD addr);
+extern void (__cdecl *fBWrite)(DWORD addr, DWORD size);
+extern void (__cdecl *fBGetFrameBufferInfo)(void *p);
 
 #endif

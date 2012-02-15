@@ -1737,6 +1737,19 @@ void genswr()
    gencallinterp((unsigned long)SWR, 0);
 }
 
+#include <malloc.h>
+inline void put8gr(unsigned char octet)
+{
+   (*inst_pointer)[code_length] = octet;
+   code_length++;
+   if (code_length == max_code_length)
+     {
+	max_code_length += 1000;
+	*inst_pointer = (unsigned char*) realloc(*inst_pointer, max_code_length);
+     }
+}
+
+
 void gencheck_cop1_unusable()
 {
    unsigned long temp, temp2;
@@ -1750,7 +1763,7 @@ void gencheck_cop1_unusable()
    
    temp2 = code_length;
    code_length = temp - 1;
-   put8(temp2 - temp);
+   put8gr(temp2 - temp);
    code_length = temp2;
 }
 

@@ -25,6 +25,7 @@
 #include "../rom.h"
 #include "translation.h"
 #include "../vcr.h"
+#include "../../lua/LuaConsole.h"
 
 static float VILimit = 60.0;
 static double VILimitMilliseconds = 1000.0/60.0;
@@ -142,7 +143,11 @@ void new_vi() {
    CurrentFPSTime = timeGetTime();
    
    Dif = CurrentFPSTime - LastFPSTime;
-   if (Config.limitFps && manualFPSLimit && !frame_advancing) {
+   if (Config.limitFps && manualFPSLimit && !frame_advancing
+#ifdef LUA_SPEEDMODE
+		 && !maximumSpeedMode
+#endif
+		 ) {
      if (Dif <  VILimitMilliseconds )
       {
           CalculatedTime = CounterTime + (double)VILimitMilliseconds * (double)VI_Counter;
