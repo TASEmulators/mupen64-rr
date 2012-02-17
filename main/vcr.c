@@ -1508,7 +1508,7 @@ VCR_updateScreen()
 //		return;
 
 #ifdef LUA_SPEEDMODE
-	if(!maximumSpeedMode)redraw=0;
+	if(maximumSpeedMode)redraw=0;
 #endif
 
 		if(redraw) {
