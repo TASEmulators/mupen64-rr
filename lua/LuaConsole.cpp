@@ -1970,7 +1970,7 @@ int DrawText(lua_State *L) {
 			case 't':format |= DT_TOP; break;
 			case 'b':format |= DT_BOTTOM; break;
 			case 'c':format |= DT_CENTER; break;
-			case 'v':format |= DT_VCENTER; break;
+			case 'v':format |= DT_VCENTER | DT_SINGLELINE; break;
 			case 'e':format |= DT_WORD_ELLIPSIS; break;
 			case 's':format &=~DT_WORDBREAK; break;
 			}
