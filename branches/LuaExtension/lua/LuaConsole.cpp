@@ -550,6 +550,8 @@ INT_PTR CALLBACK DialogProc(HWND wnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 		DestroyWindow(wnd);
 		return TRUE;
 	case WM_DESTROY:{
+		GetWindowText(GetDlgItem(wnd, IDC_TEXTBOX_LUASCRIPTPATH),
+			Config.LuaScriptPath, MAX_PATH);
 		LuaMessage::Msg *msg = new LuaMessage::Msg();
 		msg->type = LuaMessage::DestroyLua;
 		msg->destroyLua.wnd = wnd;
@@ -1120,16 +1122,7 @@ void StoreRDRAMSafe(unsigned long addr, LONGLONG value){
    *((unsigned long *)(rdramb + (addr & AddrMask))) = value >> 32;
    *((unsigned long *)(rdramb + (addr & AddrMask) + 4 )) = value & 0xFFFFFFFF;
 }
-/*
-#define LUA_LOAD_MEMORY(a, t)\
-	do{\
-		unsigned long long int tmp = 0xDEADDEADDEADDEADLL;\
-		rdword = &tmp;\
-		address = a | 0x80000000;\
-		read_##t##_in_memory();\
-		value = tmp;\
-	}while(0)
-*/
+
 int LoadByteUnsigned(lua_State *L) {
 	UCHAR value = LoadRDRAMSafe<UCHAR>(CheckIntegerU(L, 1));
 	PushIntU(L, value);
@@ -1272,8 +1265,7 @@ SyncBreakMap::iterator RemoveSyncBreak(SyncBreakMap::iterator it) {
 	if(interpcore==0) {
 		Recompile(it->first);
 	}
-	SyncBreakMap::iterator it_s = it;
-	syncBreakMap.erase(it_s);
+	syncBreakMap.erase(it++);
 	return it;
 }
 void RecompileNow(ULONG addr);
@@ -1347,8 +1339,7 @@ AddrBreakMap::iterator RemoveMemoryBreak(AddrBreakMap::iterator it) {
 		delete p;
 		hashMap[hash] = NULL;
 	}
-	AddrBreakMap::iterator it_s = it;
-	(rw ? writeBreakMap : readBreakMap).erase(it_s);
+	(rw ? writeBreakMap : readBreakMap).erase(it++);
 	return it;
 }
 extern void(*AtMemoryRead[])();
@@ -1392,7 +1383,10 @@ void SetMemoryBreak(lua_State *L) {
 			p->count ++;
 		}
 		if(dynacore) {
-			fast_memory = 0;	//どこかで復活させたほうがいいか。どこで？
+			if(fast_memory) {
+				fast_memory = 0;	//どこかで復活させたほうがいいか。どこで？
+				RecompileNextAll();
+			}
 		}
 	}else {
 		lua_pushvalue(L, 2);
@@ -1590,6 +1584,9 @@ int SelectRegister(lua_State *L, void **r, int *arg) {
 			case 8: *r = &dword; break;
 			default: ASSERT(0);
 			}
+			if(size > current_break_value_size * 8) {
+				size = current_break_value_size * 8;
+			}
 			break;
 		}
 	}else {
@@ -1732,6 +1729,40 @@ int RecompileNextLua(lua_State *L) {
 }
 int RecompileNextAllLua(lua_State *L) {
 	RecompileNextAll();
+	return 0;
+}
+template<typename T>void PushT(lua_State *L, T value) {
+	PushIntU(L, value);
+}
+template<>void PushT<ULONGLONG>(lua_State *L, ULONGLONG value) {
+	PushDword(L, value);
+}
+template<typename T, void(**readmem_func)()>
+int ReadMemT(lua_State *L) {
+	ULONGLONG *rdword_s = rdword, tmp, address_s = address;
+	address = CheckIntegerU(L, 1);
+	rdword = &tmp;
+	readmem_func[address>>16]();
+	PushT<T>(L, tmp);
+	rdword = rdword_s;
+	address = address_s;
+	return 1;
+}
+template<typename T>T CheckT(lua_State *L, int i) {
+	return CheckIntegerU(L, i);
+}
+template<>ULONGLONG CheckT<ULONGLONG>(lua_State *L, int i) {
+	return CheckDword(L, i);
+}
+template<typename T, void(**writemem_func)(), T &g_T>
+int WriteMemT(lua_State *L) {
+	ULONGLONG *rdword_s = rdword;
+	T g_T_s = g_T;
+	address = CheckIntegerU(L, 1);
+	g_T = CheckT(L, 2);
+	writemem_func[address>>16]();
+	address = address_s;
+	g_T = g_T_s;
 	return 0;
 }
 
@@ -2621,6 +2652,16 @@ const luaL_Reg memoryFuncs[] = {
 	{"recompilenext", RecompileNextLua},
 	{"recompilenextall", RecompileNextAllLua},
 
+	//IOも直アクセス
+	{"readmemb", ReadMemT<UCHAR,readmemb>},
+	{"readmemh", ReadMemT<USHORT,readmemh>},
+	{"readmem", ReadMemT<ULONG,readmem>},
+	{"readmemd", ReadMemT<ULONGLONG,readmemd>},
+	{"writememb", ReadMemT<UCHAR,writememb>},
+	{"writememh", ReadMemT<USHORT,writememh>},
+	{"writemem", ReadMemT<ULONG,writemem>},
+	{"writememd", ReadMemT<ULONGLONG,writememd>},
+
 	//一般的な名前(word=2byte)
 	{"readbytesigned", LoadByteSigned},
 	{"readbyte", LoadByteUnsigned},
@@ -2721,16 +2762,18 @@ bool IsLuaConsoleMessage(MSG* msg)
 	return false;
 }
 void AtUpdateScreenLuaCallback() {
+	GetLuaMessage();
 	LuaEngine::registerFuncEach(LuaEngine::AtUpdateScreen, LuaEngine::REG_ATUPDATESCREEN);
 }
 void AtVILuaCallback() {
+	GetLuaMessage();
 	LuaEngine::registerFuncEach(LuaEngine::AtVI, LuaEngine::REG_ATVI);
 }
 void AtInputLuaCallback(int n) {
+	GetLuaMessage();
 	LuaEngine::current_input_n = n;
 	LuaEngine::registerFuncEach(LuaEngine::AtInput, LuaEngine::REG_ATINPUT);
 	LuaEngine::inputCount ++;
-	GetLuaMessage();
 }
 
 void GetLuaMessage(){
