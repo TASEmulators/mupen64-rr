@@ -75,7 +75,7 @@ void savestates_save()
 {
 	char *filename, buf[1024];
 	gzFile f;
-	int len, i;
+	int len, i, filename_f = 0;
    
 	savestates_job_success = TRUE;
    
@@ -102,11 +102,15 @@ void savestates_save()
 		filename = (char*)malloc(strlen(fname)+1);
 		strcpy(filename, fname);
 		slot -= 10;
+		filename_f = 1;
 	}
 
 	{
 		char str [256];
-		sprintf(str, "saving slot %d", slot);
+		if(filename_f)
+			sprintf(str, "saving %-200s", filename);
+		else
+			sprintf(str, "saving slot %d", slot);
 		display_status(str);
 	}
    	
@@ -190,6 +194,7 @@ void savestates_load()
 	char *filename, buf[1024];
 	gzFile f;
 	int len, i;
+	int filename_f = 0;
 
 	savestates_job_success = TRUE;
    
@@ -208,11 +213,15 @@ void savestates_load()
 		filename = (char*)malloc(strlen(fname)+1);
 		strcpy(filename, fname);
 		slot -= 10;
+		filename_f = 1;
 	}
 
 	{
 		char str [256];
-		sprintf(str, "loading slot %d", slot);
+		if(filename_f)
+			sprintf(str, "loading %-200s", filename);
+		else
+			sprintf(str, "loading slot %d", slot);
 		display_status(str);
 	}
 

@@ -812,7 +812,7 @@ extern BOOL just_restarted_flag;
 void
 VCR_getKeys( int Control, BUTTONS *Keys )
 {
-	if (m_task != Playback && m_task != StartPlayback && m_task != StartPlaybackFromSnapshot)
+	if (m_task != Playback && m_task != StartPlayback && m_task != StartPlaybackFromSnapshot) {
 		getKeys( Control, Keys );
 #ifdef LUA_JOYPAD
 			 lastInputLua[Control] = *(DWORD*)Keys;
@@ -826,6 +826,7 @@ VCR_getKeys( int Control, BUTTONS *Keys )
 					 }
 			 }
 #endif
+	}
 
 	if(Control == 0)
 		memcpy(&m_lastController1Keys, Keys, sizeof(unsigned long));
@@ -964,6 +965,18 @@ VCR_getKeys( int Control, BUTTONS *Keys )
 			*Keys = *((BUTTONS*)m_inputBufferPtr);
 			m_inputBufferPtr += sizeof(BUTTONS);
 	
+#ifdef LUA_JOYPAD
+			 lastInputLua[Control] = *(DWORD*)Keys;
+			 AtInputLuaCallback(Control);
+			 if(0 <= Control && Control < 4) {
+					 if(rewriteInputFlagLua[Control]) {
+						   *(DWORD*)Keys = 
+								 lastInputLua[Control] =
+								 rewriteInputLua[Control];
+							 rewriteInputFlagLua[Control] = false;
+					 }
+			 }
+#endif
 	//		fread( Keys, 1, sizeof (BUTTONS), m_file );
 			m_currentSample++;
 		}
