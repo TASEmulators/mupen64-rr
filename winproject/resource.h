@@ -48,8 +48,9 @@
 #define IDI_M64ICONBIG   181 
 //Lua
 #define IDD_LUAWINDOW 182
-#define IDC_WEBSITE 190
+#define IDD_LUAINPUTPROMPT 183
 
+#define IDC_WEBSITE 190
 
 #define IDC_COMBO_RSP 200
 #define IDRSPCONFIG 201
@@ -382,6 +383,8 @@
 #define IDC_BUTTON_LUABROWSE            9513
 #define IDC_BUTTON_LUACLEAR             9514
 #define IDC_BUTTON_LUASTOP              9515
+
+#define IDC_TEXTBOX_LUAPROMPT           9520
 
 #define ID_LUA_RELOAD                   9600
 

@@ -88,6 +88,7 @@ HDC luaDC;
 int luaDCBufWidth, luaDCBufHeight;
 unsigned inputCount = 0;
 size_t current_break_value_size = 1;
+std::map<HWND, Lua*> luaWindowMap;
 
 void ASSERT(bool e, char *s = "assert"){
 	if(!e) {
@@ -504,10 +505,13 @@ LuaMessage luaMessage;
 
 
 Lua *GetWindowLua(HWND wnd) {
-	return (Lua*)GetWindowLongPtr(wnd, DWLP_USER);
+	return luaWindowMap.find(wnd)->second;
 }
 void SetWindowLua(HWND wnd, Lua *lua) {
-	SetWindowLongPtr(wnd, DWLP_USER, (LONG_PTR)lua);
+	if(lua)
+		luaWindowMap[wnd] = lua;
+	else
+		luaWindowMap.erase(wnd);
 }
 void SizingControl(HWND wnd, RECT *p, int x, int y, int w, int h) {
 	SetWindowPos(wnd, NULL, p->left+x, p->top+y,
@@ -591,6 +595,7 @@ std::string OpenLuaFileDialog() {
 	return ofn.lpstrFile;
 }
 void SetButtonState(HWND wnd, bool state) {
+	if(!IsWindow(wnd)) return;
 	HWND stateButton = GetDlgItem(wnd, IDC_BUTTON_LUASTATE),
 		stopButton = GetDlgItem(wnd, IDC_BUTTON_LUASTOP);
 	if(state) {
@@ -791,6 +796,7 @@ const char * const REG_PCBREAK = "P";
 const char * const REG_READBREAK = "R";
 const char * const REG_WRITEBREAK = "W";
 const char * const REG_WINDOWMESSAGE = "M";
+const char * const REG_ATINTERVAL = "N";
 
 Lua *GetLuaClass(lua_State *L) {
 	lua_getfield(L, LUA_REGISTRYINDEX, REG_LUACLASS);
@@ -2145,7 +2151,20 @@ int AtWindowMessage(lua_State *L) {
 	PushIntU(L, luaMessage.current_msg->windowMessage.lParam);
 	return lua_pcall(L, 4, 0, 0);
 }
-
+int RegisterInterval(lua_State *L) {
+	if(lua_toboolean(L, 2)) {
+		lua_pop(L, 1);
+		UnregisterFunction(L, REG_ATINTERVAL);
+	}else {
+		if(lua_gettop(L) == 2)
+			lua_pop(L, 1);
+		RegisterFunction(L, REG_ATINTERVAL);
+	}
+	return 0;
+}
+int AtInterval(lua_State *L) {
+	return lua_pcall(L, 0, 0, 0);
+}
 
 int GetVICount(lua_State *L) {
 	lua_pushinteger(L, m_currentVI);
@@ -2491,6 +2510,57 @@ int GetKeyDifference(lua_State *L) {
 	}
 	return 1;
 }
+INT_PTR CALLBACK InputPromptProc(HWND wnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+	static lua_State *L;
+	switch(msg) {
+	case WM_INITDIALOG:{
+		L = (lua_State*)lParam;
+		std::string str(luaL_optstring(L, 2, ""));
+		SetWindowText(wnd,
+			luaL_optstring(L, 1, "input:"));
+		std::string::size_type p = 0;
+		while((p = str.find('\n', p)) != std::string::npos){
+			str.replace(p, 1, "\r\n");
+			p += 2;
+		}
+		SetWindowText(GetDlgItem(wnd, IDC_TEXTBOX_LUAPROMPT),
+			str.c_str());
+		SetFocus(GetDlgItem(wnd, IDC_TEXTBOX_LUAPROMPT));
+		break;
+		}
+	case WM_COMMAND:
+		switch(LOWORD(wParam)){
+		case IDOK:{
+			HWND inp = GetDlgItem(wnd, IDC_TEXTBOX_LUAPROMPT);
+			int size = GetWindowTextLength(inp)+1;
+			char *buf = new char[size];
+			GetWindowText(inp, buf, size);
+			std::string str(buf);
+			delete buf;
+			std::string::size_type p = 0;
+			while((p = str.find("\r\n", p)) != std::string::npos){
+				str.replace(p, 2, "\n");
+				p += 1;
+			}
+			lua_pushstring(L, str.c_str());
+			EndDialog(wnd, 0);
+			break;
+		}
+		case IDCANCEL:
+			lua_pushnil(L);
+			EndDialog(wnd, 1);
+			break;
+		}
+		break;
+	}
+	return FALSE;
+}
+int InputPrompt(lua_State *L) {
+	DialogBoxParam(app_hInstance,
+		MAKEINTRESOURCE(IDD_LUAINPUTPROMPT), mainHWND,
+		InputPromptProc, (LPARAM)L);
+	return 1;
+}
 
 //joypad
 int GetJoypad(lua_State *L) {
@@ -2597,6 +2667,7 @@ const luaL_Reg emuFuncs[] = {
 	{"atinput", RegisterInput},
 	{"atstop", RegisterStop},
 	{"atwindowmessage", RegisterWindowMessage},
+	{"atinterval", RegisterInterval},
 
 	{"framecount", GetVICount},
 	{"samplecount", GetSampleCount},
@@ -2720,6 +2791,7 @@ const luaL_Reg wguiFuncs[] = {
 const luaL_Reg inputFuncs[] = {
 	{"get", GetKeys},
 	{"diff", GetKeyDifference},
+	{"prompt", InputPrompt},
 	{NULL, NULL}
 };
 const luaL_Reg joypadFuncs[] = {
@@ -2774,6 +2846,9 @@ void AtInputLuaCallback(int n) {
 	LuaEngine::current_input_n = n;
 	LuaEngine::registerFuncEach(LuaEngine::AtInput, LuaEngine::REG_ATINPUT);
 	LuaEngine::inputCount ++;
+}
+void AtIntervalLuaCallback() {
+	LuaEngine::registerFuncEach(LuaEngine::AtInterval, LuaEngine::REG_ATINTERVAL);
 }
 
 void GetLuaMessage(){
