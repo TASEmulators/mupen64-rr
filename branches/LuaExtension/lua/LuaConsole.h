@@ -23,6 +23,8 @@ void AtUpdateScreenLuaCallback();
 void AtVILuaCallback();
 void GetLuaMessage();
 void AtInputLuaCallback(int n);
+void AtIntervalLuaCallback();
+
 void LuaBreakpointSyncPure();
 void LuaBreakpointSyncInterp();
 void LuaDCUpadate(int redraw);

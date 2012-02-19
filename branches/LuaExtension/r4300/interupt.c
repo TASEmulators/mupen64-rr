@@ -530,11 +530,15 @@ void gen_interupt()
 
 #ifdef __WIN32__
 	extern BOOL emu_paused;
+#ifdef LUA_EMUPAUSED_WORK
+		AtIntervalLuaCallback();
+#endif
      while(emu_paused)
      {
 		Sleep(10);
 #ifdef LUA_EMUPAUSED_WORK
-			 GetLuaMessage();
+		AtIntervalLuaCallback();
+		GetLuaMessage();
 #endif
 //		viStatusChanged();
 ////		processDList();
