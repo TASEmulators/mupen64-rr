@@ -333,7 +333,12 @@ void gen_interupt()
 {
    //if (!skip_jump)
      //printf("interrupt:%x (%x)\n", q->type, Count);
-   if (stop == 1) dyna_stop();
+	
+	// dyna_stop()でlongjmp()するため、ここより前でコンストラクトするとデストラクタが呼ばれない
+	if(stop)
+	{
+		dyna_stop();
+	}
    if (savestates_job & LOADSTATE) 
      {
 	savestates_load();
