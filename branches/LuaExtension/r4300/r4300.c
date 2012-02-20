@@ -1815,7 +1815,7 @@ void go()
 	  ,(unsigned int)debug_count);
    for (i=0; i<0x100000; i++)
      {
-	if ((unsigned)blocks[i]+1!=1)	//optimaze bug
+	if (blocks[i] != NULL)
 	  {
 	     if (blocks[i]->block) {
 		free(blocks[i]->block);

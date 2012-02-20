@@ -35,6 +35,8 @@
 #include "../ops.h"
 #include "../recomph.h"
 
+#include <csetjmp>
+
 void dyna_jump()
 {
    if (PC->reg_cache_infos.need_map)
@@ -48,47 +50,19 @@ void dyna_jump()
        : "memory");*/
 }
 
-static int save_ebp;
-
+jmp_buf g_jmp_state;
 void dyna_start(void (*code)())
 {
-#ifdef _MSC_VER
-   save_ebp=0;
-   __asm mov save_ebp, ebp
-   code();
-   __asm mov ebp, save_ebp
-#elif !defined(_WIN32)
-   save_ebp=0;
-   asm("mov %%ebp, save_ebp \n" : : : "memory");
-   code();
-   asm("mov save_ebp, %%ebp \n" : : : "memory");
-#else // _WIN32
-   save_ebp=0;
-   asm("mov %%ebp, _save_ebp \n" : : : "memory");
-   code();
-   asm("mov _save_ebp, %%ebp \n" : : : "memory");
-#endif // _WIN32
+	// code() のどこかで stop が true になった時、dyna_stop() が呼ばれ、longjmp() で setjmp() したところに戻る
+	// 戻ってきた setjmp() は 1 を返すので、dyna_start() 終了
+	// レジスタ ebx, esi, edi, ebp の保存と復元が必要だが、setjmp() がやってくれる
+	if(setjmp(g_jmp_state) == 0)
+	{
+		code();
+	}
 }
-
-static void dyna_stop2() {}
 
 void dyna_stop()
 {
-   *return_address = (unsigned long)dyna_stop2;
-#ifdef _MSC_VER
-   __asm mov esp, return_address
-   __asm ret
-#elif !defined(_WIN32)
-   asm("mov return_address, %%esp \n"
-       "ret                       \n"
-       :
-       :
-       : "memory");
-#else // _WIN32
-   asm("mov _return_address, %%esp \n"
-       "ret                        \n"
-       :
-       :
-       : "memory");
-#endif // _WIN32
+   longjmp(g_jmp_state, 1); // goto dyna_start()
 }
