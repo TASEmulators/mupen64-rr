@@ -4,7 +4,7 @@
 ----
 
 <font color="#DD0000">
-*<a href="http://wiki.emulua.com/wiki/Main_Page">他のエミュレータにも存在する関数<a>以外は、頻繁に仕様が変わったり、削除されたりする場合があります。*
+*<a href="http://wiki.emulua.com/wiki/Main_Page">他のエミュレータにも存在する関数</a>以外は、頻繁に仕様が変わったり、削除されたりする場合があります。*
 </font>
 
 ----
@@ -697,5 +697,3 @@ X, Y, L, R, Cup, Cdown, Cleft, Cright, A, B, Z, start, up, down, left, right
 指定されたファイルから状態を復元します。
 
 ----
-
-
