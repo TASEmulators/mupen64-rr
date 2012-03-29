@@ -953,18 +953,18 @@ int ToStringEx(lua_State *L) {
 		while(1) {
 			lua_pushvalue(L, -2);
 			if(lua_type(L, -1) == LUA_TNUMBER &&
-				isArray + 1 == lua_tonumber(L, -1)){
-				lua_pop(L, 1);
+				isArray + 1 == lua_tonumber(L, -1)) {
 				isArray ++;
-			}else { isArray = -1;
-			if(lua_type(L, -1) == LUA_TSTRING) {
-				s.append(lua_tostring(L, -1));
-				lua_pop(L, 1);
-			}else {
-				ToStringEx(L);
-				s.append("[").append(lua_tostring(L, -1)).append("]");
-				lua_pop(L, 1);
-			}}
+			} else {
+				isArray = -1;
+				if(lua_type(L, -1) == LUA_TSTRING) {
+					s.append(lua_tostring(L, -1));
+				}else {
+					ToStringEx(L);
+					s.append("[").append(lua_tostring(L, -1)).append("]");
+				}
+			}
+			lua_pop(L, 1);
 			ToStringEx(L);
 			if(isArray == -1) {
 				s.append("=");
@@ -987,6 +987,7 @@ int ToStringExInit(lua_State *L) {
 	lua_newtable(L);
 	lua_insert(L, 1);
 	ToStringEx(L);
+	lua_remove(L, 1); // remove table
 	return 1;
 }
 int ToStringExs(lua_State *L) {
