@@ -1,5 +1,33 @@
 ﻿#summary Mupen64-rr EmuLua Reference
 
+= emu.frameadvance について =
+emu.frameadvanceは現在実装されていません。
+が、コルーチンとコールバックを組み合わせることで相当の関数が作れます。
+{{{
+function main()
+	-- ここにemu.frameadvanceを使ったコードを書く
+	-- 計算を止めるにはreturnをすれば良い
+	-- 以下例
+	local i = 0
+	while true do
+		print(i)
+		i = i + 1
+		emu.frameadvance()
+		if i == 60 then return end
+	end
+end
+
+main_wrap = coroutine.wrap(main)
+function emu.frameadvance()
+	coroutine.yield("frameadvance")
+end
+emu.atinput(function()
+	if main_wrap and not main_wrap() then
+		main_wrap = nil
+	end
+end)
+}}}
+
 = Reference =
 ----
 
