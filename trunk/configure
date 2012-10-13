@@ -1,5 +1,5 @@
 #!/bin/sh
-
+ 
 if [ -z "$CC" ]; then
   CC=gcc
 fi
