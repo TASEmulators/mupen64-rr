@@ -185,7 +185,8 @@ void savestates_save()
 
 void savestates_load()
 {
-   char *filename, buf[1024];
+#define BUFLEN 1024
+   char *filename, buf[BUFLEN];
    gzFile f;
    int len, i;
 
@@ -283,13 +284,16 @@ void savestates_load()
    gzread(f, &next_vi, 4);
    gzread(f, &vi_field, 4);
    
-   len = 0;
-   while(1)
+     for (len = 0; len < BUFLEN; len += 8)
      {
 	gzread(f, buf+len, 4);
 	if (*((unsigned long*)&buf[len]) == 0xFFFFFFFF) break;
 	gzread(f, buf+len+4, 4);
-	len += 8;
+     }
+     if (len == BUFLEN) { // Exhausted the buffer and still no terminator. Prevents the buffer overflow "Queuecrush".
+	fprintf(stderr, "Snapshot event queue terminator not reached.\n");
+	savestates_job_success = FALSE;
+	goto failedLoad;
      }
    load_eventqueue_infos(buf);
       
@@ -363,3 +367,4 @@ void savestates_load()
    else
      last_addr = PC->addr;
 }
+#undef BUFLEN
